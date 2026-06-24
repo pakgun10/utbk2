@@ -87,6 +87,7 @@ CORS_ORIGIN=         # kosong = auto localhost, isi domain untuk production
 | `bun run dev` | Jalankan backend + frontend |
 | `bun run test` | Semua test |
 | `bun run typecheck` | TypeScript check |
+| `bun run build:frontend` | Build frontend untuk production |
 | `bun run seed` | Insert soal dari `seed.json` |
 | `bun run seed:check` | Validasi `seed.json` tanpa DB |
 | `bun run db:migrate` | Migrasi database |

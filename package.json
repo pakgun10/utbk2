@@ -21,6 +21,7 @@
     "format:check": "prettier --check .",
     "seed": "bun run --cwd backend seed",
     "seed:check": "bun run --cwd backend seed:check",
-    "db:migrate": "bun run --cwd backend db:migrate"
+    "db:migrate": "bun run --cwd backend db:migrate",
+    "build:frontend": "bun run --cwd frontend build"
   }
 }

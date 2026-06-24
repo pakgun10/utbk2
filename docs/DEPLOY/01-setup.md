@@ -17,9 +17,7 @@ bun run install:all
 ## 3. Build Frontend
 
 ```bash
-cd frontend
-bun run build
-cd ..
+bun run build:frontend
 ```
 
 Hasil build masuk ke `frontend/dist/`.

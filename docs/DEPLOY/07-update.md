@@ -4,7 +4,7 @@
 git pull
 bun install
 bun run install:all
-cd frontend && bun run build && cd ..
+bun run build:frontend
 bun run seed:check
 docker compose restart
 docker compose exec app bun src/db/migrate.ts
