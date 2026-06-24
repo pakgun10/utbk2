@@ -7,7 +7,15 @@
 
     <div v-if="loading" class="topic-loading">Memuat...</div>
 
-    <div v-else-if="error" class="topic-error">{{ error }}</div>
+    <div v-else-if="error" class="topic-state">
+      <p class="topic-error">{{ error }}</p>
+      <button class="topic-action-btn" @click="loadTopicsData">Coba Lagi</button>
+    </div>
+
+    <div v-else-if="topics.length === 0" class="topic-state">
+      <p class="topic-empty">Belum ada topik untuk mata uji ini.</p>
+      <button class="topic-action-btn" @click="loadTopicsData">Muat Ulang</button>
+    </div>
 
     <div v-else class="topic-list">
       <router-link
@@ -37,7 +45,10 @@ const subjectLabel = ref('');
 const loading = ref(true);
 const error = ref<string | null>(null);
 
-onMounted(async () => {
+async function loadTopicsData() {
+  loading.value = true;
+  error.value = null;
+
   try {
     const [fetchedTopics, subjects] = await Promise.all([
       fetchTopics(subjectId),
@@ -51,7 +62,9 @@ onMounted(async () => {
   } finally {
     loading.value = false;
   }
-});
+}
+
+onMounted(loadTopicsData);
 </script>
 
 <style scoped>
@@ -79,14 +92,36 @@ onMounted(async () => {
   margin-bottom: 32px;
 }
 
+.topic-state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
 .topic-loading,
-.topic-error {
+.topic-error,
+.topic-empty {
   color: #778899;
   font-style: italic;
 }
 
 .topic-error {
   color: #c53030;
+}
+
+.topic-action-btn {
+  padding: 10px 18px;
+  background: #1e40af;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.topic-action-btn:hover {
+  background: #1c3a9c;
 }
 
 .topic-list {

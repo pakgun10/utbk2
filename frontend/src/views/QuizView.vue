@@ -15,6 +15,7 @@
     <div v-else-if="state === 'ready'" class="quiz-ready">
       <p class="ready-text">Siap berlatih?</p>
       <p v-if="questionCount > 0" class="ready-count">{{ questionCount }} soal tersedia</p>
+      <p v-else class="ready-empty">Belum ada soal yang tersedia untuk topik ini.</p>
       <button class="quiz-start-btn" @click="startQuiz">Mulai</button>
     </div>
 
@@ -84,7 +85,8 @@
     </div>
 
     <div v-else-if="state === 'error'" class="quiz-error">
-      {{ errorMessage }}
+      <p>{{ errorMessage }}</p>
+      <button class="quiz-retry-btn" @click="retryCurrentState">Coba Lagi</button>
     </div>
 
     <div v-if="showExitModal" class="modal-overlay" @click.self="cancelExit">
@@ -193,6 +195,11 @@ async function loadQuestion() {
 }
 
 function startQuiz() {
+  if (questionCount.value === 0 || !question.value) {
+    loadQuestion();
+    return;
+  }
+
   timerRunning.value = true;
   state.value = 'answering';
 }
@@ -265,6 +272,14 @@ async function loadQuestionCount() {
   } catch {
     questionCount.value = 0;
   }
+}
+
+async function retryCurrentState() {
+  await Promise.all([
+    loadTopicInfo(),
+    loadQuestionCount(),
+  ]);
+  await loadQuestion();
 }
 
 function resetSession() {
@@ -388,6 +403,13 @@ onMounted(() => {
   margin-top: -8px;
 }
 
+.ready-empty {
+  font-size: 1rem;
+  color: #778899;
+  margin-bottom: 16px;
+  margin-top: -8px;
+}
+
 .quiz-start-btn {
   padding: 16px 48px;
   background: #1e40af;
@@ -496,6 +518,22 @@ onMounted(() => {
 .quiz-submit-btn:disabled {
   background: #aab4c0;
   cursor: default;
+}
+
+.quiz-retry-btn {
+  margin-top: 16px;
+  padding: 12px 28px;
+  background: #1e40af;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.quiz-retry-btn:hover {
+  background: #1c3a9c;
 }
 
 .modal-overlay {

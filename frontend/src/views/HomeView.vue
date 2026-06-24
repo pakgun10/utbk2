@@ -5,7 +5,15 @@
 
     <div v-if="loading" class="home-loading">Memuat...</div>
 
-    <div v-else-if="error" class="home-error">{{ error }}</div>
+    <div v-else-if="error" class="home-state">
+      <p class="home-error">{{ error }}</p>
+      <button class="home-action-btn" @click="loadSubjects">Coba Lagi</button>
+    </div>
+
+    <div v-else-if="subjects.length === 0" class="home-state">
+      <p class="home-empty">Belum ada mata uji yang tersedia.</p>
+      <button class="home-action-btn" @click="loadSubjects">Muat Ulang</button>
+    </div>
 
     <div v-else class="subject-grid">
       <router-link
@@ -30,7 +38,10 @@ const subjects = ref<Subject[]>([]);
 const loading = ref(true);
 const error = ref<string | null>(null);
 
-onMounted(async () => {
+async function loadSubjects() {
+  loading.value = true;
+  error.value = null;
+
   try {
     subjects.value = await fetchSubjects();
   } catch (e) {
@@ -38,7 +49,9 @@ onMounted(async () => {
   } finally {
     loading.value = false;
   }
-});
+}
+
+onMounted(loadSubjects);
 </script>
 
 <style scoped>
@@ -54,14 +67,36 @@ onMounted(async () => {
   margin-bottom: 32px;
 }
 
+.home-state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
 .home-loading,
-.home-error {
+.home-error,
+.home-empty {
   color: #778899;
   font-style: italic;
 }
 
 .home-error {
   color: #c53030;
+}
+
+.home-action-btn {
+  padding: 10px 18px;
+  background: #1e40af;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.home-action-btn:hover {
+  background: #1c3a9c;
 }
 
 .subject-grid {

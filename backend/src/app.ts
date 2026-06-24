@@ -17,6 +17,8 @@ interface AppConfig {
 export function createApp(config: AppConfig) {
   const app = new Hono();
 
+  app.get('/health', (c) => c.json({ status: 'ok' }));
+
   app.use(
     '/api/*',
     cors({
