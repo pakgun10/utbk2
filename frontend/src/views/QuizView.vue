@@ -11,6 +11,7 @@
 
     <div v-else-if="state === 'ready'" class="quiz-ready">
       <p class="ready-text">Siap berlatih?</p>
+      <p v-if="questionCount > 0" class="ready-count">{{ questionCount }} soal tersedia</p>
       <button class="quiz-start-btn" @click="startQuiz">Mulai</button>
     </div>
 
@@ -72,6 +73,7 @@ import {
   fetchRandomQuestion,
   checkAnswer as apiCheckAnswer,
   fetchTopics,
+  fetchQuestionCount,
 } from '@/api/client';
 import type { Question, CheckResult } from '@/types';
 import QuestionCard from '@/components/QuestionCard.vue';
@@ -96,6 +98,7 @@ const finalTime = ref(0);
 const errorMessage = ref('');
 const subjectId = ref(0);
 const topicLabel = ref('');
+const questionCount = ref(0);
 const autoStart = ref(false);
 
 function nextQuestion() {
@@ -182,18 +185,28 @@ async function loadTopicInfo() {
   }
 }
 
+async function loadQuestionCount() {
+  try {
+    questionCount.value = await fetchQuestionCount(getTopicId());
+  } catch {
+    questionCount.value = 0;
+  }
+}
+
 watch(
   () => route.params.id,
   (newId) => {
     if (!newId) return;
     autoStart.value = false;
     loadTopicInfo();
+    loadQuestionCount();
     loadQuestion();
   },
 );
 
 onMounted(() => {
   loadTopicInfo();
+  loadQuestionCount();
   loadQuestion();
 });
 </script>
@@ -244,6 +257,13 @@ onMounted(() => {
   font-size: 1.3rem;
   color: #445566;
   margin-bottom: 24px;
+}
+
+.ready-count {
+  font-size: 1rem;
+  color: #556677;
+  margin-bottom: 16px;
+  margin-top: -8px;
 }
 
 .quiz-start-btn {

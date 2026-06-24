@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import { drizzle } from 'drizzle-orm/mysql2';
-import { eq, sql } from 'drizzle-orm';
+import { eq, sql, count } from 'drizzle-orm';
 import { z } from 'zod';
 import { questions } from '../db/schema/questions';
 import { questionOptions } from '../db/schema/question-options';
@@ -20,6 +20,21 @@ const checkBodySchema = z.object({
 export function questionsRoutes(pool: Pool) {
   const db = drizzle(pool, { schema, mode: 'default' });
   const app = new Hono();
+
+  app.get('/count', async (c) => {
+    const parsed = randomQuerySchema.safeParse(c.req.query());
+
+    if (!parsed.success) {
+      return c.json({ error: 'invalid_query', message: 'topic_id harus berupa angka positif.' }, 400);
+    }
+
+    const [row] = await db
+      .select({ total: count() })
+      .from(questions)
+      .where(eq(questions.topic_id, parsed.data.topic_id));
+
+    return c.json({ count: row?.total ?? 0 });
+  });
 
   app.get('/random', async (c) => {
     const parsed = randomQuerySchema.safeParse(c.req.query());
