@@ -2,11 +2,16 @@
 
 Aplikasi web sederhana untuk belajar soal UTBK.
 
+| | |
+|---|---|
+| ![home](docs/screenshots/02-home.png) | ![quiz-ready](docs/screenshots/03-ready.png) |
+| ![quiz](docs/screenshots/04-answering.png) | ![review](docs/screenshots/05-reviewing.png) |
+
+Flow: pilih topik → kerjakan soal acak → timer → jawab → lihat pembahasan → lanjut → resume.
+
 - **Stack:** Bun + Hono + Drizzle + MariaDB + Vue 3
 - **Auth opsional:** via `APP_PASSWORD` di `.env`
 - **Testing:** 51 test (Vitest)
-
-Flow: pilih topik → kerjakan soal acak → timer → jawab → lihat pembahasan → lanjut → resume.
 
 ---
 
