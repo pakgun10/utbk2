@@ -11,6 +11,24 @@ interface Env {
 }
 
 function loadEnv(): Env {
+  const fromEnv = {
+    DB_HOST: process.env.DB_HOST || '',
+    DB_PORT: process.env.DB_PORT || '',
+    DB_USER: process.env.DB_USER || '',
+    DB_PASSWORD: process.env.DB_PASSWORD || '',
+    DB_NAME: process.env.DB_NAME || '',
+  };
+
+  if (fromEnv.DB_HOST && fromEnv.DB_USER && fromEnv.DB_NAME) {
+    return {
+      DB_HOST: fromEnv.DB_HOST,
+      DB_PORT: Number(fromEnv.DB_PORT) || 3306,
+      DB_USER: fromEnv.DB_USER,
+      DB_PASSWORD: fromEnv.DB_PASSWORD,
+      DB_NAME: fromEnv.DB_NAME,
+    };
+  }
+
   const envPath = path.join(process.cwd(), '..', '.env');
   const raw = fs.readFileSync(envPath, 'utf8');
   const env: Record<string, string> = {};

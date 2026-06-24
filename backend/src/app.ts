@@ -1,4 +1,5 @@
 import { Hono } from 'hono';
+import { serveStatic } from 'hono/bun';
 import { cors } from 'hono/cors';
 import { authRoutes } from './routes/auth';
 import { subjectsRoutes } from './routes/subjects';
@@ -40,6 +41,17 @@ export function createApp(config: AppConfig) {
   app.route('/api/subjects', subjectsRoutes(config.pool));
   app.route('/api/topics', topicsRoutes(config.pool));
   app.route('/api/questions', questionsRoutes(config.pool));
+
+  if (process.env.NODE_ENV === 'production') {
+    const distDir = '../frontend/dist';
+    app.get('/assets/*', serveStatic({ root: distDir }));
+    app.get('/*', (c) => {
+      const file = Bun.file(`${distDir}/index.html`);
+      return new Response(file, {
+        headers: { 'Content-Type': 'text/html' },
+      });
+    });
+  }
 
   return app;
 }

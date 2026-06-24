@@ -5,6 +5,15 @@ import { createPool } from './db/connection';
 import { applyMigrations } from './db/migrate';
 
 function loadEnv(): { port: number; frontendPort: number; appPassword: string } {
+  const port = Number(process.env.APP_PORT) || 3000;
+  const frontendPort = Number(process.env.FRONTEND_PORT) || 5173;
+  const appPassword = process.env.APP_PASSWORD || '';
+  const dbHost = process.env.DB_HOST || '';
+
+  if (dbHost) {
+    return { port, frontendPort, appPassword };
+  }
+
   const envPath = path.join(process.cwd(), '..', '.env');
   const raw = fs.readFileSync(envPath, 'utf8');
   const map: Record<string, string> = {};
