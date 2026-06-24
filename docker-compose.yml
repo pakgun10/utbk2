@@ -13,7 +13,7 @@ services:
     command: ['bun', 'src/index.ts']
     environment:
       DB_HOST: ${DB_HOST:-172.17.0.1}
-      DB_PORT: '3306'
+      DB_PORT: ${DB_PORT:-3306}
       DB_USER: ${DB_USER:-root}
       DB_PASSWORD: ${DB_PASSWORD:-}
       DB_NAME: ${DB_NAME:-utbk_belajar}
