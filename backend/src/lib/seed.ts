@@ -42,12 +42,95 @@ const seedSchema = z.object({
   subjects: z.array(subjectSchema),
   topics: z.array(topicSchema),
   questions: z.array(questionSchema),
+}).superRefine((data, ctx) => {
+  const subjectSlugs = new Set(data.subjects.map((subject) => subject.slug));
+  const topicSlugs = new Set(data.topics.map((topic) => topic.slug));
+
+  for (const [index, topic] of data.topics.entries()) {
+    if (!subjectSlugs.has(topic.subject_slug)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `Topic "${topic.slug}" merujuk ke subject_slug yang tidak ada.`,
+        path: ['topics', index, 'subject_slug'],
+      });
+    }
+  }
+
+  for (const [index, question] of data.questions.entries()) {
+    if (!topicSlugs.has(question.topic_slug)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `Question "${question.question_text}" merujuk ke topic_slug yang tidak ada.`,
+        path: ['questions', index, 'topic_slug'],
+      });
+    }
+
+    const correctOptions = question.options.filter((option) => option.is_correct);
+    const optionKeys = question.options.map((option) => option.key);
+    const uniqueKeys = new Set(optionKeys);
+
+    if (uniqueKeys.size !== optionKeys.length) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Setiap opsi pada satu soal harus memiliki key unik.',
+        path: ['questions', index, 'options'],
+      });
+    }
+
+    if (question.type === 'single_choice' && correctOptions.length !== 1) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Soal single_choice harus memiliki tepat satu jawaban benar.',
+        path: ['questions', index, 'options'],
+      });
+    }
+
+    if (question.type === 'multiple_response' && correctOptions.length < 2) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Soal multiple_response harus memiliki minimal dua jawaban benar.',
+        path: ['questions', index, 'options'],
+      });
+    }
+
+    if (question.type === 'true_false') {
+      if (question.options.length !== 2) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Soal true_false harus memiliki tepat dua opsi.',
+          path: ['questions', index, 'options'],
+        });
+      }
+
+      const allowedKeys = new Set(['true', 'false']);
+      const hasExactKeys = optionKeys.every((key) => allowedKeys.has(key)) && uniqueKeys.size === 2;
+      if (!hasExactKeys) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Soal true_false harus memakai key "true" dan "false".',
+          path: ['questions', index, 'options'],
+        });
+      }
+
+      if (correctOptions.length !== 1) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Soal true_false harus memiliki tepat satu jawaban benar.',
+          path: ['questions', index, 'options'],
+        });
+      }
+    }
+  }
 });
 
-async function seed() {
+export function parseSeedData(raw: unknown) {
+  return seedSchema.parse(raw);
+}
+
+export async function seed() {
   const seedPath = path.join(process.cwd(), '..', 'seed.json');
   const raw = fs.readFileSync(seedPath, 'utf8');
-  const data = seedSchema.parse(JSON.parse(raw));
+  const data = parseSeedData(JSON.parse(raw));
 
   const pool = createPool();
   const db = drizzle(pool, { schema, mode: 'default' });
@@ -126,7 +209,9 @@ async function seed() {
   await pool.end();
 }
 
-seed().catch((err) => {
-  console.error('[seed] Failed:', err);
-  process.exit(1);
-});
+if (import.meta.main) {
+  seed().catch((err) => {
+    console.error('[seed] Failed:', err);
+    process.exit(1);
+  });
+}
