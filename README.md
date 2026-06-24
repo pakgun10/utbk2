@@ -196,9 +196,15 @@ bun run seed:check
 bun run seed
 ```
 
-Script seed bersifat idempotent: soal yang sama tidak diduplikasi begitu saja.
+Penting:
 
-Lihat detail format di [docs/FORMAT-SOAL.md](/home/DATA/Proyek/AHE/utbk2/docs/FORMAT-SOAL.md:1).
+- workflow ini paling aman untuk **menambah** subject, topic, dan soal baru
+- workflow ini **bukan** editor penuh untuk data yang sudah pernah masuk
+- menghapus item dari `seed.json` tidak otomatis menghapus data dari database
+- mengganti `slug` subject/topic bukan rename aman
+- dedup soal saat ini berbasis `question_text`
+
+Lihat detail format dan batasan edit/hapus di [docs/FORMAT-SOAL.md](/home/DATA/Proyek/AHE/utbk2/docs/FORMAT-SOAL.md:1).
 
 ---
 

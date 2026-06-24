@@ -1,8 +1,21 @@
 # Panduan Memasukkan Soal
 
-Soal dimasukkan melalui file `seed.json` di root project. Setelah file di-edit, jalankan `bun run seed` (dari root project) untuk memasukkan ke database.
+Soal dimasukkan melalui file `seed.json` di root project.
 
-Script seed bersifat **idempotent** — soal yang sudah ada tidak akan diduplikasi.
+Workflow resminya:
+
+```bash
+bun run seed:check
+bun run seed
+```
+
+Penting:
+
+- `seed:check` memvalidasi struktur JSON dan aturan domain soal
+- `seed` saat ini paling aman dipakai untuk **menambah data baru**
+- `seed` **bukan** mekanisme upsert penuh untuk edit/hapus data yang sudah pernah masuk ke database
+
+Jangan berasumsi bahwa mengubah isi `seed.json` otomatis mengubah data lama di database.
 
 ---
 
@@ -17,6 +30,8 @@ File `seed.json` memiliki tiga bagian wajib:
   "questions": [ ... ]
 }
 ```
+
+Tiga array ini tetap wajib ada walaupun salah satunya kosong.
 
 ---
 
@@ -47,6 +62,12 @@ Subject yang sudah ada (default):
 { "slug": "penalaran-matematika",           "label": "Penalaran Matematika",        "display_order": 4 }
 ```
 
+Catatan penting:
+
+- `slug` harus dianggap **tetap** setelah data pernah di-seed
+- Mengganti `slug` subject bukan rename, tetapi berpotensi membuat subject baru
+- Subject yang dihapus dari `seed.json` tidak otomatis terhapus dari database
+
 ---
 
 ## 3. Topics — Topik
@@ -75,6 +96,12 @@ Contoh tambahan jika ingin menambah topic baru:
 { "slug": "geometri", "subject_slug": "penalaran-matematika", "label": "Geometri", "display_order": 2 }
 ```
 
+Catatan penting:
+
+- `slug` topic juga harus dianggap **tetap**
+- Mengganti `slug` topic setelah data lama masuk bukan rename aman
+- Topic yang dihapus dari `seed.json` tidak otomatis terhapus dari database
+
 ---
 
 ## 4. Questions — Soal
@@ -100,6 +127,12 @@ Contoh tambahan jika ingin menambah topic baru:
 | `question_text` | string | Ya | Isi soal. Teks bebas, bisa multi-baris. |
 | `explanation_text` | string | Ya | Pembahasan lengkap. Wajib diisi walau singkat. |
 | `options` | array | Ya | Array opsi jawaban. |
+
+Catatan penting:
+
+- Deteksi duplikasi soal saat ini berbasis `question_text`
+- `question_text` yang identik akan dianggap soal yang sama, walaupun topiknya berbeda
+- Perubahan `question_text`, `explanation_text`, atau `options` pada soal lama tidak dijamin meng-update data yang sudah ada
 
 ### 4.2 Options — Opsi Jawaban
 
@@ -186,11 +219,69 @@ Pernyataan yang harus dinilai benar atau salah.
 
 ---
 
-## 6. Setelah Mengedit
+## 6. Tambah, Edit, Rename, Hapus
+
+Bagian ini penting untuk maintenance bank soal.
+
+| Operasi | Aman lewat `seed.json`? | Catatan |
+|---|---|---|
+| Tambah subject baru | Ya | Aman, lalu jalankan `seed:check` dan `seed` |
+| Tambah topic baru | Ya | Aman jika `subject_slug` valid |
+| Tambah soal baru | Ya | Aman jika `question_text` belum dipakai |
+| Edit label subject/topic | Tidak dijamin | Implementasi saat ini tidak melakukan update row lama |
+| Edit isi soal/pembahasan/opsi | Tidak dijamin | Soal lama bisa tetap tidak berubah |
+| Rename `slug` subject/topic | Tidak | Bisa membuat entitas baru, bukan rename |
+| Hapus subject/topic/soal dari `seed.json` | Tidak | Data lama tidak otomatis terhapus dari database |
+
+### 6.1 Jika Ingin Menambah Data
+
+Gunakan alur biasa:
+
+1. Tambah data baru ke `seed.json`
+2. Jalankan `bun run seed:check`
+3. Jalankan `bun run seed`
+
+### 6.2 Jika Ingin Mengedit Data Existing
+
+Untuk kondisi repo saat ini:
+
+- Anggap `seed.json` sebagai sumber tambah data, bukan editor data lama
+- Jika ingin mengubah data yang sudah pernah masuk, Anda perlu berhati-hati karena `seed` sekarang tidak melakukan update penuh
+
+Praktik aman:
+
+1. Backup database
+2. Tentukan apakah perubahan itu tambah data baru atau edit data lama
+3. Jika benar-benar edit data lama, lakukan cleanup/manual SQL/migrasi terkontrol sesuai kebutuhan
+4. Jalankan `bun run seed:check` setelah perubahan file
+
+### 6.3 Jika Ingin Rename Slug
+
+Jangan langsung edit `slug` lalu menjalankan `seed`.
+
+Risiko:
+
+- entitas baru dibuat
+- relasi lama tetap tertinggal
+- data menjadi ganda atau terfragmentasi
+
+### 6.4 Jika Ingin Menghapus Data
+
+Menghapus item dari `seed.json` tidak otomatis menghapus data di database.
+
+Jika butuh hapus:
+
+- lakukan delete manual dengan hati-hati
+- atau siapkan workflow migrasi/cleanup khusus
+
+---
+
+## 7. Setelah Mengedit Data Baru
 
 Dari root project, jalankan:
 
 ```bash
+bun run seed:check
 bun run seed
 ```
 
@@ -202,11 +293,15 @@ Output contoh:
 - `Subjects: 0` = tidak ada subject baru (hanya insert jika belum ada)
 - `Questions: 5` = 5 soal baru berhasil ditambahkan
 
-Soal yang sudah ada (berdasarkan teks soal yang identik) tidak akan diduplikasi.
+Perilaku penting:
+
+- subject/topic yang sudah ada berdasarkan `slug` tidak akan diinsert ulang
+- soal yang sudah ada berdasarkan `question_text` identik tidak akan diinsert ulang
+- aturan ini berlaku pada implementasi sekarang, bukan kontrak edit data penuh
 
 ---
 
-## 7. Tips Generate Soal dengan AI
+## 8. Tips Generate Soal dengan AI
 
 Minta AI untuk menghasilkan soal dalam format JSON. Contoh prompt:
 
@@ -233,7 +328,7 @@ Output dalam format JSON array questions.
 
 ---
 
-## 8. Kesalahan Umum
+## 9. Kesalahan Umum
 
 | Masalah | Penyebab | Solusi |
 |---|---|---|
@@ -241,15 +336,24 @@ Output dalam format JSON array questions.
 | `[seed] Topic "y" not found` | `topic_slug` di question tidak cocok | Pastikan slug topic sudah ada di array `topics` |
 | Soal tidak muncul | `explanation_text` kosong | Wajib diisi |
 | `true_false` tidak muncul opsi | Opsi bukan `true`/`false` | Gunakan `"key": "true"` dan `"key": "false"` |
+| Perubahan label tidak muncul | `seed` tidak meng-update row lama | Perlakukan ini sebagai edit existing, bukan tambah data |
+| Ganti `slug` lalu data jadi ganda | Rename slug membuat entitas baru | Jangan rename slug lewat edit biasa |
+| Hapus item dari `seed.json` tapi data masih ada | `seed` tidak melakukan delete | Lakukan cleanup manual/migrasi khusus |
+| Soal baru tidak masuk padahal topic beda | `question_text` sama dengan soal lain | Pastikan teks soal benar-benar unik jika memang soal baru |
 
 ---
 
-## 9. Validasi Format
+## 10. Validasi Format
 
-Sebelum menjalankan `bun run seed`, pastikan file JSON valid:
+Gunakan validasi resmi dulu:
 
 ```bash
-# Cek apakah JSON valid (di root project)
+bun run seed:check
+```
+
+Jika hanya ingin cek JSON mentah, Anda bisa pakai fallback berikut:
+
+```bash
 python3 -m json.tool seed.json > /dev/null && echo "JSON valid" || echo "JSON ERROR"
 ```
 
