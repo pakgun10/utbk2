@@ -207,7 +207,7 @@ Penting:
 - mengganti `slug` subject/topic bukan rename aman
 - dedup soal saat ini berbasis `question_text`
 
-Lihat detail format dan batasan edit/hapus di [docs/FORMAT-SOAL.md](/home/DATA/Proyek/AHE/utbk2/docs/FORMAT-SOAL.md:1).
+Lihat detail format dan batasan edit/hapus di [docs/FORMAT-SOAL/](docs/FORMAT-SOAL/).
 
 ---
 
@@ -274,9 +274,11 @@ utbk2/
 
 Dokumen lain:
 
-- [docs/STRUKTUR.md](/home/DATA/Proyek/AHE/utbk2/docs/STRUKTUR.md:1)
-- [docs/DEPLOY.md](/home/DATA/Proyek/AHE/utbk2/docs/DEPLOY.md:1)
-- [docs/RENCANA-PROFESIONALISASI.md](/home/DATA/Proyek/AHE/utbk2/docs/RENCANA-PROFESIONALISASI.md:1)
+- [docs/ARSITEKTUR.md](docs/ARSITEKTUR.md) — arsitektur & API
+- [docs/CHANGELOG.md](docs/CHANGELOG.md) — catatan rilis
+- [docs/DEPLOY/](docs/DEPLOY/) — panduan deploy production
+- [docs/STRUKTUR.md](docs/STRUKTUR.md) — struktur direktori
+- [docs/RENCANA-PROFESIONALISASI.md](docs/RENCANA-PROFESIONALISASI.md) — rencana pengembangan
 
 ---
 
