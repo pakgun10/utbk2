@@ -15,7 +15,7 @@ const randomQuerySchema = z.object({
 });
 
 const checkBodySchema = z.object({
-  selected_keys: z.array(z.string().min(1)).min(1, 'Pilih minimal satu jawaban.'),
+  selected_keys: z.array(z.string().min(1)).min(1),
 });
 
 export function questionsRoutes(pool: Pool) {
@@ -95,7 +95,7 @@ export function questionsRoutes(pool: Pool) {
     const parsed = checkBodySchema.safeParse(body);
 
     if (!parsed.success) {
-      return c.json({ error: 'invalid_body', message: parsed.error.issues[0]?.message ?? 'Body tidak valid.' }, 400);
+      return c.json({ error: 'invalid_body', message: 'Body tidak valid. selected_keys wajib diisi.' }, 400);
     }
 
     const [question] = await db
