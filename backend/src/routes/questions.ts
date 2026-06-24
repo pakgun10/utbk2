@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import { drizzle } from 'drizzle-orm/mysql2';
-import { eq, sql, count, and, notInArray } from 'drizzle-orm';
+import { eq, count, and, notInArray } from 'drizzle-orm';
 import { z } from 'zod';
 import { questions } from '../db/schema/questions';
 import { questionOptions } from '../db/schema/question-options';
@@ -75,12 +75,27 @@ export function questionsRoutes(pool: Pool) {
       conditions.push(notInArray(questions.id, excludeIds));
     }
 
+    const [countRow] = await db
+      .select({ total: count() })
+      .from(questions)
+      .where(and(...conditions))
+      .limit(1);
+
+    const total = Number(countRow?.total ?? 0);
+
+    if (total === 0) {
+      return c.json({ question: null, message: 'Tidak ada soal untuk topik ini.' });
+    }
+
+    const randomOffset = Math.floor(Math.random() * total);
+
     const [row] = await db
       .select()
       .from(questions)
       .where(and(...conditions))
-      .orderBy(sql`RAND()`)
-      .limit(1);
+      .orderBy(questions.id)
+      .limit(1)
+      .offset(randomOffset);
 
     if (!row) {
       return c.json({ question: null, message: 'Tidak ada soal untuk topik ini.' });
