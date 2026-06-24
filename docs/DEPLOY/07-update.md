@@ -2,8 +2,9 @@
 
 ```bash
 git pull
+git clean -fdX
 bun install --frozen-lockfile
-bun run install:all
+bun run install:all:frozen
 bun run build:frontend
 bun run seed:check
 docker compose restart

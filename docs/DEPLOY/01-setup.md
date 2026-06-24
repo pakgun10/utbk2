@@ -11,7 +11,7 @@ cd utbk2
 
 ```bash
 bun install --frozen-lockfile
-bun run install:all
+bun run install:all:frozen
 ```
 
 ## 3. Build Frontend

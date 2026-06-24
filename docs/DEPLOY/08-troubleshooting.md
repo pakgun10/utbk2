@@ -89,10 +89,11 @@ git clean -fdX
 
 ## `bun.lock` berubah setelah install
 
-Gunakan `--frozen-lockfile` di VPS:
+Ada 3 file `bun.lock` (root, backend, frontend). Gunakan frozen:
 
 ```bash
-bun install --frozen-lockfile
+bun install --frozen-lockfile          # root
+bun run install:all:frozen             # backend + frontend
 ```
 
-Jika gagal, ada dependency baru. Jalankan `bun install` di dev, commit `bun.lock`, deploy ulang.
+Jika gagal, ada dependency baru. Jalankan `bun install` biasa di dev, commit semua `bun.lock`, deploy ulang.
