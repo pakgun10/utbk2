@@ -5,6 +5,27 @@ Satu soal, satu jawaban, satu pembahasan. Fokus.
 
 ---
 
+## Ringkasan
+
+- Backend: Bun + Hono + Drizzle ORM + MariaDB/MySQL
+- Frontend: Vue 3 + Vue Router
+- Validasi: Zod
+- Testing: Vitest
+- Tooling: ESLint + Prettier
+
+Flow aplikasi:
+
+1. Pilih mata uji
+2. Pilih topik
+3. Kerjakan soal acak
+4. Lihat hasil dan pembahasan
+5. Lanjut ke soal berikutnya
+
+Jika `APP_PASSWORD` diisi, aplikasi memakai password sederhana.
+Jika `APP_PASSWORD` kosong, aplikasi bisa diakses langsung tanpa login.
+
+---
+
 ## Cara Menjalankan
 
 ### Prasyarat
@@ -19,39 +40,64 @@ Satu soal, satu jawaban, satu pembahasan. Fokus.
 # 1. Masuk ke direktori project
 cd utbk2
 
-# 2. Install semua dependency
-cd backend && bun install && cd ../frontend && bun install && cd ..
+# 2. Install dependency root + package
+bun install
+bun run install:all
 
 # 3. Setup database
-cd backend
-bun run db:generate    # Generate migrasi
-bun run db:migrate     # Jalankan migrasi
-bun run seed           # Isi database dengan soal awal
-cd ..
+bun run db:migrate
+bun run seed
 
-# 4. Jalankan — satu perintah untuk backend + frontend
+# 4. Jalankan backend + frontend
 bun run dev
-
-# Buka http://localhost:5173
 ```
 
-Backend berjalan di `http://localhost:3000`, frontend di `http://localhost:5173`.
+Frontend berjalan di `http://localhost:5173`.
+Backend berjalan di `http://localhost:3000`.
 
 ### Konfigurasi
 
 Edit file `.env` di root project:
 
-```
+```env
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=password-anda
 DB_NAME=utbk_belajar
 APP_PORT=3000
-APP_PASSWORD=secretttt     # Password untuk akses aplikasi
+FRONTEND_PORT=5173
+APP_PASSWORD=secretttt
 ```
 
-**Catatan:** jika `APP_PASSWORD` dikosongkan, autentikasi tidak aktif dan aplikasi bisa diakses langsung. Ini berguna untuk development lokal.
+Catatan:
+- Jika `APP_PASSWORD` kosong, auth nonaktif.
+- Jika `APP_PASSWORD` diisi, user harus login lewat `/auth`.
+
+---
+
+## Perintah Penting
+
+Semua perintah berikut dijalankan dari root project:
+
+```bash
+bun run dev           # Jalankan backend + frontend
+bun run seed          # Insert/update bank soal dari seed.json
+bun run seed:check    # Validasi seed.json tanpa menulis ke database
+bun run db:migrate    # Jalankan migrasi database
+bun run lint          # Lint backend + frontend
+bun run format        # Format seluruh repo
+bun run format:check  # Cek format tanpa mengubah file
+bun run test          # Jalankan semua test
+bun run typecheck     # TypeScript check backend + frontend
+```
+
+Per package:
+
+```bash
+cd backend && bun run test
+cd frontend && bun run test
+```
 
 ---
 
@@ -61,40 +107,37 @@ APP_PASSWORD=secretttt     # Password untuk akses aplikasi
 
 Di halaman utama, pilih salah satu mata uji UTBK:
 
-- **TPS** -- Tes Potensi Skolastik
-- **Literasi Bahasa Indonesia**
-- **Literasi Bahasa Inggris**
-- **Penalaran Matematika**
+- TPS
+- Literasi Bahasa Indonesia
+- Literasi Bahasa Inggris
+- Penalaran Matematika
 
 ### 2. Pilih Topik
 
-Setiap mata uji memiliki beberapa topik. Contoh di TPS:
-
-- Penalaran Umum
-- Pengetahuan Kuantitatif
-
+Setiap mata uji berisi beberapa topik.
 Klik topik yang ingin dikerjakan.
 
 ### 3. Kerjakan Soal
 
-- Soal muncul secara acak dari topik yang dipilih
-- Timer otomatis mulai menghitung
-- Baca soal, pilih jawaban
-- Klik **"Selesai"** jika sudah yakin
+- Soal diambil secara acak dari topik terpilih
+- Timer menghitung waktu per soal
+- Pilih jawaban
+- Klik `Selesai`
 
 ### 4. Lihat Pembahasan
 
-Setelah klik Selesai:
-- Status **Benar** atau **Salah** ditampilkan
-- Waktu pengerjaan ditampilkan
-- Kunci jawaban ditampilkan
-- Pembahasan lengkap ditampilkan
+Setelah submit:
 
-Klik **"Soal Berikutnya"** untuk lanjut ke soal acak berikutnya.
+- status `Benar` / `Salah`
+- waktu pengerjaan
+- kunci jawaban
+- pembahasan
+
+Klik `Soal Berikutnya` untuk lanjut.
 
 ### 5. Ganti Topik
 
-Klik **"Ganti Topik"** di kiri atas halaman quiz untuk kembali ke daftar topik.
+Klik `Ganti Topik` di halaman quiz untuk kembali ke daftar topik.
 
 ---
 
@@ -102,20 +145,23 @@ Klik **"Ganti Topik"** di kiri atas halaman quiz untuk kembali ke daftar topik.
 
 | Tipe | Keterangan | Cara Jawab |
 |---|---|---|
-| Pilihan Ganda | `single_choice` | Pilih satu dari 4-5 opsi |
-| Pilihan Ganda Kompleks | `multiple_response` | Centang semua jawaban benar (bisa lebih dari satu) |
-| Benar - Salah | `true_false` | Pilih Benar atau Salah |
+| `single_choice` | Pilihan ganda | Pilih satu jawaban |
+| `multiple_response` | Pilihan ganda kompleks | Pilih semua jawaban benar |
+| `true_false` | Benar / Salah | Pilih satu dari `Benar` atau `Salah` |
 
-**Aturan penilaian:**
-- Pilihan Ganda: jawaban tepat = benar
-- Pilihan Ganda Kompleks: semua opsi benar harus terpilih, tidak boleh ada opsi salah terpilih *(all-or-nothing)*
-- Benar - Salah: pilih tepat = benar
+Aturan penilaian:
+
+- `single_choice`: harus tepat satu jawaban benar
+- `multiple_response`: all-or-nothing, semua yang benar harus dipilih dan tidak boleh ada yang salah
+- `true_false`: harus tepat satu jawaban benar
 
 ---
 
 ## Menambah Soal
 
-Soal disimpan di file `seed.json` di root project. Formatnya:
+Soal disimpan di file `seed.json` di root project.
+
+Contoh ringkas:
 
 ```json
 {
@@ -143,128 +189,129 @@ Soal disimpan di file `seed.json` di root project. Formatnya:
 }
 ```
 
-**Setelah mengedit `seed.json`, jalankan dari root project:**
+Setelah mengubah `seed.json`:
 
 ```bash
+bun run seed:check
 bun run seed
 ```
 
-Script seed bersifat idempotent -- soal yang sudah ada tidak akan diduplikasi.
+Script seed bersifat idempotent: soal yang sama tidak diduplikasi begitu saja.
 
-### Tips menambah soal dengan AI
-
-Minta AI untuk menghasilkan soal dalam format di atas. Contoh prompt:
-
-```
-Buatkan 5 soal UTBK tipe single_choice tentang Penalaran Umum 
-dalam format JSON. Subject: TPS, Topic: penalaran-umum.
-Setiap soal punya 4 opsi (A-D), satu jawaban benar, 
-dan pembahasan singkat. Difficulty: campur easy/medium/hard.
-```
+Lihat detail format di [docs/FORMAT-SOAL.md](/home/DATA/Proyek/AHE/utbk2/docs/FORMAT-SOAL.md:1).
 
 ---
 
-## Arsitektur
+## API
 
-```
-┌──────────┐     HTTP/JSON     ┌──────────┐     MySQL     ┌──────────┐
-│  Vue 3   │ ◄───────────────► │   Hono   │ ◄───────────► │ MariaDB  │
-│  (5173)  │     /api/*        │  (3000)  │               │  (3306)  │
-└──────────┘                   └──────────┘               └──────────┘
-```
-
-**Backend:** Hono (Bun) + Drizzle ORM + Zod
-**Frontend:** Vue 3 (Composition API) + Vue Router
-**Testing:** Vitest (30 test, 100% passing)
-
-### Struktur Database
-
-```
-subjects ──< topics ──< questions ──< question_options
-```
-
-4 tabel, relasi one-to-many, tanpa tabel riwayat/history.
-
-### API Endpoints
+### Endpoint utama
 
 | Method | Path | Fungsi |
 |---|---|---|
+| GET | `/health` | Health check sederhana |
+| GET | `/api/auth` | Status auth (`auth_enabled`) |
+| POST | `/api/auth` | Login jika auth aktif |
 | GET | `/api/subjects` | Daftar mata uji |
 | GET | `/api/topics?subject_id=` | Daftar topik |
+| GET | `/api/questions/count?topic_id=` | Jumlah soal dalam topik |
 | GET | `/api/questions/random?topic_id=` | Soal acak |
 | POST | `/api/questions/:id/check` | Koreksi jawaban |
 
+### Response contoh
+
+```json
+{ "status": "ok" }
+```
+
+```json
+{ "auth_enabled": true }
+```
+
+```json
+{ "subjects": [] }
+```
+
 ---
 
-## Pengembangan
+## Struktur Project
 
-### Perintah dari Root
-
-Semua perintah berikut dijalankan dari root project (`utbk2/`):
-
-```bash
-bun run dev          # Jalankan backend + frontend (satu perintah)
-bun run seed         # Inject soal dari seed.json
-bun run test         # Test backend + frontend
-bun run typecheck    # TypeScript check backend + frontend
-bun run db:migrate   # Jalankan migrasi database
-```
-
-### Menjalankan Test per Package
-
-```bash
-# Dari root project:
-bun run test
-
-# Atau per package:
-cd backend && bun run test
-cd frontend && bun run test
-```
-
-### Struktur Project
-
-```
+```text
 utbk2/
-├── RULES.md              # Aturan project (wajib baca)
-├── seed.json             # Bank soal
-├── .env                  # Konfigurasi
-├── backend/              # API server
+├── README.md
+├── RULES.md
+├── seed.json
+├── docs/
+├── backend/
 │   └── src/
-│       ├── db/schema/    # Drizzle schema
-│       ├── routes/       # API endpoint handlers
-│       └── lib/          # Utils (scoring, seed)
-└── frontend/             # Vue SPA
-    └── src/
-        ├── views/        # Halaman (Home, Topic, Quiz)
-        ├── components/   # Komponen (Timer, Options, dll)
-        ├── api/          # HTTP client
-        └── types/        # TypeScript interfaces
+│       ├── app.ts
+│       ├── config.ts
+│       ├── db/
+│       ├── lib/
+│       ├── mappers/
+│       ├── middleware/
+│       ├── routes/
+│       ├── services/
+│       └── validators/
+├── frontend/
+│   └── src/
+│       ├── api/
+│       ├── components/
+│       ├── composables/
+│       ├── router/
+│       ├── types/
+│       └── views/
+└── package.json
+```
+
+Dokumen lain:
+
+- [docs/STRUKTUR.md](/home/DATA/Proyek/AHE/utbk2/docs/STRUKTUR.md:1)
+- [docs/DEPLOY.md](/home/DATA/Proyek/AHE/utbk2/docs/DEPLOY.md:1)
+- [docs/RENCANA-PROFESIONALISASI.md](/home/DATA/Proyek/AHE/utbk2/docs/RENCANA-PROFESIONALISASI.md:1)
+
+---
+
+## Kualitas
+
+Baseline kualitas repo saat ini:
+
+- `seed:check` tersedia
+- `lint` tersedia
+- `format` tersedia
+- backend dan frontend punya test aktif
+- route backend utama sudah punya test
+- state machine quiz frontend sudah punya test composable
+
+Sebelum merge/perubahan besar, jalankan:
+
+```bash
+bun run seed:check
+bun run lint
+bun run test
+bun run typecheck
 ```
 
 ---
 
 ## FAQ
 
-**Q: Kenapa tidak ada login?**
-A: Aplikasi ini dirancang untuk single-user lokal. Tidak perlu autentikasi.
+**Q: Apakah aplikasi selalu memakai login?**  
+A: Tidak. Login hanya aktif jika `APP_PASSWORD` diisi.
 
-**Q: Kenapa tidak ada riwayat nilai?**
-A: Fokus aplikasi adalah latihan per soal dengan pembahasan langsung. Riwayat bisa ditambahkan di versi berikutnya.
+**Q: Kenapa tidak ada riwayat nilai?**  
+A: Scope aplikasi memang latihan per soal tanpa history tersimpan.
 
-**Q: Bisakah menambah soal lewat UI?**
-A: Versi saat ini soal dimasukkan via `seed.json` + command `bun run seed`. UI admin bisa ditambahkan nanti.
+**Q: Bisakah menambah soal lewat UI?**  
+A: Tidak. Soal masuk lewat `seed.json` dan command seed.
 
-**Q: Timer-nya countdown atau stopwatch?**
-A: Stopwatch -- menghitung waktu dari soal muncul sampai user klik Selesai. Tidak ada batas waktu.
+**Q: Timer ini countdown atau stopwatch?**  
+A: Stopwatch per soal, bukan countdown.
 
-**Q: Soalnya muncul acak atau urut?**
-A: Acak. Setiap kali klik topik, satu soal random dari topik itu ditampilkan.
-
-**Q: Apakah soal yang sudah dikerjakan bisa muncul lagi?**
-A: Ya, karena tidak ada riwayat, soal yang sama bisa muncul lagi di sesi berbeda.
+**Q: Apakah soal yang sudah dikerjakan bisa muncul lagi?**  
+A: Dalam sesi yang sama, soal yang sudah dijawab dikecualikan. Di sesi baru, soal bisa muncul lagi.
 
 ---
 
 ## Lisensi
 
-Private -- untuk penggunaan pribadi.
+Private — untuk penggunaan pribadi.

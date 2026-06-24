@@ -1,97 +1,101 @@
 # STRUKTUR FOLDER REFERENCE
 
-> Referensi lengkap struktur direktori project `utbk2`.
-> Dokumen ini akan diupdate seiring progress pengerjaan.
+Referensi struktur direktori project `utbk2`.
+Dokumen ini disesuaikan dengan implementasi saat ini.
 
-```
+```text
 utbk2/
-│
-├── .env                          # Konfigurasi lingkungan (tidak di-commit)
-├── .env.example                  # Template konfigurasi
-├── .gitignore                    # Git ignore rules
-├── seed.json                     # Data soal untuk seed awal
-├── README.md                     # Panduan lengkap penggunaan
-├── RULES.md                      # Project rules (WAJIB BACA dulu)
-│
+├── .env
+├── .env.example
+├── .env.production.example
+├── .gitignore
+├── .prettierignore
+├── .prettierrc.json
+├── AGENTS.md
+├── README.md
+├── RTK.md
+├── RULES.md
+├── eslint.config.js
+├── package.json
+├── seed.json
 ├── docs/
-│   ├── KONSEP.md                 # Dokumen konsep aplikasi
-│   ├── RENCANA.md                # Rencana eksekusi step-by-step
-│   ├── FORMAT-SOAL.md            # Panduan format memasukkan soal
-│   ├── DEPLOY.md                 # Panduan deploy Docker
-│   └── STRUKTUR.md               # File ini
-│
+│   ├── DEPLOY.md
+│   ├── FORMAT-SOAL.md
+│   ├── KONSEP.md
+│   ├── RENCANA.md
+│   ├── RENCANA-PROFESIONALISASI.md
+│   └── STRUKTUR.md
 ├── backend/
-│   ├── src/
-│   │   ├── db/
-│   │   │   ├── schema/
-│   │   │   │   ├── subjects.ts
-│   │   │   │   ├── topics.ts
-│   │   │   │   ├── questions.ts
-│   │   │   │   ├── question-options.ts
-│   │   │   │   └── index.ts
-│   │   │   ├── connection.ts
-│   │   │   └── migrate.ts
-│   │   ├── routes/
-│   │   │   ├── subjects.ts
-│   │   │   ├── topics.ts
-│   │   │   └── questions.ts
-│   │   ├── lib/
-│   │   │   ├── scoring.ts
-│   │   │   └── seed.ts
-│   │   ├── __tests__/
-│   │   │   ├── routes/
-│   │   │   │   ├── subjects.test.ts
-│   │   │   │   ├── topics.test.ts
-│   │   │   │   └── questions.test.ts
-│   │   │   └── lib/
-│   │   │       └── scoring.test.ts
-│   │   ├── app.ts
-│   │   └── index.ts
+│   ├── drizzle/
 │   ├── package.json
 │   ├── tsconfig.json
 │   ├── vitest.config.ts
-│   └── drizzle.config.ts
-│
+│   └── src/
+│       ├── app.ts
+│       ├── config.ts
+│       ├── index.ts
+│       ├── __tests__/
+│       │   ├── app.test.ts
+│       │   ├── lib/
+│       │   └── routes/
+│       ├── db/
+│       │   ├── connection.ts
+│       │   ├── migrate.ts
+│       │   └── schema/
+│       ├── lib/
+│       │   ├── auth-store.ts
+│       │   ├── scoring.ts
+│       │   ├── seed-check.ts
+│       │   └── seed.ts
+│       ├── mappers/
+│       │   └── question-response.ts
+│       ├── middleware/
+│       │   └── require-auth.ts
+│       ├── routes/
+│       │   ├── auth.ts
+│       │   ├── questions.ts
+│       │   ├── subjects.ts
+│       │   └── topics.ts
+│       ├── services/
+│       │   └── question-service.ts
+│       └── validators/
+│           └── question-validator.ts
 ├── frontend/
-│   ├── src/
-│   │   ├── views/
-│   │   │   ├── HomeView.vue
-│   │   │   ├── TopicView.vue
-│   │   │   └── QuizView.vue
-│   │   ├── components/
-│   │   │   ├── QuestionCard.vue
-│   │   │   ├── TimerBar.vue
-│   │   │   ├── OptionList.vue
-│   │   │   └── ExplanationPanel.vue
-│   │   ├── router/
-│   │   │   └── index.ts
-│   │   ├── api/
-│   │   │   └── client.ts
-│   │   ├── types/
-│   │   │   └── index.ts
-│   │   ├── __tests__/
-│   │   │   ├── views/
-│   │   │   │   ├── HomeView.test.ts
-│   │   │   │   ├── TopicView.test.ts
-│   │   │   │   └── QuizView.test.ts
-│   │   │   └── components/
-│   │   │       ├── TimerBar.test.ts
-│   │   │       ├── OptionList.test.ts
-│   │   │       └── ExplanationPanel.test.ts
-│   │   ├── App.vue
-│   │   └── main.ts
-│   ├── index.html
-│   ├── public/
 │   ├── package.json
 │   ├── tsconfig.json
+│   ├── vite.config.ts
 │   ├── vitest.config.ts
-│   └── vite.config.ts
+│   └── src/
+│       ├── App.vue
+│       ├── main.ts
+│       ├── __tests__/
+│       │   ├── components/
+│       │   ├── composables/
+│       │   └── views/
+│       ├── api/
+│       │   └── client.ts
+│       ├── components/
+│       │   ├── ExplanationPanel.vue
+│       │   ├── OptionList.vue
+│       │   ├── QuestionCard.vue
+│       │   └── TimerBar.vue
+│       ├── composables/
+│       │   └── useQuizSession.ts
+│       ├── router/
+│       │   └── index.ts
+│       ├── types/
+│       │   └── index.ts
+│       └── views/
+│           ├── AuthView.vue
+│           ├── HomeView.vue
+│           ├── QuizView.vue
+│           └── TopicView.vue
+├── Dockerfile
+└── docker-compose.yml
 ```
 
-## Legend Status
+## Catatan
 
-| Status | Arti |
-|---|---|
-| ✅ | Sudah dikerjakan |
-| 🔜 | Rencana selanjutnya |
-| ⬜ | Belum dikerjakan |
+- `backend/src/routes/questions.ts` sekarang hanya berfungsi sebagai route wiring tipis.
+- Logika quiz frontend utama sudah dipindahkan ke `frontend/src/composables/useQuizSession.ts`.
+- Tooling kualitas tersedia di root: `lint`, `format`, `seed:check`, `test`, `typecheck`.

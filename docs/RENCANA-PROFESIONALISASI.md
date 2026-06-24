@@ -31,10 +31,10 @@ Perubahan:
 - Sisakan `createApp(App).use(router).mount(...)` di `main.ts`
 
 Checklist:
-- [ ] Tambah file `frontend/src/router/index.ts`
-- [ ] Pindahkan route guard auth ke file router
-- [ ] Pastikan import alias tetap valid
-- [ ] Tambahkan test ringan jika perlu
+- [x] Tambah file `frontend/src/router/index.ts`
+- [x] Pindahkan route guard auth ke file router
+- [x] Pastikan import alias tetap valid
+- [x] Tambahkan test ringan jika perlu
 
 ### 1.2 Sentralisasi Config Backend
 
@@ -55,10 +55,10 @@ Perubahan:
   - `DB_NAME`
 
 Checklist:
-- [ ] Buat `backend/src/config.ts`
-- [ ] Refactor `backend/src/index.ts`
-- [ ] Refactor `backend/src/db/connection.ts`
-- [ ] Pastikan fallback `.env` tetap berjalan
+- [x] Buat `backend/src/config.ts`
+- [x] Refactor `backend/src/index.ts`
+- [x] Refactor `backend/src/db/connection.ts`
+- [x] Pastikan fallback `.env` tetap berjalan
 
 ### 1.3 Tambahkan Health Endpoint
 
@@ -74,9 +74,9 @@ Perubahan:
 ```
 
 Checklist:
-- [ ] Tambah route health di backend
-- [ ] Tambahkan test route
-- [ ] Dokumentasikan di `README.md` atau `docs/DEPLOY.md`
+- [x] Tambah route health di backend
+- [x] Tambahkan test route
+- [x] Dokumentasikan di `README.md` atau `docs/DEPLOY.md`
 
 ### 1.4 Lengkapi Empty/Error State Frontend
 
@@ -90,9 +90,9 @@ Area:
 - `frontend/src/views/QuizView.vue`
 
 Checklist:
-- [ ] Tambahkan tombol retry saat fetch gagal
-- [ ] Tambahkan empty state saat subject/topic kosong
-- [ ] Tambahkan state saat tidak ada soal tersedia
+- [x] Tambahkan tombol retry saat fetch gagal
+- [x] Tambahkan empty state saat subject/topic kosong
+- [x] Tambahkan state saat tidak ada soal tersedia
 
 ### 1.5 Tambahkan Tooling Dasar
 
@@ -105,9 +105,9 @@ Perubahan:
 - Tambah `seed:check`
 
 Checklist:
-- [ ] Pilih linter/formatter
-- [ ] Tambahkan script root + package backend/frontend bila perlu
-- [ ] Tambahkan validasi `seed.json` tanpa insert DB
+- [x] Pilih linter/formatter
+- [x] Tambahkan script root + package backend/frontend bila perlu
+- [x] Tambahkan validasi `seed.json` tanpa insert DB
 
 ---
 
@@ -131,10 +131,10 @@ backend/src/
 ```
 
 Checklist:
-- [ ] Pindahkan validasi request ke validator
-- [ ] Pindahkan query soal/random/check ke service
-- [ ] Pindahkan mapping response ke helper terpisah
-- [ ] Pastikan route tinggal wire-up
+- [x] Pindahkan validasi request ke validator
+- [x] Pindahkan query soal/random/check ke service
+- [x] Pindahkan mapping response ke helper terpisah
+- [x] Pastikan route tinggal wire-up
 
 ### 2.2 Pecah State Quiz Frontend
 
@@ -153,10 +153,10 @@ Isi minimal:
 - exit flow
 
 Checklist:
-- [ ] Buat composable baru
-- [ ] Pindahkan state machine quiz dari `QuizView.vue`
-- [ ] Sisakan `QuizView.vue` sebagai presenter/container tipis
-- [ ] Tambahkan test composable atau view flow
+- [x] Buat composable baru
+- [x] Pindahkan state machine quiz dari `QuizView.vue`
+- [x] Sisakan `QuizView.vue` sebagai presenter/container tipis
+- [x] Tambahkan test composable atau view flow
 
 ### 2.3 Rapikan Kontrak API
 
