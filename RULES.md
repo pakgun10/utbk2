@@ -242,11 +242,12 @@ Pastikan database MariaDB/MySQL sudah running dan database `utbk_belajar` sudah 
 
 ## 11. Jika Ganti Model / Editor
 
-1. **Baca `RULES.md` ini** sampai paham seluruh aturan.
-2. Baca `docs/KONSEP.md` untuk paham konsep produk.
-3. Baca `docs/STRUKTUR.md` untuk paham navigasi file.
-4. Cek `docs/RENCANA.md` untuk melihat progress dan langkah selanjutnya.
-5. Jangan mulai koding sebelum paham semua aturan di atas.
+1. **Baca `RULES.md` ini** — aturan main project.
+2. **Baca `docs/README.md`** — indeks dokumentasi, tentukan yang relevan.
+3. **Baca `docs/ARSITEKTUR.md`** — paham struktur dan API.
+4. **Baca `docs/STRUKTUR.md`** — navigasi direktori.
+5. **Jalankan `bun run test`** — pastikan kondisi awal hijau.
+6. Jangan mulai koding sebelum paham semua aturan di atas.
 
 ---
 

@@ -19,6 +19,7 @@ utbk2/
 ├── package.json
 ├── seed.json
 ├── docs/
+│   ├── README.md                 # Indeks dokumentasi (mulai dari sini)
 │   ├── DEPLOY/
 │   │   ├── README.md
 │   │   ├── 01-setup.md
