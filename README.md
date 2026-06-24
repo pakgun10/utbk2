@@ -321,6 +321,18 @@ A: Dalam sesi yang sama, soal yang sudah dijawab dikecualikan. Di sesi baru, soa
 
 ---
 
+## Dokumentasi Lainnya
+
+| Topik | Lokasi |
+|---|---|
+| Arsitektur & API | `docs/ARSITEKTUR.md` |
+| Panduan deploy production | `docs/DEPLOY/README.md` |
+| Format & cara menambah soal | `docs/FORMAT-SOAL/README.md` |
+| Catatan rilis | `docs/CHANGELOG.md` |
+| Aturan project untuk developer | `RULES.md` |
+
+---
+
 ## Lisensi
 
 Private — untuk penggunaan pribadi.
