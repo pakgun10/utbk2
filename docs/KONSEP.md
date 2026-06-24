@@ -1,17 +1,16 @@
-# KONSEP APLIKASI: UTBK Belajar
+# UTBK Belajar — Arsitektur & Fitur
 
-> Dokumen ini mendefinisikan konsep, ruang lingkup, dan keputusan arsitektur
-> untuk aplikasi belajar soal UTBK.
+> Dokumen ini menggambarkan kondisi aktual aplikasi saat ini.
+> Bukan rencana — apa yang sudah jadi.
 
 ---
 
 ## 1. Ringkasan
 
-Aplikasi web belajar soal UTBK dengan alur sangat sederhana:
-pilih topik -> dapat soal acak -> timer (start/stop) -> jawab -> lihat pembahasan -> lanjut.
+Aplikasi web belajar soal UTBK. Alur: pilih topik → mulai → soal acak → timer → jawab → lihat pembahasan → lanjut → resume akhir.
 
-- Single-user, tanpa login
-- Tanpa riwayat atau skor tersimpan
+- Single-user, auth opsional (password)
+- Tanpa riwayat — setiap sesi dimulai dari nol
 - Fokus pada latihan per soal dengan pembahasan langsung
 
 ---
@@ -21,396 +20,349 @@ pilih topik -> dapat soal acak -> timer (start/stop) -> jawab -> lihat pembahasa
 | Layer | Teknologi | Versi |
 |---|---|---|
 | Runtime | Bun | 1.3.x |
-| Backend framework | Hono | ^4.8 |
+| Backend | Hono | ^4.8 |
 | Database | MariaDB / MySQL 8 | |
 | ORM | Drizzle ORM | |
 | Validasi | Zod | |
-| Frontend framework | Vue 3 (Composition API) | |
+| Frontend | Vue 3 (Composition API) | |
 | Router | Vue Router | |
-| Testing | Vitest | |
-| Build tool | Vite | |
+| Testing | Vitest | 51 test |
+| Build | Vite | |
+| Linter | ESLint | |
+| Formatter | Prettier | |
 
 ---
 
-## 3. Struktur Folder
+## 3. Arsitektur
+
+```text
+┌───────────────┐     HTTP/JSON      ┌───────────┐     MySQL      ┌───────────┐
+│  Vue 3 (SPA)  │ ◄───────────────►  │  Hono     │ ◄───────────►  │  MariaDB  │
+│  :5173 (dev)  │     /api/*         │  :3000    │     Drizzle    │  :3306    │
+└───────────────┘                    └───────────┘               └───────────┘
+```
+
+Production: backend serve frontend `dist/` langsung. Satu service, satu domain, tanpa nginx untuk frontend.
 
 ```
-utbk2/
-├── .env                  # Konfigurasi lingkungan
-├── seed.json             # Data soal untuk seed awal
-├── KONSEP.md             # Dokumen ini
-├── RENCANA.md            # Rencana eksekusi
-├── STRUKTUR.md           # Referensi struktur direktori
-│
-├── backend/
-│   ├── src/
-│   │   ├── db/
-│   │   │   ├── schema/
-│   │   │   │   ├── subjects.ts
-│   │   │   │   ├── topics.ts
-│   │   │   │   ├── questions.ts
-│   │   │   │   └── question-options.ts
-│   │   │   ├── connection.ts      # Koneksi pool database
-│   │   │   └── migrate.ts         # Runner migrasi
-│   │   ├── routes/
-│   │   │   ├── subjects.ts
-│   │   │   ├── topics.ts
-│   │   │   └── questions.ts
-│   │   ├── lib/
-│   │   │   ├── scoring.ts         # Logika koreksi jawaban
-│   │   │   └── seed.ts            # Fungsi seed database
-│   │   ├── index.ts               # Entry point
-│   │   └── app.ts                 # Hono app factory
-│   ├── src/__tests__/
-│   │   ├── routes/
-│   │   │   ├── subjects.test.ts
-│   │   │   ├── topics.test.ts
-│   │   │   └── questions.test.ts
-│   │   └── lib/
-│   │       └── scoring.test.ts
-│   ├── package.json
-│   ├── tsconfig.json
-│   └── vitest.config.ts
-│
-├── frontend/
-│   ├── src/
-│   │   ├── views/
-│   │   │   ├── HomeView.vue       # Landing: pilih subject
-│   │   │   ├── TopicView.vue      # Pilih topic dalam subject
-│   │   │   └── QuizView.vue       # Soal + timer + pembahasan
-│   │   ├── components/
-│   │   │   ├── QuestionCard.vue    # Tampilan soal
-│   │   │   ├── TimerBar.vue        # Timer start/stop display
-│   │   │   ├── OptionList.vue      # Opsi jawaban
-│   │   │   └── ExplanationPanel.vue # Pembahasan setelah jawab
-│   │   ├── router/
-│   │   │   └── index.ts
-│   │   ├── api/
-│   │   │   └── client.ts          # HTTP client
-│   │   ├── App.vue
-│   │   └── main.ts
-│   ├── src/__tests__/
-│   │   ├── views/
-│   │   │   ├── HomeView.test.ts
-│   │   │   ├── TopicView.test.ts
-│   │   │   └── QuizView.test.ts
-│   │   └── components/
-│   │       ├── TimerBar.test.ts
-│   │       ├── OptionList.test.ts
-│   │       └── ExplanationPanel.test.ts
-│   ├── public/
-│   ├── package.json
-│   ├── tsconfig.json
-│   ├── vitest.config.ts
-│   └── vite.config.ts
+NPM → app:3000
+         ├── /          → frontend SPA (index.html)
+         ├── /assets/*  → file build Vite
+         └── /api/*     → backend Hono
 ```
 
 ---
 
 ## 4. Model Data
 
-### 4.1 Entity Relationship
-
 ```
-Subject 1---* Topic 1---* Question 1---* QuestionOption
+subjects  ──<  topics  ──<  questions  ──<  question_options
 ```
 
-### 4.2 subjects
+4 tabel, relasi one-to-many. Tanpa tabel riwayat (attempt, answer, snapshot).
 
-| Kolom | Tipe | Constraint | Keterangan |
-|---|---|---|---|
-| id | int (serial) | PK | |
-| slug | varchar(50) | UNIQUE, NOT NULL | `tps`, `literasi-bahasa-indonesia` |
-| label | varchar(100) | NOT NULL | "TPS", "Literasi Bahasa Indonesia" |
-| display_order | int | NOT NULL | |
+### subjects
 
-### 4.3 topics
+| Kolom | Tipe | Keterangan |
+|---|---|---|
+| id | int auto_increment | PK |
+| slug | varchar(50) unique | `tps`, `literasi-bahasa-indonesia` |
+| label | varchar(100) | `TPS`, `Literasi Bahasa Indonesia` |
+| display_order | int | Urutan tampil |
 
-| Kolom | Tipe | Constraint | Keterangan |
-|---|---|---|---|
-| id | int (serial) | PK | |
-| subject_id | int | FK -> subjects.id, NOT NULL | |
-| slug | varchar(50) | UNIQUE, NOT NULL | `penalaran-umum` |
-| label | varchar(100) | NOT NULL | "Penalaran Umum" |
-| display_order | int | NOT NULL | |
+### topics
 
-### 4.4 questions
+| Kolom | Tipe | Keterangan |
+|---|---|---|
+| id | int auto_increment | PK |
+| subject_id | int FK | → subjects.id |
+| slug | varchar(50) unique | `penalaran-umum` |
+| label | varchar(100) | `Penalaran Umum` |
+| display_order | int | |
 
-| Kolom | Tipe | Constraint | Keterangan |
-|---|---|---|---|
-| id | int (serial) | PK | |
-| topic_id | int | FK -> topics.id, NOT NULL | |
-| type | varchar(20) | NOT NULL | `single_choice`, `multiple_response`, `true_false` |
-| difficulty | varchar(10) | NOT NULL | `easy`, `medium`, `hard` |
-| question_text | text | NOT NULL | Isi soal |
-| explanation_text | text | NOT NULL | Pembahasan |
-| created_at | timestamp | default now() | |
+### questions
 
-### 4.5 question_options
+| Kolom | Tipe | Keterangan |
+|---|---|---|
+| id | int auto_increment | PK |
+| topic_id | int FK | → topics.id |
+| type | enum | `single_choice`, `multiple_response`, `true_false` |
+| difficulty | enum | `easy`, `medium`, `hard` |
+| question_text | text | Isi soal |
+| explanation_text | text | Pembahasan |
+| created_at | timestamp | |
 
-| Kolom | Tipe | Constraint | Keterangan |
-|---|---|---|---|
-| id | int (serial) | PK | |
-| question_id | int | FK -> questions.id, NOT NULL | |
-| option_key | varchar(5) | NOT NULL | `A`, `B`, `C`, `D`, `true`, `false` |
-| option_text | text | NOT NULL | Teks opsi |
-| is_correct | boolean | NOT NULL | Kunci jawaban |
-| display_order | int | NOT NULL | |
+### question_options
+
+| Kolom | Tipe | Keterangan |
+|---|---|---|
+| id | int auto_increment | PK |
+| question_id | int FK | → questions.id |
+| option_key | varchar(5) | `A`, `B`, `C`, `D`, `true`, `false` |
+| option_text | text | Teks opsi |
+| is_correct | boolean | Kunci jawaban |
+| display_order | int | |
 
 ---
 
 ## 5. API Endpoints
 
-### `GET /api/subjects`
-Mengembalikan semua subject terurut `display_order`.
+### `GET /health`
+
+Cek server. Tidak perlu auth.
+
 ```json
-{
-  "subjects": [
-    { "id": 1, "slug": "tps", "label": "TPS", "display_order": 1 }
-  ]
-}
+{ "status": "ok" }
 ```
 
-### `GET /api/topics?subject_id=<id>`
-Mengembalikan topic milik suatu subject.
+### `GET /api/auth`
+
+Cek status auth.
+
 ```json
-{
-  "topics": [
-    { "id": 1, "subject_id": 1, "slug": "penalaran-umum", "label": "Penalaran Umum", "display_order": 1 }
-  ]
-}
+{ "auth_enabled": true }
 ```
 
-### `GET /api/questions/random?topic_id=<id>`
-Ambil 1 soal acak dari topic. Opsi tidak menyertakan is_correct.
+### `POST /api/auth`
 
-Response jika ada soal:
-```json
-{
-  "question": {
-    "id": 10,
-    "type": "single_choice",
-    "difficulty": "medium",
-    "question_text": "Manakah pernyataan yang tepat?",
-    "options": [
-      { "key": "A", "text": "Pernyataan 1" },
-      { "key": "B", "text": "Pernyataan 2" },
-      { "key": "C", "text": "Pernyataan 3" },
-      { "key": "D", "text": "Pernyataan 4" }
-    ]
-  }
-}
-```
-
-Response jika tidak ada soal (semua sudah dijawab sesi ini atau topik kosong):
-```json
-{
-  "question": null,
-  "message": "Tidak ada soal lagi untuk topik ini."
-}
-```
-
-### `POST /api/questions/:id/check`
-Mengecek jawaban.
+Login. Hanya valid jika `APP_PASSWORD` diisi.
 
 Request:
 ```json
-{
-  "selected_keys": ["B"]
-}
+{ "password": "..." }
 ```
 
-Response (benar):
+Response:
 ```json
-{
-  "correct": true,
-  "correct_keys": ["B"],
-  "explanation": "Pembahasan lengkap..."
-}
+{ "token": "uuid-string" }
 ```
 
-Response (salah):
-```json
-{
-  "correct": false,
-  "correct_keys": ["B"],
-  "explanation": "Pembahasan lengkap..."
-}
-```
+### `GET /api/subjects`
 
-**Catatan tipe soal:**
-- `single_choice`: `selected_keys` berisi 1 elemen
-- `multiple_response`: `selected_keys` berisi 1+ elemen, evaluasi all-or-nothing
-- `true_false`: `selected_keys` berisi `["true"]` atau `["false"]`
+Daftar subject. Butuh header `x-auth-token` (jika auth aktif).
 
----
+### `GET /api/topics?subject_id=<id>`
 
-## 6. Alur Pengguna (User Flow)
-
-```
-                        +------------------+
-                        |  HOMEPAGE         |
-                        |  (Daftar Subject) |
-                        +--------+---------+
-                                 |
-                                 v
-                        +------------------+
-                        |  TOPIK PAGE       |
-                        |  (Pilih Topic)    |
-                        +--------+---------+
-                                 |
-                                 v
-            +-------------------------------------------+
-            |  QUIZ PAGE                                 |
-            |                                            |
-            |  1. Soal ditampilkan + Timer auto-start    |
-            |  2. User baca soal & pilih jawaban         |
-            |  3. User klik "Selesai"                    |
-            |  4. Timer berhenti                         |
-            |  5. Jawaban dikirim ke API /check          |
-            |  6. Tampilkan:                             |
-            |     - Status (Benar/Salah)                 |
-            |     - Waktu tempuh                         |
-            |     - Kunci jawaban                        |
-            |     - Pembahasan                           |
-            |  7. User klik "Soal Berikutnya"            |
-            |  8. Kembali ke langkah 1 (soal baru)       |
-            +-------------------------------------------+
-                                 |
-                        [Klik "Ganti Topik"]
-                                 |
-                                 v
-                        +------------------+
-                        |  TOPIK PAGE       |
-                        +------------------+
-```
-
-### Detail Halaman
-
-#### HomeView
-- Daftar subject dalam bentuk card
-- Masing-masing card: icon/logo + nama subject
-- Klik -> navigasi ke TopicView dengan subject_id
-
-#### TopicView
-- Header: nama subject, tombol "Kembali"
-- Daftar topic dalam bentuk list/card
-- Masing-masing: nama topic + jumlah soal?
-- Klik -> navigasi ke QuizView dengan topic_id
-
-#### QuizView
-- **Header**: nama topic, tombol "Ganti Topik"
-- **TimerBar**: display waktu chrono (MM:SS) sejak soal tampil
-- **QuestionCard**:
-  - Indikator tipe soal (Pilihan Ganda / Pilihan Ganda Kompleks / Benar-Salah)
-  - Label tingkat kesulitan
-  - Teks soal
-- **OptionList**:
-  - `single_choice`: radio button (satu pilihan)
-  - `multiple_response`: checkbox (bisa >1)
-  - `true_false`: radio button (Benar / Salah)
-- **Tombol "Selesai"**: disabled sampai ada opsi terpilih
-- **Setelah submit**:
-  - Opsi terkunci (disabled)
-  - Opsi benar di-highlight hijau, opsi salah (jika user milih salah) di-highlight merah
-  - **ExplanationPanel** muncul:
-    - Status: "Benar!" / "Salah"
-    - Waktu tempuh: "00:45"
-    - Pembahasan teks
-  - Tombol "Soal Berikutnya" muncul
-
----
-
-## 7. Format Data Seed (seed.json)
-
-Digunakan untuk injeksi awal data soal ke database.
-File diletakkan di root project, dieksekusi via perintah `bun run seed`.
+Daftar topic + `question_count`.
 
 ```json
 {
-  "subjects": [
-    { "slug": "tps", "label": "TPS", "display_order": 1 },
-    { "slug": "literasi-bahasa-indonesia", "label": "Literasi Bahasa Indonesia", "display_order": 2 },
-    { "slug": "literasi-bahasa-inggris", "label": "Literasi Bahasa Inggris", "display_order": 3 },
-    { "slug": "penalaran-matematika", "label": "Penalaran Matematika", "display_order": 4 }
-  ],
   "topics": [
-    { "slug": "penalaran-umum", "subject_slug": "tps", "label": "Penalaran Umum", "display_order": 1 },
-    { "slug": "pengetahuan-kuantitatif", "subject_slug": "tps", "label": "Pengetahuan Kuantitatif", "display_order": 2 },
-    { "slug": "pemahaman-dan-pengetahuan-bacaan", "subject_slug": "literasi-bahasa-indonesia", "label": "Pemahaman dan Pengetahuan Bacaan", "display_order": 1 },
-    { "slug": "literasi-bahasa-inggris", "subject_slug": "literasi-bahasa-inggris", "label": "Literasi Bahasa Inggris", "display_order": 1 },
-    { "slug": "aljabar", "subject_slug": "penalaran-matematika", "label": "Aljabar", "display_order": 1 },
-    { "slug": "geometri", "subject_slug": "penalaran-matematika", "label": "Geometri", "display_order": 2 }
-  ],
-  "questions": [
-    {
-      "topic_slug": "penalaran-umum",
-      "type": "single_choice",
-      "difficulty": "medium",
-      "question_text": "...",
-      "explanation_text": "...",
-      "options": [
-        { "key": "A", "text": "...", "is_correct": false },
-        { "key": "B", "text": "...", "is_correct": true },
-        { "key": "C", "text": "...", "is_correct": false },
-        { "key": "D", "text": "...", "is_correct": false }
-      ]
-    }
+    { "id": 1, "subject_id": 1, "slug": "...", "label": "...", "display_order": 1, "question_count": 4 }
   ]
 }
 ```
 
-**Aturan:**
-- `subject_slug` pada topic harus merujuk ke slug subject yang ada
-- `topic_slug` pada question harus merujuk ke slug topic yang ada
-- `single_choice`: tepat 1 option dengan is_correct=true
-- `multiple_response`: minimal 2 option dengan is_correct=true
-- `true_false`: tepat 2 option (key: "true", "false"), salah satu is_correct=true
+### `GET /api/questions/random?topic_id=<id>&exclude=<ids>`
+
+1 soal acak. Option tidak menyertakan `is_correct`.
+
+### `GET /api/questions/count?topic_id=<id>`
+
+Jumlah soal dalam topic.
+
+### `POST /api/questions/:id/check`
+
+Koreksi jawaban.
+
+Request:
+```json
+{ "selected_keys": ["B"] }
+```
+
+Response (benar/salah):
+```json
+{
+  "correct": true | false,
+  "correct_keys": ["B"],
+  "explanation": "Pembahasan..."
+}
+```
 
 ---
 
-## 8. Environment (.env)
+## 6. Autentikasi
+
+| `APP_PASSWORD` | Efek |
+|---|---|
+| Kosong | Auth nonaktif. Frontend tidak redirect ke /auth. API tidak perlu token. |
+| Diisi | Halaman /auth muncul. Semua request API butuh header `x-auth-token`. |
+
+Token bersifat in-memory di server. Hilang saat restart.
+
+---
+
+## 7. Alur Pengguna
+
+```text
+[Home] → Pilih Subject → [Topics] → Pilih Topic → [Quiz]
+                                                       │
+                                           [Siap berlatih?]
+                                           [    Mulai    ]
+                                               │
+                                    Timer start + Soal
+                                    User pilih jawaban
+                                    Klik "Selesai"
+                                               │
+                                    Timer stop
+                                    API /check
+                                    Tampilkan: benarsalah + waktu + pembahasan
+                                               │
+                           ┌───────────────────┴──────────┐
+                           │ Soal terakhir?                │ bukan?
+                           │ YA: [Lihat Hasil]             │ [Soal Berikutnya]
+                           │     → Resume (skor, waktu)    │     → soal baru
+                           └────────────────────────────────┘
+```
+
+**Konfirmasi keluar:** jika klik "Ganti Topik" atau navigasi browser saat sesi berjalan, muncul modal "Yakin berhenti?".
+
+---
+
+## 8. Struktur Backend
 
 ```
+backend/src/
+├── config.ts                  # Load env (process.env + .env file)
+├── app.ts                     # Hono factory: routes, CORS, error, health, static
+├── index.ts                   # Entry point: pool → migrasi → serve
+│
+├── db/
+│   ├── connection.ts          # MySQL pool
+│   ├── migrate.ts             # Migration runner
+│   └── schema/                # Drizzle schema (4 tabel)
+│
+├── routes/
+│   ├── auth.ts                # GET (status), POST (login)
+│   ├── subjects.ts            # GET list
+│   ├── topics.ts              # GET list + count
+│   └── questions.ts           # GET random, GET count, POST check
+│
+├── services/
+│   └── question-service.ts     # Query logic (random, count, check)
+│
+├── validators/
+│   └── question-validator.ts   # Zod + manual validation
+│
+├── mappers/
+│   └── question-response.ts    # Response shaping
+│
+├── middleware/
+│   └── require-auth.ts         # Token validation
+│
+├── lib/
+│   ├── auth-store.ts           # In-memory token storage
+│   ├── scoring.ts              # Answer evaluation
+│   ├── seed.ts                 # Seed runner
+│   └── seed-check.ts           # Seed validator
+│
+└── __tests__/                  # 7 test files, 27 tests
+```
+
+---
+
+## 9. Struktur Frontend
+
+```
+frontend/src/
+├── main.ts                               # Bootstrap: createApp + router
+├── App.vue                               # Root + global layout
+│
+├── router/
+│   └── index.ts                          # Routes + auth guard + async init
+│
+├── views/
+│   ├── AuthView.vue                      # Login form
+│   ├── HomeView.vue                      # Daftar subject
+│   ├── TopicView.vue                     # Daftar topic + count
+│   └── QuizView.vue                      # Quiz container (tipis)
+│
+├── components/
+│   ├── QuestionCard.vue                  # Soal + type/difficulty badge
+│   ├── TimerBar.vue                      # Stopwatch display
+│   ├── OptionList.vue                    # Opsi (radio/checkbox)
+│   └── ExplanationPanel.vue              # Benarsalah + pembahasan
+│
+├── composables/
+│   └── useQuizSession.ts                 # State machine quiz (load → answer → review → resume)
+│
+├── api/
+│   └── client.ts                         # HTTP client + token header
+│
+├── types/
+│   └── index.ts                          # TypeScript interfaces
+│
+└── __tests__/                             # 5 test files, 24 tests
+```
+
+---
+
+## 10. Environment
+
+File `.env` di root project:
+
+```env
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=rahaSi4Hasan
 DB_NAME=utbk_belajar
 APP_PORT=3000
+FRONTEND_PORT=5173
+APP_PASSWORD=
+CORS_ORIGIN=
 ```
 
-Cukup minimal. Backend membaca variabel ini untuk koneksi database dan port server.
+| Variabel | Fungsi |
+|---|---|
+| `DB_*` | Koneksi database |
+| `APP_PORT` | Port backend |
+| `FRONTEND_PORT` | Port Vite dev + fallback CORS |
+| `APP_PASSWORD` | Kosong = auth nonaktif. Diisi = login required |
+| `CORS_ORIGIN` | Kosong = `http://localhost:FRONTEND_PORT`. Isi untuk production. |
 
 ---
 
-## 9. Testing Strategy
+## 11. Testing
 
-### Backend
-| Test | Deskripsi |
-|---|---|
-| `scoring.test.ts` | Unit test koreksi single_choice, multiple_response, true_false |
-| `subjects.test.ts` | Test GET /api/subjects |
-| `topics.test.ts` | Test GET /api/topics?subject_id= |
-| `questions.test.ts` | Test GET /api/questions/random, POST /api/questions/:id/check |
-
-### Frontend
-| Test | Deskripsi |
-|---|---|
-| `TimerBar.test.ts` | Start/stop timer, display format |
-| `OptionList.test.ts` | Single select, multi select, true/false toggle |
-| `ExplanationPanel.test.ts` | Render benar/salah, pembahasan |
-| `HomeView.test.ts` | Render daftar subject |
-| `TopicView.test.ts` | Render daftar topic, klik item |
-| `QuizView.test.ts` | Flow lengkap (ambil soal -> jawab -> submit -> lihat pembahasan -> lanjut) |
+| Area | File Test | Jumlah |
+|---|---|---|
+| Backend | 7 files | 27 tests |
+| Frontend | 5 files | 24 tests |
+| **Total** | **12 files** | **51 tests** |
 
 ---
 
-## 10. Prinsip Desain
+## 12. Tooling
 
-1. **Kesederhanaan** - Tidak ada fitur yang tidak diperlukan. Fokus pada latihan soal.
-2. **Tanpa auth** - Single-user, aplikasi lokal.
-3. **Tanpa state server** - Semua state sesi belajar di frontend.
-4. **Tanpa riwayat** - Tidak ada penyimpanan hasil. Soal habis dibahas, selesai.
-5. **Seed-first** - Data masuk via seed JSON. Tidak perlu UI admin dulu.
-6. **Timer per soal** - Waktu dihitung per soal dari tampil sampai submit.
+```bash
+bun run lint           # ESLint
+bun run format         # Prettier
+bun run format:check   # Prettier check only
+bun run test           # Backend + Frontend
+bun run typecheck      # TypeScript strict
+bun run seed:check     # Validasi seed.json
+```
+
+---
+
+## 13. Deployment
+
+- Image: `oven/bun:1.3.14` (tanpa build image)
+- Frontend build di-mount dari host
+- Backend source di-mount dari host
+- Reverse proxy: Nginx Proxy Manager / Caddy
+- Satu domain, satu service
+- Panduan lengkap: `docs/DEPLOY/`
+
+---
+
+## 14. Prinsip Desain
+
+1. **Kesederhanaan** — fitur minimum yang berguna
+2. **Auth opsional** — password via env, nonaktif jika dikosongkan
+3. **Tanpa state server** — sesi belajar di frontend saja
+4. **Tanpa riwayat** — tidak ada tabel attempt/history
+5. **Seed-first** — data masuk via JSON, bukan UI admin
+6. **Timer per soal** — stopwatch dari tampil sampai submit
+7. **All-or-nothing** — multiple_response harus tepat semua
