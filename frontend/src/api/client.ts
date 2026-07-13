@@ -1,4 +1,4 @@
-import type { Subject, Topic, Question, CheckResult } from '@/types';
+import type { Subject, Topic, Question, CheckResult, Participant } from '@/types';
 
 const BASE = '/api';
 
@@ -62,3 +62,21 @@ export async function fetchTopic(topicId: number): Promise<Topic | null> {
     return null;
   }
 }
+
+export async function fetchParticipant(): Promise<Participant | null> {
+  try {
+    const data = await request<{ participant: Participant | null }>('/participant');
+    return data.participant;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveParticipant(participant: Participant): Promise<Participant> {
+  const data = await request<{ participant: Participant }>('/participant', {
+    method: 'POST',
+    body: JSON.stringify(participant),
+  });
+  return data.participant;
+}
+

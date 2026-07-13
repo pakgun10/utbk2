@@ -15,6 +15,13 @@
       "when": 1782281498933,
       "tag": "0001_great_la_nuit",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1783922695451,
+      "tag": "0002_thick_devos",
+      "breakpoints": true
     }
   ]
 }

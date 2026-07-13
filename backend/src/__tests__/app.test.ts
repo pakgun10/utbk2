@@ -21,6 +21,10 @@ vi.mock('@/routes/questions', () => ({
   questionsRoutes: () => new Hono(),
 }));
 
+vi.mock('@/routes/participant', () => ({
+  participantRoutes: () => new Hono(),
+}));
+
 import { createApp } from '@/app.js';
 
 describe('createApp', () => {

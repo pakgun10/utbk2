@@ -21,6 +21,13 @@
 
     <div v-else-if="state === 'resume'" class="quiz-resume">
       <h2 class="resume-title">Sesi Selesai</h2>
+      
+      <!-- Participant details on results card -->
+      <div v-if="participant" class="resume-participant-card">
+        <p class="res-part-name">{{ participant.name }}</p>
+        <p class="res-part-meta">{{ participant.institution }} &bull; UKKJ: {{ participant.ukkj.toUpperCase() }}</p>
+      </div>
+
       <div class="resume-stats">
         <div class="resume-stat">
           <span class="resume-value correct">{{ correctCount }}</span>
@@ -41,6 +48,7 @@
       </div>
       <router-link :to="`/topics/${subjectId}`" class="quiz-back-btn">Pilih Topik Lain</router-link>
     </div>
+
 
     <div v-else-if="question" class="quiz-content">
       <TimerBar v-if="state === 'answering'" :running="timerRunning" @time="onTime" />
@@ -103,13 +111,16 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter, onBeforeRouteLeave } from 'vue-router';
 import QuestionCard from '@/components/QuestionCard.vue';
 import TimerBar from '@/components/TimerBar.vue';
 import OptionList from '@/components/OptionList.vue';
 import ExplanationPanel from '@/components/ExplanationPanel.vue';
 import { useQuizSession } from '@/composables/useQuizSession';
+import { fetchParticipant } from '@/api/client';
+import type { Participant } from '@/types';
+
 
 const route = useRoute();
 const router = useRouter();
@@ -189,10 +200,18 @@ watch(
   },
 );
 
-onMounted(() => {
+const participant = ref<Participant | null>(null);
+
+onMounted(async () => {
   initializeSession();
+  try {
+    participant.value = await fetchParticipant();
+  } catch (e) {
+    // Ignore
+  }
 });
 </script>
+
 
 <style scoped>
 .quiz-header {
@@ -321,6 +340,28 @@ onMounted(() => {
   color: #c53030;
 }
 
+.resume-participant-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 400px;
+  margin: 0 auto 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  border-top: 3px solid #1e40af;
+}
+
+.res-part-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #1a2b3c;
+  margin-bottom: 2px;
+}
+
+.res-part-meta {
+  font-size: 0.9rem;
+  color: #556677;
+}
+
 .resume-label {
   display: block;
   font-size: 0.85rem;
@@ -329,6 +370,7 @@ onMounted(() => {
 }
 
 .quiz-back-btn {
+
   display: inline-block;
   padding: 10px 24px;
   background: #1e40af;

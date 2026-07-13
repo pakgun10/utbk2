@@ -5,8 +5,10 @@ import { authRoutes } from './routes/auth';
 import { subjectsRoutes } from './routes/subjects';
 import { topicsRoutes } from './routes/topics';
 import { questionsRoutes } from './routes/questions';
+import { participantRoutes } from './routes/participant';
 import { requireAuth } from './middleware/require-auth';
 import type { Pool } from './db/connection';
+
 
 declare module 'hono' {
   interface ContextVariableMap {
@@ -44,7 +46,9 @@ export function createApp(config: AppConfig) {
     app.use('/api/subjects', requireAuth);
     app.use('/api/topics', requireAuth);
     app.use('/api/questions', requireAuth);
+    app.use('/api/participant', requireAuth);
   }
+
 
   app.onError((err, c) => {
     const requestId = c.get('requestId') ?? 'unknown';
@@ -62,6 +66,8 @@ export function createApp(config: AppConfig) {
   app.route('/api/subjects', subjectsRoutes(config.pool));
   app.route('/api/topics', topicsRoutes(config.pool));
   app.route('/api/questions', questionsRoutes(config.pool));
+  app.route('/api/participant', participantRoutes(config.pool));
+
 
   if (process.env.NODE_ENV === 'production') {
     const distDir = '../frontend/dist';

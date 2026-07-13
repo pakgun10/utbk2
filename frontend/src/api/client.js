@@ -52,3 +52,19 @@ export async function fetchTopic(topicId) {
         return null;
     }
 }
+export async function fetchParticipant() {
+    try {
+        const data = await request('/participant');
+        return data.participant;
+    }
+    catch {
+        return null;
+    }
+}
+export async function saveParticipant(participant) {
+    const data = await request('/participant', {
+        method: 'POST',
+        body: JSON.stringify(participant),
+    });
+    return data.participant;
+}

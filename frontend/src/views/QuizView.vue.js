@@ -1,10 +1,11 @@
-import { onMounted, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter, onBeforeRouteLeave } from 'vue-router';
 import QuestionCard from '@/components/QuestionCard.vue';
 import TimerBar from '@/components/TimerBar.vue';
 import OptionList from '@/components/OptionList.vue';
 import ExplanationPanel from '@/components/ExplanationPanel.vue';
 import { useQuizSession } from '@/composables/useQuizSession';
+import { fetchParticipant } from '@/api/client';
 const route = useRoute();
 const router = useRouter();
 function getTopicId() {
@@ -45,8 +46,15 @@ watch(() => route.params.id, (newId) => {
     resetSession();
     initializeSession();
 });
-onMounted(() => {
+const participant = ref(null);
+onMounted(async () => {
     initializeSession();
+    try {
+        participant.value = await fetchParticipant();
+    }
+    catch (e) {
+        // Ignore
+    }
 });
 debugger; /* PartiallyEnd: #3632/scriptSetup.vue */
 const __VLS_ctx = {};
@@ -124,6 +132,20 @@ else if (__VLS_ctx.state === 'resume') {
     __VLS_asFunctionalElement(__VLS_intrinsicElements.h2, __VLS_intrinsicElements.h2)({
         ...{ class: "resume-title" },
     });
+    if (__VLS_ctx.participant) {
+        __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({
+            ...{ class: "resume-participant-card" },
+        });
+        __VLS_asFunctionalElement(__VLS_intrinsicElements.p, __VLS_intrinsicElements.p)({
+            ...{ class: "res-part-name" },
+        });
+        (__VLS_ctx.participant.name);
+        __VLS_asFunctionalElement(__VLS_intrinsicElements.p, __VLS_intrinsicElements.p)({
+            ...{ class: "res-part-meta" },
+        });
+        (__VLS_ctx.participant.institution);
+        (__VLS_ctx.participant.ukkj.toUpperCase());
+    }
     __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({
         ...{ class: "resume-stats" },
     });
@@ -336,6 +358,9 @@ if (__VLS_ctx.showExitModal) {
 /** @type {__VLS_StyleScopedClasses['quiz-start-btn']} */ ;
 /** @type {__VLS_StyleScopedClasses['quiz-resume']} */ ;
 /** @type {__VLS_StyleScopedClasses['resume-title']} */ ;
+/** @type {__VLS_StyleScopedClasses['resume-participant-card']} */ ;
+/** @type {__VLS_StyleScopedClasses['res-part-name']} */ ;
+/** @type {__VLS_StyleScopedClasses['res-part-meta']} */ ;
 /** @type {__VLS_StyleScopedClasses['resume-stats']} */ ;
 /** @type {__VLS_StyleScopedClasses['resume-stat']} */ ;
 /** @type {__VLS_StyleScopedClasses['resume-value']} */ ;
@@ -401,6 +426,7 @@ const __VLS_self = (await import('vue')).defineComponent({
             tryExit: tryExit,
             cancelExit: cancelExit,
             confirmExit: confirmExit,
+            participant: participant,
         };
     },
 });

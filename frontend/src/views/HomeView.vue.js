@@ -1,13 +1,21 @@
 import { ref, onMounted } from 'vue';
-import { fetchSubjects } from '@/api/client';
+import { useRouter } from 'vue-router';
+import { fetchSubjects, fetchParticipant } from '@/api/client';
+const router = useRouter();
 const subjects = ref([]);
+const participant = ref(null);
 const loading = ref(true);
 const error = ref(null);
-async function loadSubjects() {
+async function loadData() {
     loading.value = true;
     error.value = null;
     try {
-        subjects.value = await fetchSubjects();
+        const [subjectsRes, participantRes] = await Promise.all([
+            fetchSubjects(),
+            fetchParticipant(),
+        ]);
+        subjects.value = subjectsRes;
+        participant.value = participantRes;
     }
     catch (e) {
         error.value = e instanceof Error ? e.message : 'Gagal memuat data.';
@@ -16,11 +24,15 @@ async function loadSubjects() {
         loading.value = false;
     }
 }
-onMounted(loadSubjects);
+function editProfile() {
+    router.push('/data-peserta');
+}
+onMounted(loadData);
 debugger; /* PartiallyEnd: #3632/scriptSetup.vue */
 const __VLS_ctx = {};
 let __VLS_components;
 let __VLS_directives;
+/** @type {__VLS_StyleScopedClasses['edit-profile-btn']} */ ;
 /** @type {__VLS_StyleScopedClasses['home-error']} */ ;
 /** @type {__VLS_StyleScopedClasses['home-action-btn']} */ ;
 /** @type {__VLS_StyleScopedClasses['subject-card']} */ ;
@@ -29,6 +41,33 @@ let __VLS_directives;
 __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({
     ...{ class: "home-view" },
 });
+if (__VLS_ctx.participant) {
+    __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({
+        ...{ class: "participant-profile-card" },
+    });
+    __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({
+        ...{ class: "profile-info" },
+    });
+    __VLS_asFunctionalElement(__VLS_intrinsicElements.span, __VLS_intrinsicElements.span)({
+        ...{ class: "profile-icon" },
+    });
+    __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({
+        ...{ class: "profile-details" },
+    });
+    __VLS_asFunctionalElement(__VLS_intrinsicElements.p, __VLS_intrinsicElements.p)({
+        ...{ class: "profile-name" },
+    });
+    (__VLS_ctx.participant.name);
+    __VLS_asFunctionalElement(__VLS_intrinsicElements.p, __VLS_intrinsicElements.p)({
+        ...{ class: "profile-meta" },
+    });
+    (__VLS_ctx.participant.institution);
+    (__VLS_ctx.participant.ukkj.toUpperCase());
+    __VLS_asFunctionalElement(__VLS_intrinsicElements.button, __VLS_intrinsicElements.button)({
+        ...{ onClick: (__VLS_ctx.editProfile) },
+        ...{ class: "edit-profile-btn" },
+    });
+}
 __VLS_asFunctionalElement(__VLS_intrinsicElements.h1, __VLS_intrinsicElements.h1)({
     ...{ class: "home-title" },
 });
@@ -49,7 +88,7 @@ else if (__VLS_ctx.error) {
     });
     (__VLS_ctx.error);
     __VLS_asFunctionalElement(__VLS_intrinsicElements.button, __VLS_intrinsicElements.button)({
-        ...{ onClick: (__VLS_ctx.loadSubjects) },
+        ...{ onClick: (__VLS_ctx.loadData) },
         ...{ class: "home-action-btn" },
     });
 }
@@ -61,7 +100,7 @@ else if (__VLS_ctx.subjects.length === 0) {
         ...{ class: "home-empty" },
     });
     __VLS_asFunctionalElement(__VLS_intrinsicElements.button, __VLS_intrinsicElements.button)({
-        ...{ onClick: (__VLS_ctx.loadSubjects) },
+        ...{ onClick: (__VLS_ctx.loadData) },
         ...{ class: "home-action-btn" },
     });
 }
@@ -95,6 +134,13 @@ else {
     }
 }
 /** @type {__VLS_StyleScopedClasses['home-view']} */ ;
+/** @type {__VLS_StyleScopedClasses['participant-profile-card']} */ ;
+/** @type {__VLS_StyleScopedClasses['profile-info']} */ ;
+/** @type {__VLS_StyleScopedClasses['profile-icon']} */ ;
+/** @type {__VLS_StyleScopedClasses['profile-details']} */ ;
+/** @type {__VLS_StyleScopedClasses['profile-name']} */ ;
+/** @type {__VLS_StyleScopedClasses['profile-meta']} */ ;
+/** @type {__VLS_StyleScopedClasses['edit-profile-btn']} */ ;
 /** @type {__VLS_StyleScopedClasses['home-title']} */ ;
 /** @type {__VLS_StyleScopedClasses['home-subtitle']} */ ;
 /** @type {__VLS_StyleScopedClasses['home-loading']} */ ;
@@ -113,9 +159,11 @@ const __VLS_self = (await import('vue')).defineComponent({
     setup() {
         return {
             subjects: subjects,
+            participant: participant,
             loading: loading,
             error: error,
-            loadSubjects: loadSubjects,
+            loadData: loadData,
+            editProfile: editProfile,
         };
     },
 });

@@ -32,3 +32,12 @@ export interface CheckResult {
   correct_keys: string[];
   explanation: string;
 }
+
+export interface Participant {
+  id?: number;
+  session_token?: string;
+  name: string;
+  institution: string;
+  ukkj: '3c' | '4a' | '4d';
+}
+

@@ -1,5 +1,17 @@
 <template>
   <div class="home-view">
+    <!-- Participant Profile Header -->
+    <div v-if="participant" class="participant-profile-card">
+      <div class="profile-info">
+        <span class="profile-icon">👤</span>
+        <div class="profile-details">
+          <p class="profile-name">{{ participant.name }}</p>
+          <p class="profile-meta">{{ participant.institution }} &bull; UKKJ: {{ participant.ukkj.toUpperCase() }}</p>
+        </div>
+      </div>
+      <button class="edit-profile-btn" @click="editProfile">Ubah Data</button>
+    </div>
+
     <h1 class="home-title">Pilih Mata Uji</h1>
     <p class="home-subtitle">Pilih salah satu mata uji UTBK untuk mulai berlatih.</p>
 
@@ -7,12 +19,12 @@
 
     <div v-else-if="error" class="home-state">
       <p class="home-error">{{ error }}</p>
-      <button class="home-action-btn" @click="loadSubjects">Coba Lagi</button>
+      <button class="home-action-btn" @click="loadData">Coba Lagi</button>
     </div>
 
     <div v-else-if="subjects.length === 0" class="home-state">
       <p class="home-empty">Belum ada mata uji yang tersedia.</p>
-      <button class="home-action-btn" @click="loadSubjects">Muat Ulang</button>
+      <button class="home-action-btn" @click="loadData">Muat Ulang</button>
     </div>
 
     <div v-else class="subject-grid">
@@ -31,19 +43,27 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { fetchSubjects } from '@/api/client';
-import type { Subject } from '@/types';
+import { useRouter } from 'vue-router';
+import { fetchSubjects, fetchParticipant } from '@/api/client';
+import type { Subject, Participant } from '@/types';
 
+const router = useRouter();
 const subjects = ref<Subject[]>([]);
+const participant = ref<Participant | null>(null);
 const loading = ref(true);
 const error = ref<string | null>(null);
 
-async function loadSubjects() {
+async function loadData() {
   loading.value = true;
   error.value = null;
 
   try {
-    subjects.value = await fetchSubjects();
+    const [subjectsRes, participantRes] = await Promise.all([
+      fetchSubjects(),
+      fetchParticipant(),
+    ]);
+    subjects.value = subjectsRes;
+    participant.value = participantRes;
   } catch (e) {
     error.value = e instanceof Error ? e.message : 'Gagal memuat data.';
   } finally {
@@ -51,10 +71,71 @@ async function loadSubjects() {
   }
 }
 
-onMounted(loadSubjects);
+function editProfile() {
+  router.push('/data-peserta');
+}
+
+onMounted(loadData);
 </script>
 
 <style scoped>
+.participant-profile-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+  border-left: 4px solid #1e40af;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile-icon {
+  font-size: 1.5rem;
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.profile-name {
+  font-weight: 700;
+  color: #1a2b3c;
+  font-size: 1rem;
+}
+
+.profile-meta {
+  font-size: 0.85rem;
+  color: #556677;
+}
+
+.edit-profile-btn {
+  padding: 6px 12px;
+  background: #f0f4f8;
+  color: #1e40af;
+  border: 1px solid #d4dde6;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.edit-profile-btn:hover {
+  background: #1e40af;
+  color: #fff;
+  border-color: #1e40af;
+}
+
 .home-title {
   font-size: 1.8rem;
   font-weight: 700;
