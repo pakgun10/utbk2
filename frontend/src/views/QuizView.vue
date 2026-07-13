@@ -107,9 +107,14 @@
         @next="nextQuestion"
         @finish="finishSession"
       />
+
+      <div v-if="state === 'error'" class="quiz-error-inline">
+        <p>{{ errorMessage }}</p>
+        <button class="quiz-retry-btn" @click="retryCurrentState">Coba Lagi</button>
+      </div>
     </div>
 
-    <div v-else-if="state === 'error'" class="quiz-error">
+    <div v-else-if="state === 'error' && !question" class="quiz-error">
       <p>{{ errorMessage }}</p>
       <button class="quiz-retry-btn" @click="retryCurrentState">Coba Lagi</button>
     </div>
@@ -520,3 +525,14 @@ onMounted(async () => {
   background: #b02828;
 }
 </style>
+
+.quiz-error-inline {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  color: #c53030;
+  font-size: 1.1rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  margin-top: 16px;
+}
