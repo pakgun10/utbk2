@@ -45,8 +45,8 @@ Aplikasi punya lapisan password sederhana. Jika `APP_PASSWORD` diisi di `.env`:
 Jika `APP_PASSWORD` kosong, autentikasi tidak aktif.
 Aplikasi bisa diakses langsung tanpa login.
 
-### 3.2 Tidak Ada Riwayat / Skor Tersimpan
-Setiap soal selesai dibahas, selesai. Tidak ada tabel attempt, answer, snapshot, atau penyimpanan hasil apa pun di database.
+### 3.2 Riwayat dan Skor Tersimpan
+Aplikasi menyimpan sesi pengerjaan (`quiz_attempts`) dan jawaban per soal (`quiz_answers`) untuk kebutuhan rekap hasil peserta. Logika scoring tetap berada di backend dan menggunakan fungsi scoring resmi.
 
 ### 3.3 Seed-First, Bukan Admin Panel
 Data soal masuk via file `seed.json` di root project. Tidak perlu UI admin untuk CRUD soal. Tidak perlu endpoint POST/PUT/DELETE untuk subjects, topics, atau questions.
@@ -68,7 +68,11 @@ Untuk tipe `multiple_response`, semua opsi benar harus terpilih dan tidak ada op
 | GET | `/api/subjects` | Semua subject |
 | GET | `/api/topics?subject_id=` | Topics dalam subject |
 | GET | `/api/questions/random?topic_id=` | 1 soal acak (opsi tanpa is_correct) |
-| POST | `/api/questions/:id/check` | Cek jawaban, return pembahasan |
+| POST | `/api/questions/:id/check` | Cek jawaban non-persisten, return pembahasan |
+| POST | `/api/attempts/start` | Mulai sesi pengerjaan tersimpan |
+| POST | `/api/attempts/:id/answers` | Simpan jawaban per soal dan return pembahasan |
+| POST | `/api/attempts/:id/finish` | Selesaikan sesi dan simpan ringkasan akhir |
+| GET | `/api/attempts/:id` | Ambil ringkasan attempt dan jawaban tersimpan |
 
 ### 4.2 Response Format
 

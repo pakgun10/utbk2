@@ -4,8 +4,16 @@ import {
   fetchQuestionCount,
   fetchRandomQuestion,
   fetchTopic,
+  finishAttempt as apiFinishAttempt,
+  startAttempt,
+  submitAttemptAnswer,
 } from '@/api/client';
-import type { CheckResult, CheckScoredResult, Question } from '@/types';
+import type {
+  CheckResult,
+  CheckScoredResult,
+  Question,
+  QuizAttempt,
+} from '@/types';
 
 export type QuizState =
   | 'loading'
@@ -32,6 +40,7 @@ export function useQuizSession(options: UseQuizSessionOptions) {
   const state = ref<QuizState>('loading');
   const question = ref<Question | null>(null);
   const result = ref<CheckResult | CheckScoredResult | null>(null);
+  const attempt = ref<QuizAttempt | null>(null);
   const selectedKeys = ref<string[]>([]);
   const timerRunning = ref(false);
   const finalTime = ref(0);
@@ -66,8 +75,9 @@ export function useQuizSession(options: UseQuizSessionOptions) {
     return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
   });
   const accuracy = computed(() => {
-    if (sessionResults.value.length === 0) return 0;
-    return Math.round((correctCount.value / sessionResults.value.length) * 100);
+    const binaryTotal = correctCount.value + incorrectCount.value;
+    if (binaryTotal === 0) return 0;
+    return Math.round((correctCount.value / binaryTotal) * 100);
   });
   const isLastQuestion = computed(
     () => answeredIds.value.size >= questionCount.value,
@@ -127,14 +137,26 @@ export function useQuizSession(options: UseQuizSessionOptions) {
     }
   }
 
-  function startQuiz() {
+  async function startQuiz() {
     if (questionCount.value === 0 || !question.value) {
       loadQuestion();
       return;
     }
 
-    timerRunning.value = true;
-    state.value = 'answering';
+    try {
+      if (!attempt.value) {
+        attempt.value = await startAttempt(
+          options.getTopicId(),
+          questionCount.value,
+        );
+      }
+      timerRunning.value = true;
+      state.value = 'answering';
+    } catch (error) {
+      errorMessage.value =
+        error instanceof Error ? error.message : 'Gagal memulai sesi.';
+      state.value = 'error';
+    }
   }
 
   function nextQuestion() {
@@ -158,11 +180,17 @@ export function useQuizSession(options: UseQuizSessionOptions) {
     timerRunning.value = false;
 
     try {
-      const checkResult = await apiCheckAnswer(
-        question.value.id,
-        selectedKeys.value,
-      );
+      const checkResult = attempt.value
+        ? await submitAttemptAnswer(attempt.value.id, {
+            question_id: question.value.id,
+            selected_keys: selectedKeys.value,
+            elapsed_seconds: finalTime.value,
+          })
+        : await apiCheckAnswer(question.value.id, selectedKeys.value);
       result.value = checkResult;
+      if ('attempt' in checkResult) {
+        attempt.value = (checkResult as { attempt: QuizAttempt }).attempt;
+      }
       answeredIds.value.add(question.value.id);
 
       if ('correct' in checkResult) {
@@ -227,12 +255,23 @@ export function useQuizSession(options: UseQuizSessionOptions) {
   }
 
   function resetSession() {
+    attempt.value = null;
     answeredIds.value = new Set();
     sessionResults.value = [];
     autoStart.value = false;
   }
 
-  function finishSession() {
+  async function finishSession() {
+    if (attempt.value) {
+      try {
+        attempt.value = await apiFinishAttempt(attempt.value.id);
+      } catch (error) {
+        errorMessage.value =
+          error instanceof Error
+            ? error.message
+            : 'Gagal menyimpan hasil akhir.';
+      }
+    }
     state.value = 'resume';
   }
 
@@ -265,6 +304,7 @@ export function useQuizSession(options: UseQuizSessionOptions) {
   return {
     accuracy,
     answeredIds,
+    attempt,
     binaryResult,
     cancelExit,
     confirmExitState,

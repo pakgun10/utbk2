@@ -105,6 +105,41 @@ subjects  ──<  topics  ──<  questions  ──<  question_options
 | score | int nullable | Skor per opsi (khusus `multiple_choice`) |
 | display_order | int | |
 
+### quiz_attempts
+
+| Kolom | Tipe | Keterangan |
+|---|---|---|
+| id | int auto_increment | PK |
+| participant_id | int FK | → participants.id |
+| topic_id | int FK | → topics.id |
+| status | enum | `in_progress`, `finished`, `abandoned` |
+| started_at | timestamp | Waktu mulai sesi |
+| finished_at | timestamp nullable | Waktu selesai sesi |
+| total_questions | int | Jumlah soal dalam sesi |
+| answered_questions | int | Jumlah soal terjawab |
+| total_correct | int | Jumlah jawaban binary benar |
+| total_incorrect | int | Jumlah jawaban binary salah |
+| total_score | int | Total skor tersimpan |
+| max_score | int | Skor maksimal tersimpan |
+| total_elapsed_seconds | int | Total waktu pengerjaan |
+| created_at | timestamp | |
+| updated_at | timestamp | |
+
+### quiz_answers
+
+| Kolom | Tipe | Keterangan |
+|---|---|---|
+| id | int auto_increment | PK |
+| attempt_id | int FK | → quiz_attempts.id |
+| question_id | int FK | → questions.id |
+| question_type | enum | Snapshot tipe soal saat dijawab |
+| selected_keys_json | text | JSON array opsi yang dipilih |
+| is_correct | boolean nullable | Hasil benar/salah untuk tipe binary |
+| score | int nullable | Skor jawaban |
+| max_score | int nullable | Skor maksimal soal |
+| elapsed_seconds | int | Waktu menjawab soal |
+| answered_at | timestamp | Waktu submit jawaban |
+
 ---
 
 ## 5. API Endpoints

@@ -4,6 +4,9 @@ import type {
   Question,
   CheckResult,
   CheckScoredResult,
+  AttemptCheckResult,
+  QuizAttempt,
+  PersistedQuizAnswer,
   Participant,
 } from '@/types';
 
@@ -82,6 +85,51 @@ export async function fetchQuestionCount(topicId: number): Promise<number> {
     `/questions/count?topic_id=${topicId}`,
   );
   return data.count;
+}
+
+export async function startAttempt(
+  topicId: number,
+  totalQuestions: number,
+): Promise<QuizAttempt> {
+  const data = await request<{ attempt: QuizAttempt }>('/attempts/start', {
+    method: 'POST',
+    body: JSON.stringify({
+      topic_id: topicId,
+      total_questions: totalQuestions,
+    }),
+  });
+  return data.attempt;
+}
+
+export async function submitAttemptAnswer(
+  attemptId: number,
+  payload: {
+    question_id: number;
+    selected_keys: string[];
+    elapsed_seconds: number;
+  },
+): Promise<AttemptCheckResult> {
+  return request<AttemptCheckResult>(`/attempts/${attemptId}/answers`, {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function finishAttempt(attemptId: number): Promise<QuizAttempt> {
+  const data = await request<{ attempt: QuizAttempt }>(
+    `/attempts/${attemptId}/finish`,
+    { method: 'POST', body: JSON.stringify({}) },
+  );
+  return data.attempt;
+}
+
+export async function fetchAttempt(attemptId: number): Promise<{
+  attempt: QuizAttempt;
+  answers: PersistedQuizAnswer[];
+}> {
+  return request<{ attempt: QuizAttempt; answers: PersistedQuizAnswer[] }>(
+    `/attempts/${attemptId}`,
+  );
 }
 
 export async function fetchTopic(topicId: number): Promise<Topic | null> {
