@@ -104,8 +104,8 @@ const showSuggestions = ref(false);
 let debounceTimeout: ReturnType<typeof setTimeout> | null = null;
 
 const isFormValid = computed(() => {
-  return form.name.trim().length > 0 && 
-         form.institution.trim().length > 0 && 
+  return form.name.trim().length > 0 &&
+         form.institution.trim().length > 0 &&
          form.ukkj !== '';
 });
 
@@ -137,12 +137,12 @@ function onInstitutionInput() {
     try {
       const res = await fetch(`https://api-sekolah-indonesia.vercel.app/sekolah/s?sekolah=${encodeURIComponent(query)}`);
       if (res.ok) {
-        const body = await res.json() as { data?: Array<{ sekolah: string }> };
-        if (body.data && Array.isArray(body.data)) {
-          suggestions.value = body.data.map(item => item.sekolah);
-        } else {
-          suggestions.value = [];
-        }
+        const body = await res.json() as {
+          data?: Array<{ sekolah: string }>;
+          dataSekolah?: Array<{ sekolah: string }>;
+        };
+        const schools = body.dataSekolah ?? body.data ?? [];
+        suggestions.value = schools.map((item) => item.sekolah).filter(Boolean);
       }
     } catch (err) {
       console.error('Gagal mengambil data sekolah:', err);

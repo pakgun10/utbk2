@@ -22,7 +22,6 @@
           <span v-if="isSelected(option.key)" class="radio-dot"></span>
         </span>
       </span>
-      <span v-if="type !== 'multiple_choice'" class="option-key">{{ option.key }}</span>
       <span class="option-text">{{ option.text }}</span>
       <span
         v-if="type === 'multiple_choice' && showResult && option.score !== undefined"

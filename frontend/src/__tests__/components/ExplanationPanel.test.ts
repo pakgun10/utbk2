@@ -44,7 +44,7 @@ describe('ExplanationPanel', () => {
     expect(wrapper.find('.explanation-time').text()).toBe('Waktu: 02:05');
   });
 
-  it('displays correct keys', () => {
+  it('does not display option letters in the answer row', () => {
     const wrapper = mount(ExplanationPanel, {
       props: {
         correct: true,
@@ -54,7 +54,8 @@ describe('ExplanationPanel', () => {
       },
     });
 
-    expect(wrapper.find('.correct-keys').text()).toBe('A, C');
+    expect(wrapper.find('.correct-keys').exists()).toBe(false);
+    expect(wrapper.text()).not.toContain('A, C');
   });
 
   it('displays explanation text', () => {

@@ -17,8 +17,7 @@
     </div>
 
     <div class="explanation-answer">
-      <strong>{{ score === undefined ? 'Jawaban benar:' : 'Jawaban terbaik:' }}</strong>
-      <span class="correct-keys">{{ score === undefined ? correctKeysDisplay : bestKeysDisplay }}</span>
+      <strong>{{ score === undefined ? 'Jawaban benar ditandai dengan highlight hijau.' : 'Jawaban terbaik ditandai dengan highlight hijau.' }}</strong>
     </div>
 
     <div class="explanation-body">
@@ -62,8 +61,6 @@ const formattedTime = computed(() => {
   return `Waktu: ${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
 });
 
-const correctKeysDisplay = computed(() => props.correct_keys.join(', '));
-const bestKeysDisplay = computed(() => (props.bestKeys ?? []).join(', '));
 </script>
 
 <style scoped>
