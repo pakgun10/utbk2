@@ -7,7 +7,7 @@
       <router-view />
     </main>
     <footer class="app-footer">
-      PakGun@2026 - Terimakasih banghasan.com, semoga Allah melimpahi keberkahan kepada engkau
+      PakGun@2026 - Terimakasih <a href="https://banghasan.com" target="_blank" rel="noopener noreferrer" class="footer-link">banghasan</a>, semoga Allah melimpahi keberkahan kepada engkau
     </footer>
   </div>
 </template>
@@ -63,5 +63,16 @@ body {
   font-size: 0.85rem;
   border-top: 1px solid #d4dde6;
   margin-top: auto;
+}
+
+.footer-link {
+  color: #1e40af;
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #1d4ed8;
 }
 </style>
