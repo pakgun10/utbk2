@@ -1,18 +1,51 @@
-{
-  "subjects": [
-    { "slug": "tps", "label": "TPS", "display_order": 1 },
-    { "slug": "literasi-bahasa-indonesia", "label": "Literasi Bahasa Indonesia", "display_order": 2 },
-    { "slug": "literasi-bahasa-inggris", "label": "Literasi Bahasa Inggris", "display_order": 3 },
-    { "slug": "penalaran-matematika", "label": "Penalaran Matematika", "display_order": 4 }
-  ],
-  "topics": [
-    { "slug": "penalaran-umum", "subject_slug": "tps", "label": "Penalaran Umum", "display_order": 1 },
-    { "slug": "pengetahuan-kuantitatif", "subject_slug": "tps", "label": "Pengetahuan Kuantitatif", "display_order": 2 },
-    { "slug": "pemahaman-dan-pengetahuan-bacaan", "subject_slug": "literasi-bahasa-indonesia", "label": "Pemahaman dan Pengetahuan Bacaan", "display_order": 1 },
-    { "slug": "literasi-bahasa-inggris", "subject_slug": "literasi-bahasa-inggris", "label": "Literasi Bahasa Inggris", "display_order": 1 },
-    { "slug": "aljabar", "subject_slug": "penalaran-matematika", "label": "Aljabar", "display_order": 1 },
-    { "slug": "geometri", "subject_slug": "penalaran-matematika", "label": "Geometri", "display_order": 2 },
-    { "slug": "rasio", "subject_slug": "penalaran-matematika", "label": "Rasio", "display_order": 3 }
+    {
+      "slug": "penalaran-umum",
+      "subject_slug": "tps",
+      "label": "Penalaran Umum",
+      "display_order": 1
+    },
+    {
+      "slug": "pengetahuan-kuantitatif",
+      "subject_slug": "tps",
+      "label": "Pengetahuan Kuantitatif",
+      "display_order": 2
+    },
+    {
+      "slug": "pemahaman-dan-pengetahuan-bacaan",
+      "subject_slug": "literasi-bahasa-indonesia",
+      "label": "Pemahaman dan Pengetahuan Bacaan",
+      "display_order": 1
+    },
+    {
+      "slug": "literasi-bahasa-inggris",
+      "subject_slug": "literasi-bahasa-inggris",
+      "label": "Literasi Bahasa Inggris",
+      "display_order": 1
+    },
+    {
+      "slug": "aljabar",
+      "subject_slug": "penalaran-matematika",
+      "label": "Aljabar",
+      "display_order": 1
+    },
+    {
+      "slug": "geometri",
+      "subject_slug": "penalaran-matematika",
+      "label": "Geometri",
+      "display_order": 2
+    },
+    {
+      "slug": "rasio",
+      "subject_slug": "penalaran-matematika",
+      "label": "Rasio",
+      "display_order": 3
+    },
+    {
+      "slug": "aritmetika-sosial",
+      "subject_slug": "penalaran-matematika",
+      "label": "Aritmetika Sosial",
+      "display_order": 4
+    }
   ],
   "questions": [
     {
@@ -23,10 +56,26 @@
       "question_text": "Semua mahasiswa adalah lulusan SMA. Sebagian mahasiswa adalah pemilik bisnis online. Simpulan yang paling tepat adalah...",
       "explanation_text": "Premis 1: Semua mahasiswa = lulusan SMA. Premis 2: Sebagian mahasiswa = pemilik bisnis online. Maka dapat disimpulkan bahwa sebagian lulusan SMA adalah pemilik bisnis online.",
       "options": [
-        { "key": "A", "text": "Semua pemilik bisnis online adalah mahasiswa", "is_correct": false },
-        { "key": "B", "text": "Sebagian lulusan SMA adalah pemilik bisnis online", "is_correct": true },
-        { "key": "C", "text": "Semua lulusan SMA adalah pemilik bisnis online", "is_correct": false },
-        { "key": "D", "text": "Tidak ada lulusan SMA yang menjadi pemilik bisnis online", "is_correct": false }
+        {
+          "key": "A",
+          "text": "Semua pemilik bisnis online adalah mahasiswa",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Sebagian lulusan SMA adalah pemilik bisnis online",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "Semua lulusan SMA adalah pemilik bisnis online",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Tidak ada lulusan SMA yang menjadi pemilik bisnis online",
+          "is_correct": false
+        }
       ]
     },
     {
@@ -37,10 +86,26 @@
       "question_text": "Jika 2x + 5 = 13, maka nilai x adalah...",
       "explanation_text": "2x + 5 = 13 -> 2x = 8 -> x = 4",
       "options": [
-        { "key": "A", "text": "3", "is_correct": false },
-        { "key": "B", "text": "4", "is_correct": true },
-        { "key": "C", "text": "5", "is_correct": false },
-        { "key": "D", "text": "6", "is_correct": false }
+        {
+          "key": "A",
+          "text": "3",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "4",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "5",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "6",
+          "is_correct": false
+        }
       ]
     },
     {
@@ -51,10 +116,26 @@
       "question_text": "Manakah pernyataan berikut yang termasuk silogisme?",
       "explanation_text": "Silogisme adalah bentuk penalaran deduktif yang terdiri dari premis umum dan premis khusus yang menghasilkan kesimpulan. Pernyataan 1 dan 3 memenuhi struktur silogisme.",
       "options": [
-        { "key": "A", "text": "Semua manusia akan mati. Socrates adalah manusia. Jadi Socrates akan mati.", "is_correct": true },
-        { "key": "B", "text": "Jika hujan turun, tanah basah. Tanah basah, jadi hujan turun.", "is_correct": false },
-        { "key": "C", "text": "Semua mamalia bernapas dengan paru-paru. Paus adalah mamalia. Jadi paus bernapas dengan paru-paru.", "is_correct": true },
-        { "key": "D", "text": "Sebagian besar siswa suka matematika. Andi adalah siswa. Jadi Andi suka matematika.", "is_correct": false }
+        {
+          "key": "A",
+          "text": "Semua manusia akan mati. Socrates adalah manusia. Jadi Socrates akan mati.",
+          "is_correct": true
+        },
+        {
+          "key": "B",
+          "text": "Jika hujan turun, tanah basah. Tanah basah, jadi hujan turun.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Semua mamalia bernapas dengan paru-paru. Paus adalah mamalia. Jadi paus bernapas dengan paru-paru.",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "Sebagian besar siswa suka matematika. Andi adalah siswa. Jadi Andi suka matematika.",
+          "is_correct": false
+        }
       ]
     },
     {
@@ -65,8 +146,16 @@
       "question_text": "Semua persegi adalah persegi panjang.",
       "explanation_text": "Persegi memiliki semua sifat persegi panjang (sisi berhadapan sejajar, semua sudut 90 derajat), ditambah semua sisi sama panjang. Jadi persegi adalah kasus khusus persegi panjang. Pernyataan BENAR.",
       "options": [
-        { "key": "true", "text": "Benar", "is_correct": true },
-        { "key": "false", "text": "Salah", "is_correct": false }
+        {
+          "key": "true",
+          "text": "Benar",
+          "is_correct": true
+        },
+        {
+          "key": "false",
+          "text": "Salah",
+          "is_correct": false
+        }
       ]
     },
     {
@@ -77,10 +166,26 @@
       "question_text": "Hasil dari 25% x 200 adalah...",
       "explanation_text": "25% dari 200 = 25/100 x 200 = 50",
       "options": [
-        { "key": "A", "text": "25", "is_correct": false },
-        { "key": "B", "text": "50", "is_correct": true },
-        { "key": "C", "text": "75", "is_correct": false },
-        { "key": "D", "text": "100", "is_correct": false }
+        {
+          "key": "A",
+          "text": "25",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "50",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "75",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "100",
+          "is_correct": false
+        }
       ]
     },
     {
@@ -91,10 +196,26 @@
       "question_text": "Sebuah persegi panjang memiliki panjang 12 cm dan lebar 8 cm. Luas persegi panjang tersebut adalah...",
       "explanation_text": "Luas persegi panjang = panjang x lebar = 12 x 8 = 96 cm persegi.",
       "options": [
-        { "key": "A", "text": "96 cm persegi", "is_correct": true },
-        { "key": "B", "text": "40 cm persegi", "is_correct": false },
-        { "key": "C", "text": "20 cm persegi", "is_correct": false },
-        { "key": "D", "text": "48 cm persegi", "is_correct": false }
+        {
+          "key": "A",
+          "text": "96 cm persegi",
+          "is_correct": true
+        },
+        {
+          "key": "B",
+          "text": "40 cm persegi",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "20 cm persegi",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "48 cm persegi",
+          "is_correct": false
+        }
       ]
     },
     {
@@ -105,10 +226,26 @@
       "question_text": "Bacaan: \"Perubahan iklim telah menjadi isu global yang mendesak. Suhu rata-rata bumi meningkat 1,1 derajat Celcius sejak era pra-industri. Dampaknya meliputi naiknya permukaan air laut, cuaca ekstrem, dan terganggunya ekosistem. Para ilmuwan sepakat bahwa aktivitas manusia, terutama pembakaran bahan bakar fosil, menjadi penyebab utama.\"\n\nIde pokok bacaan tersebut adalah...",
       "explanation_text": "Ide pokok adalah gagasan utama yang menjadi dasar pengembangan paragraf. Paragraf ini membahas perubahan iklim sebagai isu global yang mendesak, yang disebutkan di awal paragraf.",
       "options": [
-        { "key": "A", "text": "Dampak perubahan iklim terhadap ekosistem", "is_correct": false },
-        { "key": "B", "text": "Perubahan iklim sebagai isu global yang mendesak", "is_correct": true },
-        { "key": "C", "text": "Aktivitas manusia penyebab perubahan iklim", "is_correct": false },
-        { "key": "D", "text": "Kenaikan suhu bumi sejak era pra-industri", "is_correct": false }
+        {
+          "key": "A",
+          "text": "Dampak perubahan iklim terhadap ekosistem",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Perubahan iklim sebagai isu global yang mendesak",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "Aktivitas manusia penyebab perubahan iklim",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Kenaikan suhu bumi sejak era pra-industri",
+          "is_correct": false
+        }
       ]
     },
     {
@@ -119,10 +256,26 @@
       "question_text": "Read the following text:\n\"The Amazon rainforest is often called the 'lungs of the Earth' because it produces about 20% of the world's oxygen. It spans across nine countries and is home to an incredible diversity of plant and animal species. However, deforestation threatens this vital ecosystem, with large areas being cleared for agriculture and mining.\"\n\nWhy is the Amazon rainforest called the 'lungs of the Earth'?",
       "explanation_text": "The text states it produces about 20% of the world's oxygen, which is why it's called the lungs of the Earth.",
       "options": [
-        { "key": "A", "text": "It spans across nine countries", "is_correct": false },
-        { "key": "B", "text": "It produces about 20% of the world's oxygen", "is_correct": true },
-        { "key": "C", "text": "It has diverse plant and animal species", "is_correct": false },
-        { "key": "D", "text": "It is threatened by deforestation", "is_correct": false }
+        {
+          "key": "A",
+          "text": "It spans across nine countries",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "It produces about 20% of the world's oxygen",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "It has diverse plant and animal species",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "It is threatened by deforestation",
+          "is_correct": false
+        }
       ]
     },
     {
@@ -133,10 +286,26 @@
       "question_text": "Diketahui fungsi f(x) = 2x^2 - 3x + 1. Nilai f(-1) adalah...",
       "explanation_text": "f(-1) = 2(-1)^2 - 3(-1) + 1 = 2(1) + 3 + 1 = 2 + 3 + 1 = 6",
       "options": [
-        { "key": "A", "text": "4", "is_correct": false },
-        { "key": "B", "text": "5", "is_correct": false },
-        { "key": "C", "text": "6", "is_correct": true },
-        { "key": "D", "text": "7", "is_correct": false }
+        {
+          "key": "A",
+          "text": "4",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "5",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "6",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "7",
+          "is_correct": false
+        }
       ]
     },
     {
@@ -147,10 +316,26 @@
       "question_text": "Manakah di antara berikut yang merupakan faktor dari x^2 - 5x + 6?",
       "explanation_text": "x^2 - 5x + 6 = (x - 2)(x - 3). Jadi faktor-faktornya adalah (x - 2) dan (x - 3).",
       "options": [
-        { "key": "A", "text": "(x - 2)", "is_correct": true },
-        { "key": "B", "text": "(x + 2)", "is_correct": false },
-        { "key": "C", "text": "(x - 3)", "is_correct": true },
-        { "key": "D", "text": "(x + 3)", "is_correct": false }
+        {
+          "key": "A",
+          "text": "(x - 2)",
+          "is_correct": true
+        },
+        {
+          "key": "B",
+          "text": "(x + 2)",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "(x - 3)",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "(x + 3)",
+          "is_correct": false
+        }
       ]
     },
     {
@@ -161,10 +346,26 @@
       "question_text": "Sebuah segitiga siku-siku memiliki sisi tegak 6 cm dan 8 cm. Panjang sisi miringnya adalah...",
       "explanation_text": "Menggunakan teorema Pythagoras: c^2 = a^2 + b^2 = 36 + 64 = 100. Jadi c = akar(100) = 10 cm.",
       "options": [
-        { "key": "A", "text": "10 cm", "is_correct": true },
-        { "key": "B", "text": "12 cm", "is_correct": false },
-        { "key": "C", "text": "14 cm", "is_correct": false },
-        { "key": "D", "text": "15 cm", "is_correct": false }
+        {
+          "key": "A",
+          "text": "10 cm",
+          "is_correct": true
+        },
+        {
+          "key": "B",
+          "text": "12 cm",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "14 cm",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "15 cm",
+          "is_correct": false
+        }
       ]
     },
     {
@@ -175,8 +376,346 @@
       "question_text": "Sebuah lingkaran dengan jari-jari 7 cm memiliki luas 154 cm persegi.",
       "explanation_text": "Luas lingkaran = pi x r^2 = 22/7 x 49 = 22 x 7 = 154 cm persegi. Pernyataan BENAR.",
       "options": [
-        { "key": "true", "text": "Benar", "is_correct": true },
-        { "key": "false", "text": "Salah", "is_correct": false }
+        {
+          "key": "true",
+          "text": "Benar",
+          "is_correct": true
+        },
+        {
+          "key": "false",
+          "text": "Salah",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "rasio",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "external_id": "q_ras_001",
+      "question_text": "Perbandingan umur Ali dan Budi adalah 2 : 3. Jika jumlah umur mereka 30 tahun, maka umur Ali adalah...",
+      "explanation_text": "Ali : Budi = 2 : 3. Jumlah rasio = 2 + 3 = 5. Umur Ali = (2/5) x 30 = 12 tahun.",
+      "options": [
+        {
+          "key": "A",
+          "text": "10 tahun",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "12 tahun",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "15 tahun",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "18 tahun",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "rasio",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ras_002",
+      "question_text": "Pada peta berskala 1 : 250.000, jarak kota X dan Y adalah 8 cm. Jarak sebenarnya kedua kota tersebut adalah...",
+      "explanation_text": "Skala 1 : 250.000 artinya 1 cm pada peta = 250.000 cm sebenarnya. Jarak sebenarnya = 8 x 250.000 = 2.000.000 cm = 20 km.",
+      "options": [
+        {
+          "key": "A",
+          "text": "2 km",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "10 km",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "20 km",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "200 km",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "rasio",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ras_003",
+      "question_text": "Sebuah resep kue memerlukan tepung dan gula dengan perbandingan 5 : 2. Jika digunakan 200 gram gula, maka tepung yang dibutuhkan adalah...",
+      "explanation_text": "Tepung : Gula = 5 : 2. Tepung = (5/2) x 200 = 500 gram.",
+      "options": [
+        {
+          "key": "A",
+          "text": "300 gram",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "400 gram",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "500 gram",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "700 gram",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "rasio",
+      "type": "single_choice",
+      "difficulty": "hard",
+      "external_id": "q_ras_004",
+      "question_text": "Suatu pekerjaan dapat diselesaikan oleh 12 orang dalam 15 hari. Jika pekerjaan ingin selesai dalam 10 hari, banyak tambahan pekerja yang diperlukan adalah...",
+      "explanation_text": "Ini perbandingan berbalik nilai. 12 orang x 15 hari = 180 orang-hari. Untuk 10 hari: 180/10 = 18 orang. Tambahan = 18 - 12 = 6 orang.",
+      "options": [
+        {
+          "key": "A",
+          "text": "3 orang",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "6 orang",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "8 orang",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "18 orang",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "rasio",
+      "type": "single_choice",
+      "difficulty": "hard",
+      "external_id": "q_ras_005",
+      "question_text": "Perbandingan uang A, B, dan C adalah 3 : 4 : 5. Jika selisih uang A dan C adalah Rp24.000, jumlah uang mereka bertiga adalah...",
+      "explanation_text": "Selisih rasio A dan C = 5 - 3 = 2 bagian = Rp24.000. Nilai 1 bagian = Rp12.000. Jumlah rasio = 3 + 4 + 5 = 12 bagian. Total = 12 x Rp12.000 = Rp144.000.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Rp120.000",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Rp132.000",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Rp144.000",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "Rp156.000",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "aritmetika-sosial",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_as_001",
+      "question_text": "Seorang pedagang membeli 1 lusin pensil seharga Rp42.000. Jika ia menghendaki untung 20% dari harga pembelian, maka harga jual setiap pensil adalah...",
+      "explanation_text": "Harga beli per pensil = 42.000 ÷ 12 = Rp3.500. Untung 20% dari harga beli = 20% × 3.500 = Rp700. Harga jual per pensil = 3.500 + 700 = Rp4.200.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Rp3.500",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Rp4.200",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "Rp5.000",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Rp4.000",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "aritmetika-sosial",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "external_id": "q_as_002",
+      "question_text": "Bu Dewi meminjam uang di bank sebesar Rp12.000.000 dengan suku bunga tunggal 9% per tahun. Jika ia meminjam selama 8 bulan, besar angsuran yang harus dibayar setiap bulan adalah...",
+      "explanation_text": "Bunga 8 bulan = 12.000.000 × 9% × 8/12 = 12.000.000 × 0,09 × 2/3 = Rp720.000. Total pinjaman = 12.000.000 + 720.000 = Rp12.720.000. Angsuran per bulan = 12.720.000 ÷ 8 = Rp1.590.000.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Rp1.570.000",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Rp1.590.000",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "Rp1.620.000",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Rp1.640.000",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "aritmetika-sosial",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_as_003",
+      "question_text": "Seorang penjual membeli 1 kodi baju dengan harga Rp2.400.000. Setelah semua baju laku terjual, ia memperoleh total penjualan Rp3.200.000. Persentase keuntungan yang diperoleh penjual tersebut adalah...",
+      "explanation_text": "1 kodi = 20 buah. Untung = 3.200.000 − 2.400.000 = Rp800.000. Persentase untung = (800.000 ÷ 2.400.000) × 100% = 33,33%.",
+      "options": [
+        {
+          "key": "A",
+          "text": "25%",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "30%",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "33,3%",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "20%",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "aritmetika-sosial",
+      "type": "single_choice",
+      "difficulty": "hard",
+      "external_id": "q_as_004",
+      "question_text": "Seorang nasabah menabung Rp5.000.000 di bank dengan suku bunga majemuk 10% per tahun. Besar tabungan setelah 3 tahun adalah...",
+      "explanation_text": "Bunga majemuk: Mn = M0 × (1 + i)^n = 5.000.000 × (1,1)^3 = 5.000.000 × 1,331 = Rp6.655.000.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Rp6.050.000",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Rp6.500.000",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Rp6.655.000",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "Rp6.750.000",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "aritmetika-sosial",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_as_005",
+      "question_text": "Pak Anto membeli sebuah motor seharga Rp18.000.000. Setelah 2 tahun, motor tersebut dijual dengan kerugian 15%. Harga jual motor tersebut adalah...",
+      "explanation_text": "Rugi 15% dari harga beli = 15% × 18.000.000 = Rp2.700.000. Harga jual = 18.000.000 − 2.700.000 = Rp15.300.000.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Rp14.700.000",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Rp15.000.000",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Rp15.300.000",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "Rp15.500.000",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "aritmetika-sosial",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "external_id": "q_as_006",
+      "question_text": "Harga sebuah tas setelah mendapat diskon 20% adalah Rp120.000. Harga tas sebelum diskon adalah...",
+      "explanation_text": "Harga setelah diskon = 80% dari harga awal. Harga awal = 120.000 ÷ 80% = 120.000 ÷ 0,8 = Rp150.000.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Rp140.000",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Rp144.000",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Rp150.000",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "Rp160.000",
+          "is_correct": false
+        }
       ]
     },
     {
