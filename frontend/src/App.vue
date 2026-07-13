@@ -6,6 +6,9 @@
     <main class="app-main">
       <router-view />
     </main>
+    <footer class="app-footer">
+      PakGun@2026 - Terimakasih banghasan.com, semoga Allah melimpahi keberkahan kepada engkau
+    </footer>
   </div>
 </template>
 
@@ -30,6 +33,9 @@ body {
   max-width: 800px;
   margin: 0 auto;
   padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .app-header {
@@ -46,6 +52,16 @@ body {
 }
 
 .app-main {
-  padding-bottom: 64px;
+  flex: 1;
+  padding-bottom: 32px;
+}
+
+.app-footer {
+  text-align: center;
+  padding: 24px 0;
+  color: #64748b;
+  font-size: 0.85rem;
+  border-top: 1px solid #d4dde6;
+  margin-top: auto;
 }
 </style>
