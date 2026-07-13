@@ -20,7 +20,6 @@
           <span v-if="isSelected(option.key)" class="radio-dot"></span>
         </span>
       </span>
-      <span class="option-key">{{ option.key }}</span>
       <span class="option-text">{{ option.text }}</span>
     </div>
   </div>

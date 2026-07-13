@@ -77,10 +77,6 @@ for (const [option] of __VLS_getVForSourceType((__VLS_ctx.options))) {
         }
     }
     __VLS_asFunctionalElement(__VLS_intrinsicElements.span, __VLS_intrinsicElements.span)({
-        ...{ class: "option-key" },
-    });
-    (option.key);
-    __VLS_asFunctionalElement(__VLS_intrinsicElements.span, __VLS_intrinsicElements.span)({
         ...{ class: "option-text" },
     });
     (option.text);
@@ -91,7 +87,6 @@ for (const [option] of __VLS_getVForSourceType((__VLS_ctx.options))) {
 /** @type {__VLS_StyleScopedClasses['option-checkbox']} */ ;
 /** @type {__VLS_StyleScopedClasses['option-radio']} */ ;
 /** @type {__VLS_StyleScopedClasses['radio-dot']} */ ;
-/** @type {__VLS_StyleScopedClasses['option-key']} */ ;
 /** @type {__VLS_StyleScopedClasses['option-text']} */ ;
 var __VLS_dollars;
 const __VLS_self = (await import('vue')).defineComponent({

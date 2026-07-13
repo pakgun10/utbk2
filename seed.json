@@ -1,3 +1,32 @@
+{
+  "subjects": [
+    {
+      "slug": "tps",
+      "label": "TPS",
+      "display_order": 1
+    },
+    {
+      "slug": "literasi-bahasa-indonesia",
+      "label": "Literasi Bahasa Indonesia",
+      "display_order": 2
+    },
+    {
+      "slug": "literasi-bahasa-inggris",
+      "label": "Literasi Bahasa Inggris",
+      "display_order": 3
+    },
+    {
+      "slug": "penalaran-matematika",
+      "label": "Penalaran Matematika",
+      "display_order": 4
+    },
+    {
+      "slug": "ukkj-guru-muda-ke-madya",
+      "label": "UKKJ Guru Muda ke Madya",
+      "display_order": 5
+    }
+  ],
+  "topics": [
     {
       "slug": "penalaran-umum",
       "subject_slug": "tps",
@@ -45,6 +74,18 @@
       "subject_slug": "penalaran-matematika",
       "label": "Aritmetika Sosial",
       "display_order": 4
+    },
+    {
+      "slug": "latihan-1-ukkj-3d-ke-4a",
+      "subject_slug": "ukkj-guru-muda-ke-madya",
+      "label": "Latihan 1 UKKJ 3d ke 4a",
+      "display_order": 1
+    },
+    {
+      "slug": "latihan-2-ukkj-3d-ke-4a",
+      "subject_slug": "ukkj-guru-muda-ke-madya",
+      "label": "Latihan 2 UKKJ 3d ke 4a",
+      "display_order": 5
     }
   ],
   "questions": [
@@ -726,10 +767,26 @@
       "question_text": "Perbandingan umur Ali dan Budi adalah 2 : 3. Jika jumlah umur mereka 30 tahun, maka umur Ali adalah...",
       "explanation_text": "Ali : Budi = 2 : 3. Jumlah rasio = 2 + 3 = 5. Umur Ali = (2/5) x 30 = 12 tahun.",
       "options": [
-        { "key": "A", "text": "10 tahun", "is_correct": false },
-        { "key": "B", "text": "12 tahun", "is_correct": true },
-        { "key": "C", "text": "15 tahun", "is_correct": false },
-        { "key": "D", "text": "18 tahun", "is_correct": false }
+        {
+          "key": "A",
+          "text": "10 tahun",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "12 tahun",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "15 tahun",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "18 tahun",
+          "is_correct": false
+        }
       ]
     },
     {
@@ -740,10 +797,26 @@
       "question_text": "Pada peta berskala 1 : 250.000, jarak kota X dan Y adalah 8 cm. Jarak sebenarnya kedua kota tersebut adalah...",
       "explanation_text": "Skala 1 : 250.000 artinya 1 cm pada peta = 250.000 cm sebenarnya. Jarak sebenarnya = 8 x 250.000 = 2.000.000 cm = 20 km.",
       "options": [
-        { "key": "A", "text": "2 km", "is_correct": false },
-        { "key": "B", "text": "10 km", "is_correct": false },
-        { "key": "C", "text": "20 km", "is_correct": true },
-        { "key": "D", "text": "200 km", "is_correct": false }
+        {
+          "key": "A",
+          "text": "2 km",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "10 km",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "20 km",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "200 km",
+          "is_correct": false
+        }
       ]
     },
     {
@@ -754,10 +827,26 @@
       "question_text": "Sebuah resep kue memerlukan tepung dan gula dengan perbandingan 5 : 2. Jika digunakan 200 gram gula, maka tepung yang dibutuhkan adalah...",
       "explanation_text": "Tepung : Gula = 5 : 2. Tepung = (5/2) x 200 = 500 gram.",
       "options": [
-        { "key": "A", "text": "300 gram", "is_correct": false },
-        { "key": "B", "text": "400 gram", "is_correct": false },
-        { "key": "C", "text": "500 gram", "is_correct": true },
-        { "key": "D", "text": "700 gram", "is_correct": false }
+        {
+          "key": "A",
+          "text": "300 gram",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "400 gram",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "500 gram",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "700 gram",
+          "is_correct": false
+        }
       ]
     },
     {
@@ -768,10 +857,26 @@
       "question_text": "Suatu pekerjaan dapat diselesaikan oleh 12 orang dalam 15 hari. Jika pekerjaan ingin selesai dalam 10 hari, banyak tambahan pekerja yang diperlukan adalah...",
       "explanation_text": "Ini perbandingan berbalik nilai. 12 orang x 15 hari = 180 orang-hari. Untuk 10 hari: 180/10 = 18 orang. Tambahan = 18 - 12 = 6 orang.",
       "options": [
-        { "key": "A", "text": "3 orang", "is_correct": false },
-        { "key": "B", "text": "6 orang", "is_correct": true },
-        { "key": "C", "text": "8 orang", "is_correct": false },
-        { "key": "D", "text": "18 orang", "is_correct": false }
+        {
+          "key": "A",
+          "text": "3 orang",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "6 orang",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "8 orang",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "18 orang",
+          "is_correct": false
+        }
       ]
     },
     {
@@ -782,10 +887,2766 @@
       "question_text": "Perbandingan uang A, B, dan C adalah 3 : 4 : 5. Jika selisih uang A dan C adalah Rp24.000, jumlah uang mereka bertiga adalah...",
       "explanation_text": "Selisih rasio A dan C = 5 - 3 = 2 bagian = Rp24.000. Nilai 1 bagian = Rp12.000. Jumlah rasio = 3 + 4 + 5 = 12 bagian. Total = 12 x Rp12.000 = Rp144.000.",
       "options": [
-        { "key": "A", "text": "Rp120.000", "is_correct": false },
-        { "key": "B", "text": "Rp132.000", "is_correct": false },
-        { "key": "C", "text": "Rp144.000", "is_correct": true },
-        { "key": "D", "text": "Rp156.000", "is_correct": false }
+        {
+          "key": "A",
+          "text": "Rp120.000",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Rp132.000",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Rp144.000",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "Rp156.000",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_001",
+      "question_text": "Di kelas Anda, seorang peserta didik bernama Andi seringkali mengantuk dan tertidur saat pelajaran Matematika berlangsung karena ia harus membantu orang tuanya berjualan di pasar hingga larut malam. Sikap Anda adalah...",
+      "explanation_text": "Pendekatan personal yang empatik dan strategi belajar interaktif adalah solusi pedagogis paling tepat untuk membantu siswa tanpa mempermalukannya.",
+      "options": [
+        {
+          "key": "B",
+          "text": "Mengajak Andi berdiskusi secara personal, memberikan motivasi, serta memikirkan strategi belajar interaktif yang membantunya tetap aktif dan terjaga di kelas.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Memaklumi kondisi Andi dan mengizinkannya sesekali beristirahat di UKS agar tidak mengganggu fokus belajar rekan-rekan kelasnya.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Membiarkan Andi tertidur di kelas tanpa intervensi karena merasa kasihan dengan beban ekonomi keluarga yang ditanggungnya.",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "Berkonsultasi dengan guru BK dan memanggil orang tuanya untuk mendiskusikan pembagian waktu kerja dan belajar Andi secara seimbang.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Menegur Andi di depan teman-temannya secara tegas agar ia merasa jera dan memaksakan dirinya untuk memperhatikan pelajaran.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_002",
+      "question_text": "Anda ingin mengajarkan materi IPA tentang ekosistem lingkungan menggunakan proyektor kelas, namun satu-satunya proyektor di sekolah mendadak rusak di pagi hari. Tindakan pembelajaran Anda adalah...",
+      "explanation_text": "Mengajak siswa belajar langsung di luar kelas untuk mengamati ekosistem nyata adalah solusi kreatif yang tetap mencapai tujuan pembelajaran meskipun tanpa proyektor.",
+      "options": [
+        {
+          "key": "D",
+          "text": "Meminta siswa membaca materi ekosistem secara mandiri dan mengerjakan latihan soal di buku tugas masing-masing.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Menunda materi pembelajaran ekosistem dan menggantinya dengan teori lain yang tidak membutuhkan visualisasi media.",
+          "is_correct": true
+        },
+        {
+          "key": "A",
+          "text": "Menghentikan proses belajar mengajar sementara waktu hingga staf sarana prasarana selesai memperbaiki proyektor tersebut.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Menggunakan gambar cetak dari buku paket dan menggambar bagan jaring-jaring makanan secara manual di papan tulis.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Mengajak siswa belajar langsung di halaman sekolah untuk mengamati komponen biotik dan abiotik nyata secara kolaboratif.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_003",
+      "question_text": "Seorang siswa berkebutuhan khusus (inklusi) dengan hambatan pendengaran ringan baru saja bergabung di kelas Anda. Agar ia dapat mengikuti penjelasan pelajaran dengan baik, langkah Anda adalah...",
+      "explanation_text": "Penempatan di baris depan, media visual, dan artikulasi bibir yang jelas adalah langkah paling langsung dan efektif yang dapat dilakukan guru tanpa bergantung pada pihak lain.",
+      "options": [
+        {
+          "key": "C",
+          "text": "Membiarkan siswa belajar secara alami sesuai kemampuannya tanpa memberikan perlakuan khusus agar ia mandiri.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Menempatkan posisi duduknya di baris paling depan, menggunakan media visual yang kaya, serta berbicara dengan artikulasi bibir yang jelas menghadap kelas.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Menugaskan seorang tutor sebaya dari kalangan siswa aktif untuk membantu menuliskan kembali penjelasan Anda setiap kali pelajaran selesai.",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "Menyarankan kepada kepala sekolah untuk memindahkan siswa tersebut ke sekolah luar biasa (SLB) yang memiliki sarana pendukung lebih lengkap.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Meminta orang tua siswa tersebut menyediakan alat bantu dengar khusus atau guru pendamping pribadi selama jam kelas.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_004",
+      "question_text": "Saat sesi diskusi kelompok kelas IPS berjalan, Anda mengamati bahwa sebagian besar anggota kelompok mengandalkan satu orang siswa cerdas untuk menyelesaikan tugas kelompok. Tindakan Anda adalah...",
+      "explanation_text": "Mendatangi setiap kelompok, membagi tugas secara adil, dan memantau kontribusi individu adalah bentuk intervensi pedagogis langsung yang efektif.",
+      "options": [
+        {
+          "key": "C",
+          "text": "Menegur kelompok yang pasif dan mengumumkan bahwa penilaian akan didasarkan pada performa individu saat tanya jawab kelak.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Memarahi siswa yang pasif di depan kelas dan menyuruh mereka keluar dari kelompok masing-masing.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Mengubah format penugasan kelompok menjadi penugasan mandiri agar kontribusi pengerjaan tugas merata untuk semua siswa.",
+          "is_correct": true
+        },
+        {
+          "key": "B",
+          "text": "Membiarkan hal tersebut terjadi namun memberikan nilai akhir kelompok yang sama rata untuk menjaga solidaritas siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Mendatangi setiap kelompok, membagi tugas menulis dan presentasi secara adil pada setiap anggota, serta memantau kontribusi masing-masing.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_005",
+      "question_text": "Anda menyadari bahwa materi pelajaran Sejarah Indonesia minggu ini terasa sangat menjenuhkan bagi siswa karena terlalu banyak hafalan tahun dan nama tokoh. Langkah pedagogis Anda adalah...",
+      "explanation_text": "Mengemas materi dalam bentuk role-playing atau kuis interaktif adalah langkah paling transformatif yang mengubah pengalaman belajar dari pasif menjadi aktif dan menyenangkan.",
+      "options": [
+        {
+          "key": "D",
+          "text": "Meminta siswa membuat rangkuman kreatif berupa peta pikiran (mind map) warna-warni di buku catatan mereka.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Membuat jembatan keledai (mnemonic) menarik untuk membantu mempermudah siswa menghafal tanggal dan tokoh.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Tetap menerangkan secara konvensional namun memberikan janji bonus nilai bagi siswa yang bisa menjawab pertanyaan cepat.",
+          "is_correct": true
+        },
+        {
+          "key": "B",
+          "text": "Memutarkan film dokumenter sejarah yang relevan lalu menugaskan siswa membuat ulasan esai singkat.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Mengemas materi dalam bentuk bermain peran (role-playing) atau kuis petualangan sejarah interaktif kelompok.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_006",
+      "question_text": "Ketika Anda memberikan soal latihan matematika, seorang siswa yang biasanya pasif tiba-tiba berhasil menyelesaikannya dengan metode penyelesaian yang sangat tidak biasa namun hasilnya benar. Sikap Anda?",
+      "explanation_text": "Mengapresiasi, meminta siswa menjelaskan cara berpikirnya, dan memvalidasi kebenaran logisnya adalah sikap yang mendorong kreativitas berpikir matematis.",
+      "options": [
+        {
+          "key": "C",
+          "text": "Mengabaikan keunikan metodenya dan langsung mengalihkan perhatian kelas ke soal latihan berikutnya.",
+          "is_correct": true
+        },
+        {
+          "key": "A",
+          "text": "Mengapresiasi usahanya, memintanya menjelaskan cara berpikir uniknya kepada kelas, serta memvalidasi kebenaran konsep logisnya.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Memuji hasilnya secara langsung dan mencatatnya sebagai nilai keaktifan tambahan di dalam buku nilai harian.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Mengecek apakah siswa tersebut menyontek dari internet atau meniru pekerjaan orang lain di luar jam sekolah.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Menerima jawaban tersebut namun mengingatkan siswa agar di ujian nanti tetap memakai cara standar yang tercantum di buku paket.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_007",
+      "question_text": "Setelah melakukan analisis hasil ulangan harian IPA, Anda mendapati hampir 60% siswa mendapatkan nilai di bawah Kriteria Ketercapaian Tujuan Pembelajaran (KKTP). Strategi Anda adalah...",
+      "explanation_text": "Refleksi metode mengajar, penyederhanaan materi, dan remedial terstruktur adalah langkah komprehensif yang mengakui bahwa masalah mungkin berasal dari pembelajaran, bukan hanya dari siswa.",
+      "options": [
+        {
+          "key": "E",
+          "text": "Melanjutkan materi ke bab baru karena tuntutan target kurikulum tahunan sekolah yang sangat padat.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Membagikan lembar jawaban ulangan yang benar dan meminta siswa mempelajari kembali materi di rumah secara mandiri.",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "Melakukan refleksi metode mengajar Anda, menyederhanakan materi yang sulit dipahami, lalu menyelenggarakan remedial terstruktur bagi siswa tersebut.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Mengulang pelaksanaan ulangan harian dengan soal yang tingkat kesulitannya diturunkan jauh lebih mudah agar semua lulus.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Mengadakan sesi pelajaran tambahan (remedial teaching) khusus di luar jam pelajaran bagi seluruh siswa yang belum tuntas.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_008",
+      "question_text": "Saat mengajar di siang hari yang terik, siswa tampak gelisah, mengeluh gerah, dan kehilangan konsentrasi belajar sama sekali. Langkah taktis yang Anda ambil adalah...",
+      "explanation_text": "Ice breaking gerakan fisik ringan lalu diskusi interaktif adalah langkah taktis yang mengembalikan fokus tanpa mengorbankan waktu belajar secara berarti.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mempercepat berakhirnya kelas dan memberikan tugas rumah mandiri sebagai kompensasi materi yang belum tuntas diajarkan.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Mengubah metode mengajar menjadi diskusi santai kelompok kecil di selasar koridor sekolah yang lebih rindang.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Mengadakan sesi penyegaran (ice breaking) singkat bernuansa gerakan fisik ringan, lalu melanjutkan materi pelajaran dengan diskusi interaktif.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Menasehati siswa tentang pentingnya ketahanan fisik dan disiplin belajar dalam kondisi keterbatasan sarana prasarana sekolah.",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "Mengizinkan siswa untuk mencuci muka atau meminum air putih bergantian agar fokus dan kesegaran fisik mereka kembali terjaga.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_009",
+      "question_text": "Seorang siswa menanyakan fenomena kecerdasan buatan (AI) yang baru saja ia tonton di berita, lalu mengaitkannya dengan materi sosiologi kelas. Anda belum mempelajari isu tersebut secara mendalam. Respons Anda?",
+      "explanation_text": "Mengakui keterbatasan dan menjadikannya sebagai proyek riset kelas bersama adalah sikap profesional yang jujur sekaligus mendorong literasi digital siswa.",
+      "options": [
+        {
+          "key": "E",
+          "text": "Mengarahkan siswa tersebut untuk menanyakan hal itu langsung kepada guru TIK yang dirasa lebih berkompeten di bidang teknologi.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Meminta siswa menyimpan pertanyaan tersebut dan melarangnya membahas topik di luar silabus resmi kementerian.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Mengapresiasi relevansi pertanyaannya, mengakui keterbatasan informasi Anda saat itu, lalu menugaskan kelas mencari artikel sosiologi-AI bersama untuk dibahas esok.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Mengabaikan pertanyaannya dan langsung melanjutkan pembacaan buku teks sosiologi konvensional.",
+          "is_correct": true
+        },
+        {
+          "key": "B",
+          "text": "Mencoba menjawab semampu Anda berdasarkan pengetahuan umum agar kewibawaan akademik Anda di mata siswa tetap terjaga.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_010",
+      "question_text": "Anda diminta kepala sekolah untuk menjadi perwakilan guru dalam pelatihan pembuatan media pembelajaran berbasis AR (Augmented Reality). Di sisi lain, Anda merasa sangat canggung dengan teknologi baru. Sikap Anda?",
+      "explanation_text": "Menerima sebagai tantangan pengembangan diri dan bertekad membagikan ilmu adalah sikap profesional dan growth mindset yang tepat.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Menolak tugas tersebut secara terbuka dengan alasan beban mengajar harian Anda di sekolah sudah sangat menumpuk.",
+          "is_correct": true
+        },
+        {
+          "key": "E",
+          "text": "Menerima tugas tersebut sebagai tantangan pengembangan diri, mempersiapkan mental, dan bertekad membagikan ilmu baru tersebut pada rekan sejawat pasca-pelatihan.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Menyarankan kepala sekolah agar menugaskan rekan guru lain yang memiliki latar belakang ilmu TIK agar hasil pelatihan lebih optimal.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Mengikuti pelatihan tersebut sekadarnya demi menggugurkan kewajiban penugasan tanpa niat mengaplikasikannya di kelas kelak.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Menerima tugas dengan syarat didampingi oleh salah satu guru muda yang sudah menguasai teknologi digital untuk membantu asistensi.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_011",
+      "question_text": "Materi ajar sejarah perjuangan bangsa yang Anda ampu dinilai oleh beberapa rekan sejawat sudah usang dan kurang menyertakan perspektif historiografi terbaru. Sikap profesional Anda adalah...",
+      "explanation_text": "Mencari referensi akademik baru dan jurnal ilmiah terakreditasi adalah sikap profesional yang menunjukkan komitmen pada pengembangan ilmu secara mandiri.",
+      "options": [
+        {
+          "key": "D",
+          "text": "Mengabaikan masukan rekan sejawat karena merasa penyusunan materi baru hanya akan menambah beban kerja di luar jam dinas.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Berdiskusi dengan guru sejarah lain dalam MGMP sekolah untuk merumuskan ulang pemutakhiran materi secara kolaboratif.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Menolak kritikan tersebut karena merasa metode dan materi Anda sudah terbukti meluluskan siswa selama bertahun-tahun.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Mencari buku referensi akademik baru dan jurnal ilmiah terakreditasi untuk menyegarkan konten modul ajar Anda secara komprehensif.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Menerima masukan tersebut namun tetap memakai bahan ajar lama karena materi ujian sekolah belum mengalami revisi berkala.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_012",
+      "question_text": "Anda mendapati bahwa metode mengajar yang Anda terapkan secara rutin di kelas mulai kurang efektif karena gaya belajar peserta didik generasi sekarang sangat didominasi konten visual multimedia singkat. Tindakan Anda?",
+      "explanation_text": "Mempelajari pembuatan video instruksional pendek dan asesmen berbasis infografis adalah adaptasi profesional yang langsung merespons perubahan gaya belajar siswa.",
+      "options": [
+        {
+          "key": "B",
+          "text": "Mengkombinasikan ceramah lisan dengan penayangan gambar dari artikel internet sesekali tanpa mengubah kerangka modul ajar.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Mempelajari cara pembuatan video instruksional pendek dan merancang asesmen berbasis infografis kreatif yang sesuai gaya belajar mereka.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Meminta siswa merekomendasikan channel edukasi visual favorit mereka untuk ditonton dan dianalisis bersama di kelas.",
+          "is_correct": true
+        },
+        {
+          "key": "A",
+          "text": "Menolak menyesuaikan metode karena yakin bahwa metode konvensional adalah cara paling disiplin dalam mentransfer ilmu pengetahuan.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Menasehati siswa agar melatih daya konsentrasi mereka membaca buku teks konvensional yang padat tulisan.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_013",
+      "question_text": "Seorang wali murid mendatangi Anda dengan nada tinggi, menuduh Anda telah bersikap tidak adil karena memberikan hukuman piket tambahan pada anaknya yang ketahuan membuang sampah sembarangan. Respons asertif Anda adalah...",
+      "explanation_text": "Menyambut dengan tenang, mendengarkan, lalu menunjukkan tata tertib sekolah secara objektif adalah respons asertif yang menjaga martabat kedua belah pihak.",
+      "options": [
+        {
+          "key": "E",
+          "text": "Meminta maaf atas kesalahpahaman tersebut, lalu membatalkan sanksi piket tambahan anak tersebut agar wali murid tenang kembali.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Menyambut wali murid dengan tenang, mendengarkan keluhannya, lalu menunjukkan tata tertib kebersihan sekolah dan komitmen kedisiplinan siswa.",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "Menerangkan bahwa hukuman tersebut bersifat edukatif dan berlaku adil bagi seluruh siswa yang melanggar aturan lingkungan sekolah.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Mengarahkan wali murid secara kaku untuk langsung menyampaikan keberatannya kepada kepala sekolah agar ditangani dinas.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Menolak berdiskusi dan balik menegur cara wali murid mendidik anaknya dalam hal menjaga kebersihan lingkungan.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_014",
+      "question_text": "Di lingkungan tempat Anda tinggal, terjadi perselisihan kecil antartetangga mengenai pembangunan fasilitas selokan bersama. Sebagai pendidik yang dihormati di lingkungan tersebut, kontribusi sosial Anda?",
+      "explanation_text": "Menginisiasi pertemuan warga untuk musyawarah dan gotong royong adalah kontribusi sosial yang paling konstruktif dari seorang pendidik.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Menyarankan ketua RT untuk memanggil dinas pekerjaan umum daerah agar menyelesaikan masalah infrastruktur secara legal formal.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Memilih bersikap netral dan membatasi diri dari perselisihan tersebut untuk menjaga kewibawaan nama baik Anda sebagai guru.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Ikut mendukung salah satu tetangga yang Anda rasa posisinya paling benar secara logika keadilan.",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "Menginisiasi pertemuan warga di balai RT untuk duduk bersama, memetakan solusi teknis drainase, dan mengedepankan asas gotong royong.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Menawarkan bantuan menyumbang semen atau pasir secukupnya agar konflik fisik pembangunan selokan cepat terselesaikan.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_015",
+      "question_text": "Seorang guru honorer baru yang berasal dari daerah terpencil merasa sangat canggung dan kesulitan berbaur dengan staf pengajar senior di ruang guru sekolah Anda. Sikap sosial Anda?",
+      "explanation_text": "Menyapa, menemani makan siang, dan memperkenalkannya secara hangat adalah inisiatif sosial paling langsung untuk membantunya beradaptasi.",
+      "options": [
+        {
+          "key": "C",
+          "text": "Menyapa terlebih dahulu, menemaninya makan siang, serta memperkenalkannya secara hangat kepada rekan-rekan guru senior lainnya.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Mengabaikan keberadaannya karena Anda sendiri merasa memiliki banyak kesibukan mengajar yang harus diselesaikan harian.",
+          "is_correct": true
+        },
+        {
+          "key": "B",
+          "text": "Menyarankannya untuk bersikap lebih proaktif dan berani menegur sapa rekan sejawat agar disenangi lingkungan.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Membiarkannya menyesuaikan diri secara bertahap karena yakin proses adaptasi sosial memerlukan ruang dan waktu pribadi.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Mengajaknya bergabung dalam proyek tim kepanitiaan sekolah kecil agar ia memiliki kesempatan berinteraksi aktif.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_016",
+      "question_text": "Anda baru saja mengalami musibah keluarga yang cukup menguras emosi semalam, namun pagi ini Anda harus masuk mengajar dan memimpin penilaian portofolio kelas yang menuntut konsentrasi tinggi. Bagaimana sikap Anda?",
+      "explanation_text": "Melakukan regulasi emosi diri dan tetap tampil profesional melayani hak belajar siswa adalah sikap kepribadian yang paling matang dan bertanggung jawab.",
+      "options": [
+        {
+          "key": "B",
+          "text": "Mengatur jalannya asesmen kelas dengan tertib lalu sesekali mengawasi siswa dari meja guru sembari menenangkan pikiran Anda.",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "Mengajar dengan nada ketus dan mudah tersinggung ketika mendapati adanya kesalahan-kesalahan kecil peserta didik di dalam kelas.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Berterus terang kepada siswa di awal kelas mengenai kondisi Anda agar mereka memaklumi jika Anda kurang bersemangat hari ini.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Meminta bantuan guru piket untuk mengawasi kelas Anda sementara Anda beristirahat menenangkan diri di ruang UKS.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Melakukan regulasi emosi diri sejenak sebelum masuk kelas, menepis kesedihan pribadi, dan tampil profesional melayani hak belajar siswa.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_017",
+      "question_text": "Meskipun Anda telah bekerja keras mempersiapkan materi mengajar yang kreatif, seorang kepala sekolah memberikan kritik tajam di depan forum rapat bahwa metode mengajar Anda kurang berdisiplin waktu. Sikap kepribadian Anda?",
+      "explanation_text": "Menerima kritik dengan lapang dada, mencatat evaluasi, dan berkomitmen memperbaiki diri adalah sikap kepribadian yang dewasa dan profesional.",
+      "options": [
+        {
+          "key": "E",
+          "text": "Menerima evaluasi tersebut di dalam rapat tetapi merasa sangat berkecil hati dan kehilangan semangat mengajar kreatif beberapa hari.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Menunjukkan kekesalan Anda dengan diam membisu sepanjang rapat dan mengabaikan arahan kepala sekolah ke depannya.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Menemui kepala sekolah secara khusus pasca-rapat untuk menjelaskan kendala lapangan yang Anda hadapi secara objektif dan sopan.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Menerima kritikan tersebut dengan lapang dada, mencatat poin evaluasi, mengucapkan terima kasih, dan berkomitmen memperbaiki manajemen waktu mengajar.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Melakukan pembelaan diri secara langsung di dalam rapat guna meluruskan bahwa tuduhan keterlambatan tersebut tidak sepenuhnya benar.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_018",
+      "question_text": "Sekolah tempat Anda mengajar berada di pelosok dengan fasilitas aliran listrik yang sering padam tiba-tiba. Kondisi ini kerap merusak persiapan media ajar elektronik Anda. Sikap Anda?",
+      "explanation_text": "Menyiapkan rencana cadangan non-elektronik adalah sikap antisipatif dan solutif yang tidak bergantung pada perbaikan infrastruktur eksternal.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mengeluhkan kondisi padam tersebut kepada pengawas sekolah dan meminta dimutasikan ke sekolah perkotaan yang lebih maju.",
+          "is_correct": true
+        },
+        {
+          "key": "E",
+          "text": "Menghentikan proses belajar mengajar aktif saat listrik padam dan membiarkan siswa mengobrol bebas di bangku masing-masing.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Selalu menyiapkan rencana cadangan (back-up plan) non-elektronik seperti peta konsep cetak dan alat peraga darurat dari bahan alam sekitar.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Mengajukan proposal penyediaan genset darurat kepada kepala sekolah dan komite agar pembelajaran kelas tidak terganggu.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Menyesuaikan materi pengajaran dengan langsung menulis materi di papan tulis secara detail saat pemadaman berlangsung.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_019",
+      "question_text": "Wali murid yang memiliki usaha katering ternama mengirimkan paket makanan mewah ke rumah Anda menjelang pembagian rapor, sembari menitipkan pesan agar putrinya diberi kelonggaran peringkat kelas. Sikap Anda?",
+      "explanation_text": "Menolak dengan santun dan menerangkan objektivitas penilaian adalah tindakan berintegritas yang menjaga marwah profesi guru.",
+      "options": [
+        {
+          "key": "C",
+          "text": "Menolak kiriman tersebut dengan bahasa yang sangat santun, menerangkan bahwa penilaian rapor dilakukan secara objektif dan transparan.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Melaporkan kejadian pengiriman paket tersebut kepada kepala sekolah dan komite etik sekolah untuk diambil tindakan kelembagaan.",
+          "is_correct": true
+        },
+        {
+          "key": "A",
+          "text": "Menerima makanan tersebut dan menaikkan nilai putrinya sedikit saja karena merasa tersanjung dan kasihan dengan kesungguhan orang tuanya.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Menerima makanan tersebut demi menghormati niat baik wali murid, tetapi sama sekali tidak memengaruhi objektivitas nilai rapor anaknya.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Mengembalikan paket tersebut secara kasar agar wali murid menyadari bahwa tindakannya melanggar prinsip anti-gratifikasi.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_020",
+      "question_text": "Anda menemukan bahwa kunci jawaban asesmen sumatif akhir tahun kelas Anda tersebar di grup obrolan siswa. Setelah ditelusuri, rekan guru paralel Anda yang tidak sengaja menjatuhkan drafnya di fotokopi sekolah. Sikap Anda?",
+      "explanation_text": "Melapor ke tim panitia untuk membuat soal cadangan baru adalah tindakan integritas yang mengutamakan keadilan asesmen bagi semua siswa.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Menasehati siswa di grup obrolan agar tetap bersikap jujur dan tidak menggunakan kunci jawaban bocor tersebut saat ujian.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Melaporkan kecerobohan rekan sejawat tersebut secara terbuka di grup koordinasi guru agar kepala sekolah memberikan sanksi berat.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Mengabaikan kebocoran tersebut karena merasa bukan Anda yang melakukan kecerobohan administratif tersebut.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Menegur rekan sejawat tersebut secara rahasia dan membantunya mengumpulkan kembali fotokopian draf soal yang tercecer.",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "Segera melapor ke tim panitia asesmen sekolah untuk membuat paket soal cadangan baru dan merombak total draf asesmen sebelum hari ujian.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_021",
+      "question_text": "Sekolah Anda sedang membentuk panitia perayaan HUT Sekolah. Anda diposisikan satu divisi dengan seorang rekan guru senior yang terkenal sangat perfeksionis dan sulit diajak kompromi. Sikap kolaboratif Anda adalah...",
+      "explanation_text": "Pendekatan personal yang hangat, mendengarkan gagasannya, lalu menyelaraskan pembagian tugas adalah strategi kolaboratif paling efektif menghadapi rekan yang sulit.",
+      "options": [
+        {
+          "key": "E",
+          "text": "Mengajukan keberatan kepada ketua panitia dan meminta dipindahkan ke divisi kepanitiaan lain yang anggotanya lebih santai.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Bekerja secara terpisah dan hanya menyelesaikan porsi tugas individu Anda sendiri tanpa banyak berkoordinasi dengannya.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Mengajukan draf rencana kerja alternatif yang rapi kepada ketua panitia inti agar memediasi pembagian wilayah kerja divisi Anda.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Mengikuti semua keputusan kerja yang diusulkan oleh guru senior tersebut demi meminimalkan konflik internal tim.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Melakukan pendekatan personal yang hangat, mendengarkan gagasannya terlebih dahulu, lalu menyelaraskan pembagian tugas kerja secara detail.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_022",
+      "question_text": "Sekolah Anda terpilih mengikuti kompetisi adiwiyata tingkat provinsi. Semua guru diwajibkan lembur untuk membersihkan dan menata taman sekolah, namun Anda sudah memiliki janji mengantar anak Anda imunisasi sore itu. Sikap Anda?",
+      "explanation_text": "Meminta izin, menyelesaikan tugas di siang hari, lalu pergi adalah solusi yang menyeimbangkan tanggung jawab profesional dan keluarga.",
+      "options": [
+        {
+          "key": "B",
+          "text": "Mengikuti lembur bersama guru lain terlebih dahulu dan membatalkan janji imunisasi anak ke hari lain yang belum tentu luang.",
+          "is_correct": true
+        },
+        {
+          "key": "A",
+          "text": "Menolak berpartisipasi dalam program adiwiyata karena menilai tugas menata taman adalah tanggung jawab penuh tukang kebun sekolah.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Pergi meninggalkan sekolah begitu saja saat jam kerja usai tanpa melapor atau pamit kepada rekan guru divisi taman.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Mendelegasikan tugas pembersihan bagian taman Anda kepada staf honorer sekolah dengan memberikan uang lelah pribadi yang pantas.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Meminta izin kepada koordinator dengan sopan, menyelesaikan porsi tugas penataan taman Anda di siang hari, lalu bergegas pergi mengantar anak.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_023",
+      "question_text": "Anda ditugasi mensosialisasikan tata tertib seragam dan kedisiplinan baru sekolah yang menuai banyak polemik karena melarang siswa menggunakan jaket non-sekolah di area kelas. Strategi komunikasi Anda adalah...",
+      "explanation_text": "Dialog interaktif yang menjelaskan alasan dan mengakomodasi masukan kritis adalah strategi komunikasi yang paling partisipatif dan efektif.",
+      "options": [
+        {
+          "key": "C",
+          "text": "Mengadakan dialog interaktif yang ramah, menjelaskan alasan kesehatan dan kesetaraan sosial di balik aturan, serta mengakomodasi masukan kritis.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Membacakan sanksi tata tertib secara kaku di forum upacara bendera hari Senin agar terkesan menakutkan bagi siswa.",
+          "is_correct": true
+        },
+        {
+          "key": "A",
+          "text": "Mengundang perwakilan pengurus OSIS terlebih dahulu untuk membantu menyebarkan esensi pemahaman aturan tersebut kepada rekan sebaya.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Membuat pamflet infografis yang menarik, menyebarkannya lewat grup WhatsApp kelas, dan membuka jalur tanya jawab tertulis yang rapi.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Meminta guru BK langsung melakukan razia jaket di gerbang sekolah tanpa ada proses sosialisasi atau dialog preventif.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_024",
+      "question_text": "Di sekolah tempat Anda mengajar, seorang siswa pindahan dari Papua seringkali diejek oleh teman-temannya karena logat bicaranya yang dinilai unik dan tidak biasa. Tindakan Anda sebagai perekat kebangsaan adalah...",
+      "explanation_text": "Merancang proyek kelas bertema Keragaman Nusantara dan memberikan kepemimpinan kelompok padanya adalah tindakan preventif-konstruktif yang menanamkan toleransi.",
+      "options": [
+        {
+          "key": "B",
+          "text": "Merancang proyek kelas kolaboratif bertema 'Keragaman Nusantara', memberikan porsi kepemimpinan kelompok padanya, dan menanamkan nilai toleransi.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Meminta guru BK mengadakan bimbingan klasikal mengenai bahaya perundungan verbal ringan di seluruh jenjang kelas sekolah.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Mengajak siswa baru Papua tersebut berbicara secara khusus untuk memberikan penguatan mental agar ia tidak terlalu sensitif.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Menegur secara tegas siswa yang mengejek, memanggil mereka ke ruang guru, serta menjelaskan indahnya keragaman suku di Indonesia.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Menganggap ejekan tersebut hanyalah candaan khas anak sekolah biasa yang akan mereda dengan sendirinya seiring berjalannya waktu.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_025",
+      "question_text": "Terjadi perdebatan yang sangat sensitif di grup koordinasi guru sekolah mengenai isu keagamaan tertentu yang dihubungkan dengan kebijakan berpakaian staf pengajar. Sikap Anda sebagai perekat kebangsaan?",
+      "explanation_text": "Mengajak fokus ke komitmen profesional dan mengusulkan forum tatap muka yang dipimpin kepala sekolah adalah solusi yang meredakan ketegangan tanpa memihak.",
+      "options": [
+        {
+          "key": "E",
+          "text": "Memilih untuk diam membisu (silent reader) di grup WhatsApp guna menjaga netralitas dan menghindari gesekan opini pribadi.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Melaporkan guru-guru yang paling vokal berdebat kepada dinas pendidikan agar diberikan sanksi pembinaan disiplin ASN.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Mengajak rekan guru fokus kembali ke komitmen profesional melayani siswa, serta mengusulkan forum tatap muka santai dipimpin kepala sekolah.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Meminta guru yang berdebat untuk segera menghapus postingan sensitif mereka demi menghindari ketegangan internal yang semakin meluas.",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "Turut serta membela kelompok guru yang opininya sejalan dengan keyakinan pribadi Anda di dalam grup WhatsApp.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_026",
+      "question_text": "Siswa Anda kesulitan memahami konsep konversi satuan berat di kelas IPA. Strategi Anda?",
+      "explanation_text": "Menggunakan neraca pegas asli dan menimbang benda langsung adalah pembelajaran kontekstual yang membuat konsep abstrak menjadi konkret dan mudah dipahami.",
+      "options": [
+        {
+          "key": "B",
+          "text": "Membuat bagan tangga konversi warna-warni yang besar di dinding kelas sebagai alat bantu visual permanen.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Melanjutkan materi ke konsep volume karena target pencapaian kurikulum mingguan sudah sangat mendesak.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Membagikan tabel lembar kerja konversi satuan untuk dilatih secara mandiri berulang kali oleh siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Menggunakan neraca pegas asli di kelas dan menimbang berbagai benda kelas secara langsung bersama siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Menganjurkan siswa menghafal konversi kg ke gram di rumah dibantu bimbingan orang tua.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_027",
+      "question_text": "Siswa cerdas di kelas Anda sering mengganggu temannya yang lambat belajar dengan mengejek kelambatan pengerjaannya. Tindakan Anda?",
+      "explanation_text": "Mengajak diskusi personal dan menunjuknya sebagai tutor sebaya adalah pendekatan yang mengubah perilaku negatif menjadi kontribusi positif.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Menegur siswa cerdas tersebut secara lisan di depan kelas agar ia menyadari kesalahannya saat itu juga.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Memisahkan meja duduk mereka berdua agar tidak berdekatan selama jam pembelajaran kelas berlangsung.",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "Membiarkan kejadian tersebut selama tidak berujung pada kekerasan fisik atau tangisan siswa lainnya.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Mengajak siswa cerdas tersebut berdiskusi personal, menunjuknya menjadi tutor sebaya bagi temannya, dan mengajarkan empati sosial.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Meminta bantuan guru BK untuk memberikan bimbingan perilaku khusus bagi anak cerdas yang suka merundung tersebut.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_028",
+      "question_text": "Sebuah materi pelajaran TIK mewajibkan praktik komputer, namun laboratorium komputer sekolah sedang dipakai simulasi UNBK. Strategi Anda?",
+      "explanation_text": "Menggunakan media unplugged (kartu instruksi visual) adalah solusi kreatif yang tetap mengajarkan konsep algoritma tanpa bergantung pada komputer.",
+      "options": [
+        {
+          "key": "D",
+          "text": "Mengalihkan jam kelas ke teori sejarah komputer dan meminta siswa merangkum bab terkait di buku catatan.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Menggunakan media unplugged (tanpa komputer): membuat simulasi algoritma dengan kartu instruksi visual di lantai kelas.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Meliburkan kelas praktik TIK tersebut karena ketiadaan fasilitas komputer yang memadai di sekolah.",
+          "is_correct": true
+        },
+        {
+          "key": "B",
+          "text": "Menunda pembelajaran praktik TIK tersebut ke minggu depan saat simulasi UNBK selesai sepenuhnya.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Menayangkan materi demonstrasi pengoperasian software dari laptop pribadi Anda menggunakan layar proyektor kelas.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_029",
+      "question_text": "Kurikulum baru menghendaki penilaian portofolio berbasis blog digital, sedangkan Anda belum pernah membuat blog sama sekali. Sikap Anda?",
+      "explanation_text": "Mengikuti tutorial online dan berdiskusi dengan MGMP adalah sikap pengembangan diri yang proaktif dan mandiri.",
+      "options": [
+        {
+          "key": "E",
+          "text": "Berkolaborasi dengan guru TIK muda di sekolah untuk merancang sistem penilaian portofolio digital bersama-sama.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Menolak menerapkan metode portofolio blog dan tetap menggunakan portofolio kertas map kuning yang biasa Anda pakai.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Meminta siswa membuat blog sendiri dan mengumpulkan link-nya, sementara Anda menilai tampilannya secara konvensional.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Mengeluhkan kerumitan administrasi digital baru tersebut kepada pengawas sekolah saat sesi rapat evaluasi.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Mengikuti tutorial online pembuatan blog di akhir pekan, mencobanya secara mandiri, dan berdiskusi dengan komunitas MGMP.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_030",
+      "question_text": "Anda ditunjuk sebagai ketua tim juri lomba karya ilmiah remaja sekolah, padahal Anda merasa metodologi penelitian Anda perlu ditingkatkan kembali. Tindakan Anda?",
+      "explanation_text": "Mempelajari buku panduan metodologi penelitian dan berdiskusi dengan akademisi adalah langkah pengembangan kompetensi yang paling bertanggung jawab.",
+      "options": [
+        {
+          "key": "C",
+          "text": "Menyarankan kepala sekolah mencari juri eksternal dari universitas lokal terdekat karena keterbatasan keahlian internal.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Menolak tugas kejurian tersebut karena khawatir membuat keputusan penilaian juara yang keliru secara ilmiah.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Mengajak guru bahasa dan guru sains senior untuk menyusun rubrik penilaian karya ilmiah yang detail dan transparan.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Menerima penugasan juri tersebut namun menyerahkan penilaian final kepada suara terbanyak juri lainnya.",
+          "is_correct": true
+        },
+        {
+          "key": "A",
+          "text": "Mempelajari kembali buku panduan metodologi penelitian ilmiah terbaru dan berdiskusi dengan akademisi kenalan Anda.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_031",
+      "question_text": "Seorang wali murid menolak hasil keputusan pembagian kelas inklusi karena khawatir anaknya tertular perilaku kurang tertib siswa inklusi. Sikap Anda?",
+      "explanation_text": "Audiensi ramah yang menerangkan konsep empati sosial dan hasil riset tentang manfaat inklusivitas adalah pendekatan edukatif yang paling meyakinkan.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Menerima keberatan wali murid tersebut dan memindahkan anaknya ke baris bangku paling jauh dari siswa inklusi.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Mengadakan audiensi ramah, menerangkan konsep empati sosial, dan menunjukkan hasil riset bahwa inklusivitas melatih karakter anak.",
+          "is_correct": true
+        },
+        {
+          "key": "B",
+          "text": "Meminta wali murid menandatangani surat keberatan tertulis untuk diserahkan ke dinas pendidikan setempat.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Menolak keras keluhan wali murid dan menuduhnya bersikap diskriminatif terhadap sesama anak bangsa.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Mempertemukan wali murid tersebut dengan guru pendamping khusus (GPK) untuk memberikan jaminan pengawasan ketat.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_032",
+      "question_text": "Ketika terjadi bencana alam banjir di dekat lingkungan sekolah, siswa tampak cemas dan kurang fokus belajar. Respons sosial Anda?",
+      "explanation_text": "Mengorganisasi gerakan donasi dan mengajak siswa menyalurkannya langsung adalah respons sosial yang menyalurkan empati menjadi aksi nyata.",
+      "options": [
+        {
+          "key": "D",
+          "text": "Mengabaikan isu banjir tersebut dan memaksakan kelancaran target materi pembelajaran demi ujian akhir mendatang.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Mengorganisasi gerakan donasi sukarela 'Sekolah Peduli' dan mengajak siswa menyalurkannya langsung ke posko bencana terdekat.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Menghibur siswa dengan lelucon santai agar kecemasan banjir mereka terlupakan selama jam kelas berlangsung.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Mengizinkan siswa yang rumahnya terdampak banjir untuk pulang lebih awal tanpa sanksi kehadiran apa pun.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Mengadakan sesi diskusi psikososial di kelas mengenai mitigasi bencana alam banjir dan pentingnya solidaritas sosial.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_033",
+      "question_text": "Anda mendapati mobil pribadi Anda tergores dalam di parkiran sekolah oleh sepeda siswa yang tidak sengaja terjatuh. Sikap kepribadian Anda?",
+      "explanation_text": "Memanggil siswa dengan tenang, mendengarkan, memaafkan, dan menasehati adalah sikap kepribadian yang meneladankan kedewasaan emosional.",
+      "options": [
+        {
+          "key": "B",
+          "text": "Menghukum siswa tersebut melakukan piket kebersihan halaman parkir selama satu minggu sebagai sanksi kedisiplinan.",
+          "is_correct": true
+        },
+        {
+          "key": "A",
+          "text": "Memarahi siswa tersebut di depan ruang guru dan menyuruhnya mengganti biaya cat mobil Anda saat itu juga.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Menghubungi orang tua siswa tersebut untuk datang ke sekolah membahas penyelesaian perbaikan bodi mobil secara kekeluargaan.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Meminta staf keamanan sekolah untuk memperketat tata tertib parkir sepeda siswa di area sekolah secara resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Memanggil siswa tersebut secara tenang, mendengarkan alasannya, memaafkannya, dan menasehatinya agar memarkir sepeda lebih hati-hati.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_034",
+      "question_text": "Anda menghadapi kelelahan kerja fisik (burnout) akibat mengajar di 6 kelas paralel ditambah tugas sampingan bendahara sekolah. Langkah Anda?",
+      "explanation_text": "Olahraga, skala prioritas, dan komunikasi jujur dengan kepala sekolah adalah langkah komprehensif yang mengatasi burnout dari berbagai sisi.",
+      "options": [
+        {
+          "key": "C",
+          "text": "Membatalkan rencana mengajar kreatif dan beralih ke metode penugasan buku paket konvensional agar Anda tidak kelelahan.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Meminta delegasi pencatatan keuangan bendahara sekolah dibantu oleh staf tata usaha agar beban administrasi Anda berkurang.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Melakukan olahraga ringan di akhir pekan, mengatur skala prioritas kerja, serta berkomunikasi jujur dengan kepala sekolah terkait beban kerja.",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "Menggunakan sebagian jam mengajar kelas untuk pengerjaan laporan keuangan di meja guru secara mandiri.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Mengajukan surat pengunduran diri dari jabatan bendahara sekolah secara mendadak menjelang pelaporan akhir tahun.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_035",
+      "question_text": "Rekan sejawat meminta bantuan Anda membubuhkan tanda tangan kehadiran mengajar di lembar presensi manual padahal ia terlambat masuk kelas. Respons Anda?",
+      "explanation_text": "Menolak dengan halus dan menyarankannya lapor ke tata usaha adalah tindakan integritas yang tetap menjaga hubungan baik.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Melaporkan tindakan ketidakjujuran rekan tersebut langsung kepada kepala sekolah di forum formal rapat dinas.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Membantu menandatanganinya sekali ini saja demi menjaga keharmonisan pertemanan sejawat ruang guru sekolah.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Menolaknya dengan halus, menerangkan pentingnya kejujuran administratif bersama, serta menyarankannya lapor langsung ke tata usaha.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Mengabaikan permintaannya dan langsung meninggalkannya pergi ke kelas Anda tanpa memberikan respons apa pun.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Menolak membubuhkan tanda tangan namun menawarkan diri untuk menggantikan membuka kelasnya terlebih dahulu agar siswa tertib.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_036",
+      "question_text": "Sekolah mengadopsi program Go Green tanpa plastik sekali pakai. Guru olahraga keberatan karena menyulitkan penyediaan air minum praktis saat praktikum luar. Langkah Anda?",
+      "explanation_text": "Mengusulkan pengadaan dispenser air isi ulang dan botol minum pribadi adalah solusi kolaboratif yang mengakomodasi kedua kepentingan.",
+      "options": [
+        {
+          "key": "E",
+          "text": "Mengusulkan pengadaan dispenser air isi ulang di dekat lapangan sekolah dan meminta siswa membawa botol minum (tumblr) sendiri.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Membantu guru olahraga mencari sponsor penyedia galon ramah lingkungan khusus untuk sesi praktikum luar.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Menghujat guru olahraga di depan kepala sekolah karena dinilai tidak mendukung kampanye kelestarian lingkungan hidup.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Meminta guru olahraga mematuhi aturan sekolah tanpa membantah karena sudah merupakan ketetapan keputusan rapat pimpinan.",
+          "is_correct": true
+        },
+        {
+          "key": "A",
+          "text": "Memaklumi keberatan guru olahraga dan mengecualikan aturan bebas plastik khusus untuk jam pelajaran olahraga luar.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_037",
+      "question_text": "Siswa salah mengerti pengumuman jadwal ujian praktik sehingga banyak yang tidak membawa bahan praktikum IPA kelas Anda. Langkah Anda?",
+      "explanation_text": "Mengevaluasi pengumuman, meminta maaf, dan mendesain ulang kelompok agar berbagi bahan adalah solusi yang mengakui kesalahan komunikasi dan tetap melanjutkan pembelajaran.",
+      "options": [
+        {
+          "key": "D",
+          "text": "Mengevaluasi redaksi pengumuman Anda, meminta maaf atas kesalahpahaman, lalu mendesain ulang kelompok agar bisa berbagi bahan.",
+          "is_correct": true
+        },
+        {
+          "key": "E",
+          "text": "Meminta siswa yang membawa bahan berlebih membagi bahannya kepada temannya dengan kompensasi nilai kerelaan.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Membatalkan seluruh ujian praktik hari itu dan menggantinya dengan ujian teori esai tertulis saat itu juga.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Mengurangi nilai kedisiplinan seluruh siswa karena dinilai kurang teliti membaca teks instruksi di mading.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Menjadwalkan ujian praktik susulan esok hari khusus bagi siswa yang tidak membawa bahan tanpa mengurangi nilai akhir.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_038",
+      "question_text": "Menjelang hari besar keagamaan, terjadi selentingan prasangka kurang baik antar-siswa di media sosial kelas mengenai toleransi libur ibadah. Langkah Anda?",
+      "explanation_text": "Sesi diskusi kelas terbuka bertema kerukunan beragama adalah langkah preventif-edukatif yang menanamkan pemahaman toleransi secara langsung.",
+      "options": [
+        {
+          "key": "E",
+          "text": "Menghubungi admin grup kelas WhatsApp untuk menghapus seluruh chat prasangka keagamaan tersebut secara paksa.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Menyerahkan penanganan akun-akun siswa pelanggar etika SARA medsos tersebut ke tim BK sekolah.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Membuka sesi diskusi kelas terbuka bertema kerukunan beragama di Indonesia, mengundang perwakilan siswa berbagi kisah persahabatan indah.",
+          "is_correct": true
+        },
+        {
+          "key": "B",
+          "text": "Meminta siswa menghentikan bahasan agama di media sosial dan memberikan ceramah umum moral kebinekaan.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Membiarkan perdebatan tersebut mereda sendiri karena menganggap medsos adalah ruang privat kebebasan berpendapat siswa.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_039",
+      "question_text": "Di SMA Budi Utomo, pada pelajaran IPS, Anda dihadapkan pada situasi di mana Rudi mengalami kendala: Siswa mengumpulkan PR kosong karena membantu pertanian orang tuanya. Sebagai pendidik profesional, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Pendekatan personal yang empatik, mendiskusikan kendala, dan menyusun strategi perbaikan terstruktur adalah langkah pedagogis yang paling solutif.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "B",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Rudi, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "topic_slug": "latihan-1-ukkj-3d-ke-4a",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ukkj_040",
+      "question_text": "Di SMK Taruna, pada pelajaran Matematika, Anda dihadapkan pada situasi di mana Gita mengalami kendala: Pembagian wilayah kerja bakti halaman sekolah dirasa tidak merata antar kelas. Sebagai pendidik profesional, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Pendekatan personal empatik, diskusi kendala, dan strategi perbaikan terstruktur adalah langkah paling solutif untuk menangani keluhan ketidakadilan yang dirasakan siswa.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Gita, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "E",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_041",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SMP Cendekia, pada pelajaran Bahasa Indonesia, Anda dihadapkan pada situasi di mana Doni mengalami kendala: Siswa merasa canggung mengemukakan ide kreativitas mading karena takut diejek temannya. Sebagai pendidik profesional dengan tingkat Kompetensi Teknis (Pedagogik) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Pendekatan personal empatik pada Doni adalah langkah pedagogis paling tepat untuk mengatasi kecemasan sosialnya dalam berkarya.",
+      "options": [
+        {
+          "key": "B",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Doninya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "E",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_042",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SD Merdeka, pada pelajaran Ilmu Pengetahuan Alam (IPA), Anda dihadapkan pada situasi di mana Eka mengalami kendala: Fasilitas perpustakaan sekolah minim buku referensi non-fiksi terbaru. Sebagai pendidik profesional dengan tingkat Kompetensi Teknis (Profesional Guru) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Guru profesional mencari solusi dengan mendiskusikan kendala dan menyusun strategi perbaikan, misalnya mengusulkan pengadaan buku atau memanfaatkan sumber digital alternatif.",
+      "options": [
+        {
+          "key": "B",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Ekanya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "A",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_043",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SDN Nusantara, pada pelajaran Bahasa Inggris, Anda dihadapkan pada situasi di mana Fajar mengalami kendala: Siswa membawa gadget tanpa izin untuk merekam video joget di kelas saat jam kosong. Sebagai pendidik profesional dengan tingkat Kompetensi Teknis (Kepribadian) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Pendekatan personal yang empatik akan menggali alasan siswa melanggar aturan dan menyusun pembinaan karakter yang tepat.",
+      "options": [
+        {
+          "key": "C",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Fajarnya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_044",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SMP Harapan Bangsa, pada pelajaran Pendidikan Pancasila, Anda dihadapkan pada situasi di mana Hana mengalami kendala: Wali murid mendatangi guru dengan marah karena anaknya dilarang ikut karya wisata. Sebagai pendidik profesional dengan tingkat Kompetensi Teknis (Sosial) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Keterampilan sosial guru diuji dengan menghadapi wali murid secara empatik, mendengarkan keluhan, dan mencari solusi bersama.",
+      "options": [
+        {
+          "key": "D",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Hananya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_045",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SMA Budi Utomo, pada pelajaran Fisika, Anda dihadapkan pada situasi di mana Andi mengalami kendala: Guru sejawat menderita sakit keras sehingga kelasnya terlantar selama satu minggu. Sebagai pendidik profesional dengan tingkat Kompetensi Manajerial (Kerjasama) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Kerjasama tim diwujudkan dengan pendekatan personal kepada guru pengganti dan merancang strategi agar pembelajaran tetap berjalan efektif.",
+      "options": [
+        {
+          "key": "B",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Andinya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "E",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_046",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SMK Taruna, pada pelajaran IPS, Anda dihadapkan pada situasi di mana Siti mengalami kendala: Kebijakan e-learning baru dinilai terlalu banyak menggunakan paket data internet siswa. Sebagai pendidik profesional dengan tingkat Kompetensi Manajerial (Mengelola Perubahan) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Mengelola perubahan berarti memahami kendala secara personal dan bersama-sama menyusun strategi adaptasi yang meringankan beban siswa.",
+      "options": [
+        {
+          "key": "E",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Sitinya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_047",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SMP Cendekia, pada pelajaran Matematika, Anda dihadapkan pada situasi di mana Budi mengalami kendala: Terjadi pertengkaran kecil di lobi sekolah antarsiswa gara-gara pinjaman alat tulis. Sebagai pendidik profesional dengan tingkat Kompetensi Teknis (Sosial) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Mediasi pertengkaran dimulai dengan pendekatan personal kepada Budi untuk memahami akar masalah.",
+      "options": [
+        {
+          "key": "D",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Budinya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "E",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_048",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SD Merdeka, pada pelajaran Bahasa Indonesia, Anda dihadapkan pada situasi di mana Rian mengalami kendala: Siswa merasa jenuh karena guru terlalu sering mengajar dengan metode slide PowerPoint padat teks. Sebagai pendidik profesional dengan tingkat Kompetensi Teknis (Pedagogik) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Pendekatan pedagogis yang empatik akan menggali penyebab kejenuhan dan menyusun variasi metode pembelajaran yang lebih interaktif.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Riannya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_049",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SDN Nusantara, pada pelajaran Ilmu Pengetahuan Alam (IPA), Anda dihadapkan pada situasi di mana Lani mengalami kendala: Buku laporan administrasi kelas Anda ketumpahan kopi menjelang pengumpulan ke dinas. Sebagai pendidik profesional dengan tingkat Kompetensi Teknis (Kepribadian) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Kepribadian yang tenang dan solutif diuji dengan situasi darurat administratif.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Lani, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "B",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_050",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SMP Harapan Bangsa, pada pelajaran Bahasa Inggris, Anda dihadapkan pada situasi di mana Dewi mengalami kendala: Siswa menyontek tulisan tangan temannya saat ulangan harian karena lupa belajar. Sebagai pendidik profesional dengan tingkat Kompetensi Manajerial (Integritas) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Integritas pendidik tercermin dari pendekatan personal yang mendidik, bukan menghukum.",
+      "options": [
+        {
+          "key": "D",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Dewinya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_051",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SMA Budi Utomo, pada pelajaran Pendidikan Pancasila, Anda dihadapkan pada situasi di mana Rudi mengalami kendala: Kepala sekolah memberikan instruksi penugasan ganda di akhir pekan tanpa uang lelah tambahan. Sebagai pendidik profesional dengan tingkat Kompetensi Manajerial (Orientasi pada Hasil) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Orientasi pada hasil tetap mengutamakan komunikasi personal untuk mencari strategi penyelesaian tugas yang efektif.",
+      "options": [
+        {
+          "key": "B",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Rudinya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_052",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SMK Taruna, pada pelajaran Fisika, Anda dihadapkan pada situasi di mana Gita mengalami kendala: Siswa baru pindahan kesulitan beradaptasi dengan bahasa pengantar harian ruang guru. Sebagai pendidik profesional dengan tingkat Kompetensi Sosio Kultural (Perekat Kebangsaan) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Perekat kebangsaan diwujudkan dengan pendekatan personal empatik untuk memahami kesulitan adaptasi bahasa.",
+      "options": [
+        {
+          "key": "D",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Gitanya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_053",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SMP Cendekia, pada pelajaran IPS, Anda dihadapkan pada situasi di mana Doni mengalami kendala: Kelompok belajar tidak mau menerima siswa yang fisiknya memiliki kekurangan ringan. Sebagai pendidik profesional dengan tingkat Kompetensi Sosio Kultural (Perekat Kebangsaan) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Pendekatan personal dan strategi perbaikan terstruktur menanamkan nilai inklusivitas dan toleransi.",
+      "options": [
+        {
+          "key": "B",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Doninya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_054",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SD Merdeka, pada pelajaran Matematika, Anda dihadapkan pada situasi di mana Eka mengalami kendala: Siswa membawa mainan kartu ilegal ke kelas dan mengedarkannya di jam pelajaran serius. Sebagai pendidik profesional dengan tingkat Kompetensi Teknis (Kepribadian) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Pendekatan personal membantu menggali motif siswa dan menyusun pembinaan karakter yang tepat.",
+      "options": [
+        {
+          "key": "C",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Ekanya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "B",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_055",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SDN Nusantara, pada pelajaran Bahasa Indonesia, Anda dihadapkan pada situasi di mana Fajar mengalami kendala: Siswa yang rajin tiba-tiba bolos sekolah selama tiga hari berturut-turut tanpa surat izin. Sebagai pendidik profesional dengan tingkat Kompetensi Teknis (Pedagogik) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Pendekatan pedagogis paling tepat adalah mencari tahu penyebab ketidakhadiran secara personal sebelum mengambil tindakan.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Fajarnya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_056",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SMP Harapan Bangsa, pada pelajaran Ilmu Pengetahuan Alam (IPA), Anda dihadapkan pada situasi di mana Hana mengalami kendala: Fasilitas taman obat sekolah dirusak oleh aksi kenakalan siswa kelas lain. Sebagai pendidik profesional dengan tingkat Kompetensi Teknis (Kepribadian) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Kedewasaan kepribadian guru diuji dengan tetap bersikap solutif dan mendidik melalui pendekatan personal.",
+      "options": [
+        {
+          "key": "B",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Hananya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "A",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_057",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SMA Budi Utomo, pada pelajaran Bahasa Inggris, Anda dihadapkan pada situasi di mana Andi mengalami kendala: Terjadi perbedaan pendapat tajam dalam rapat komite sekolah terkait program seragam batik baru. Sebagai pendidik profesional dengan tingkat Kompetensi Manajerial (Komunikasi) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Komunikasi efektif dimulai dari pendekatan personal untuk memahami perspektif.",
+      "options": [
+        {
+          "key": "E",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Andinya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_058",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SMK Taruna, pada pelajaran Pendidikan Pancasila, Anda dihadapkan pada situasi di mana Siti mengalami kendala: Guru senior meminta Anda mengerjakan draf penelitian tindak kelas (PTK) miliknya pribadi. Sebagai pendidik profesional dengan tingkat Kompetensi Manajerial (Integritas) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Integritas dijaga dengan pendekatan personal yang santun namun tegas, serta mencari solusi etis.",
+      "options": [
+        {
+          "key": "D",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Sitinya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "E",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_059",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SMP Cendekia, pada pelajaran Fisika, Anda dihadapkan pada situasi di mana Budi mengalami kendala: Siswa merasa tertekan menghadapi ujian akhir nasional dan menunjukkan tanda-tanda depresi ringan. Sebagai pendidik profesional dengan tingkat Kompetensi Teknis (Pedagogik) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Pendekatan personal empatik adalah langkah pedagogis pertama yang krusial untuk mendukung kesehatan mental siswa.",
+      "options": [
+        {
+          "key": "E",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Budinya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_060",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SD Merdeka, pada pelajaran IPS, Anda dihadapkan pada situasi di mana Rian mengalami kendala: Terjadi kecemburuan sosial antar siswa terkait pemberian penghargaan beasiswa kurang mampu. Sebagai pendidik profesional dengan tingkat Kompetensi Sosio Kultural (Perekat Kebangsaan) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Perekat kebangsaan diwujudkan dengan pendekatan personal dan strategi menanamkan keadilan sosial.",
+      "options": [
+        {
+          "key": "C",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Riannya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_061",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SDN Nusantara, pada pelajaran Matematika, Anda dihadapkan pada situasi di mana Lani mengalami kendala: Aliran air keran wastafel kelas mati sehingga kebersihan siswa menjelang makan siang terganggu. Sebagai pendidik profesional dengan tingkat Kompetensi Teknis (Kepribadian) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Kepribadian solutif tercermin dari pendekatan personal dan strategi perbaikan darurat.",
+      "options": [
+        {
+          "key": "B",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Lani, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "A",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_062",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SMP Harapan Bangsa, pada pelajaran Bahasa Indonesia, Anda dihadapkan pada situasi di mana Dewi mengalami kendala: Siswa mencoret dinding meja belajar kelas dengan gambar-gambar yang kurang sopan. Sebagai pendidik profesional dengan tingkat Kompetensi Teknis (Kepribadian) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Pendidikan karakter dimulai dengan pendekatan personal untuk memahami motif siswa dan membina tanggung jawabnya.",
+      "options": [
+        {
+          "key": "C",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Dewinya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_063",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SMA Budi Utomo, pada pelajaran Ilmu Pengetahuan Alam (IPA), Anda dihadapkan pada situasi di mana Rudi mengalami kendala: Siswa enggan berpartisipasi aktif dalam kegiatan pramuka wajib di hari Sabtu siang. Sebagai pendidik profesional dengan tingkat Kompetensi Teknis (Pedagogik) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Pendekatan pedagogis personal untuk memahami penyebab keengganan adalah langkah pertama yang tepat.",
+      "options": [
+        {
+          "key": "B",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Rudinya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_064",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SMK Taruna, pada pelajaran Bahasa Inggris, Anda dihadapkan pada situasi di mana Gita mengalami kendala: Guru sejawat mengkritik gaya berpakaian mengajar Anda yang dinilai terlalu kasual. Sebagai pendidik profesional dengan tingkat Kompetensi Teknis (Kepribadian) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Kepribadian dewasa menerima kritik dengan pendekatan personal dan strategi perbaikan diri yang terstruktur.",
+      "options": [
+        {
+          "key": "B",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Gitanya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_065",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SMP Cendekia, pada pelajaran Pendidikan Pancasila, Anda dihadapkan pada situasi di mana Doni mengalami kendala: Wali murid menuntut nilai anaknya dinaikkan agar lolos berkas pendaftaran SNMPTN jalur rahasia. Sebagai pendidik profesional dengan tingkat Kompetensi Manajerial (Integritas) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Integritas dijaga teguh dengan pendekatan personal yang santun namun prinsipil.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Doninya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_066",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SD Merdeka, pada pelajaran Fisika, Anda dihadapkan pada situasi di mana Eka mengalami kendala: Siswa aktif memotong penjelasan guru dengan pertanyaan-pertanyaan yang terkesan menguji keahlian. Sebagai pendidik profesional dengan tingkat Kompetensi Teknis (Profesional Guru) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Profesionalisme guru tercermin dari sikap terbuka terhadap pertanyaan kritis dan pendekatan personal yang mendidik.",
+      "options": [
+        {
+          "key": "E",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Ekanya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_067",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SDN Nusantara, pada pelajaran IPS, Anda dihadapkan pada situasi di mana Fajar mengalami kendala: Adanya sengketa kepemilikan bola sepak antar kelas saat jam istirahat sekolah siang hari. Sebagai pendidik profesional dengan tingkat Kompetensi Teknis (Sosial) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Keterampilan sosial guru digunakan untuk mediasi konflik melalui pendekatan personal kepada para pihak.",
+      "options": [
+        {
+          "key": "D",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Fajarnya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_068",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "Di SMP Harapan Bangsa, pada pelajaran Matematika, Anda dihadapkan pada situasi di mana Hana mengalami kendala: Siswa menolak piket kebersihan kelas hari Jumat dengan alasan ingin segera salat Jumat di masjid. Sebagai pendidik profesional dengan tingkat Kompetensi Sosio Kultural (Perekat Kebangsaan) pada level sedang, langkah tindakan paling solutif yang Anda ambil adalah...",
+      "explanation_text": "Perekat kebangsaan menghargai ibadah namun tetap menanamkan tanggung jawab melalui pendekatan personal dan solusi bersama.",
+      "options": [
+        {
+          "key": "B",
+          "text": "Mengajak siswa merumuskan jalan keluar kolaboratif bersama komite atau BK sekolah agar tercipta solusi resmi.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Melakukan pendekatan personal yang empatik, mendiskusikan kendala bersama Hananya, serta menyusun strategi perbaikan terstruktur yang melayani kebutuhan belajarnya.",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "Menegur siswa tersebut secara asertif di ruang guru agar ia menyadari tanggung jawab akademiknya secara serius.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Memberikan kelonggaran batas waktu pengumpulan tugas atau sanksi ringan sekali ini saja demi menjaga motivasi belajarnya.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Membiarkan situasi tersebut berjalan mandiri tanpa intervensi khusus untuk melatih kemandirian emosional siswa.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_069",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "KASUS: Berdasarkan hasil analisis data asesmen diagnostik literasi siswa di kelas Anda, ditemukan bahwa 40% siswa berada di kategori \"Perlu Intervensi Khusus\", 40% \"Cakap\", dan 20% \"Mahir\". Minggu depan kelas Anda harus memulai modul proyek kolaboratif yang menuntut kemampuan literasi kritis tinggi.\n\nLangkah instruksional paling efektif yang Anda ambil untuk menyikapi kasus ini adalah...",
+      "explanation_text": "Pembelajaran terdiferensiasi dengan kelompok heterogen dan tutor sebaya adalah strategi paling efektif karena mengakomodasi semua level literasi secara simultan.",
+      "options": [
+        {
+          "key": "E",
+          "text": "Memisahkan siswa kategori \"Perlu Intervensi\" untuk belajar mandiri di perpustakaan sekolah didampingi orang tua, sementara Anda mengajar kelompok lainnya.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Menerapkan pembelajaran terdiferensiasi dengan membagi kelas menjadi kelompok heterogen, menyediakan bahan ajar bertingkat, serta memberdayakan siswa kategori \"Mahir\" sebagai tutor sebaya pendamping kelompok.",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "Melanjutkan proyek sesuai modul rancangan awal tetapi menurunkan standar penilaian kelulusan bagi kelompok siswa yang memiliki literasi rendah.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Menunda pelaksanaan modul proyek selama dua minggu dan memprioritaskan sesi kelas bimbingan membaca intensif secara klasikal bagi seluruh siswa kelas.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_070",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "KASUS: Dana Bantuan Operasional Sekolah (BOS) mengalami keterlambatan pencairan selama tiga bulan berturut-turut. Padahal, sekolah sangat membutuhkan biaya harian untuk membayar tagihan listrik, internet penunjang pembelajaran, dan honorarium guru tidak tetap (GTT). Sebagai bagian dari tim manajemen sekolah, solusi taktis Anda adalah...",
+      "explanation_text": "Dana talangan dari komite/yayasan adalah solusi legal dan bijaksana. Memprioritaskan gaji GTT dan listrik menunjukkan kepemimpinan yang bertanggung jawab.",
+      "options": [
+        {
+          "key": "D",
+          "text": "Menghentikan sementara aktivitas belajar mengajar di sekolah dan menginstruksikan siswa belajar mandiri di rumah guna menghemat biaya listrik harian.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Memotong sementara honorarium guru GTT sebesar 40% sampai dana BOS cair demi mengamankan operasional listrik dan internet ruang kelas.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Menarik sumbangan wajib dadakan yang mendesak langsung kepada seluruh orang tua siswa kelas tanpa berkoordinasi dengan pengurus komite.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Mengadakan rapat koordinasi bersama pengurus komite sekolah dan yayasan untuk mengajukan dana talangan jangka pendek yang legal, serta memprioritaskan pembayaran hak guru GTT dan listrik.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_071",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "KASUS: Sekolah Anda ditunjuk menjadi percontohan digitalisasi sistem raport nasional. Hal ini mewajibkan seluruh pengisian nilai beralih ke aplikasi online berbasis cloud. Hampir 50% guru senior merasa cemas, tidak siap, dan menunjukkan penolakan pasif di ruang guru.\n\nTindakan kepemimpinan perubahan yang paling tepat untuk menjamin keberhasilan program ini adalah...",
+      "explanation_text": "Buddy System adalah strategi perubahan paling efektif karena membangun kepercayaan diri guru senior melalui pendampingan personal tanpa tekanan.",
+      "options": [
+        {
+          "key": "C",
+          "text": "Menerapkan sistem pendampingan personal \"Buddy System\" di mana setiap guru muda mendampingi satu guru senior secara asertif, menyelenggarakan uji coba tanpa tekanan sanksi, dan memberikan apresiasi berkala.",
+          "is_correct": true
+        },
+        {
+          "key": "B",
+          "text": "Mengajukan pembatalan status sekolah percontohan digitalisasi kepada dinas pendidikan daerah demi menjaga kondusivitas emosional guru senior.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Menugaskan staf administrasi tata usaha sekolah untuk menginputkan seluruh data nilai para guru senior agar mereka fokus pada mengajar konvensional.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Menerbitkan surat keputusan kepala sekolah yang mewajibkan pengisian digital mulai minggu depan dan menetapkan sanksi pemotongan tunjangan bagi guru lambat.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_072",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "KASUS: Menjelang pelaksanaan pemilihan kepala daerah (Pilkada), atmosfer di grup WhatsApp guru sekolah Anda menjadi sangat panas karena perdebatan politik praktis antar-guru yang kerap menyenggol isu SARA sensitif. Hal ini mulai memicu kubu-kubuan saat makan siang.\n\nSebagai guru senior, tindakan perekat kebangsaan yang paling tepat adalah...",
+      "explanation_text": "Meredakan ketegangan dengan dialog kebersamaan dan aturan grup yang jelas jauh lebih efektif daripada tindakan represif atau menarik diri.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Turut serta berdebat di dalam grup WhatsApp dengan memberikan argumentasi akademis yang panjang lebar guna menyeimbangkan opini SARA yang beredar.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Keluar dari grup WhatsApp sekolah secara demonstratif dan membatasi interaksi sosial hanya pada rekan guru yang memiliki pilihan politik sehaluan.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Mengusulkan pertemuan makan siang bersama dengan agenda \"Deklarasi Kebersamaan\", merumuskan tata tertib grup WhatsApp guru bebas politik praktis, serta mengalihkan obrolan ke kolaborasi mutu pengajaran.",
+          "is_correct": true
+        },
+        {
+          "key": "E",
+          "text": "Melaporkan guru-guru yang paling vokal berdebat politik di grup kepada dinas pendidikan daerah agar diberikan sanksi pemecatan ASN disiplin.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_073",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "KASUS: Terjadi kasus pelecehan verbal ringan antarsiswa di kelas yang Anda ampu, di mana seorang siswa mengolok-olok kondisi ekonomi keluarga siswa lain. Korban tampak menangis di pojok kelas.\n\nLangkah penanganan kasus pertama yang paling mendidik dan berwibawa adalah...",
+      "explanation_text": "Langkah pertama yang mendidik adalah menenangkan korban dan membina pelaku secara tertutup, bukan mempermalukan di depan umum.",
+      "options": [
+        {
+          "key": "D",
+          "text": "Menghampiri korban untuk menenangkan jiwanya, memanggil pelaku secara tertutup untuk memberikan pembinaan moral tanggung jawab, serta membimbing pelaku meminta maaf tulus.",
+          "is_correct": true
+        },
+        {
+          "key": "A",
+          "text": "Meminta orang tua pelaku dan korban datang hari itu juga untuk menyelesaikan ganti rugi psikologis di luar kelas.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Menyerahkan kasus sepenuhnya ke ruang BK sekolah agar ditangani sesuai tata tertib hukum kedisiplinan sekolah.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Menghukum pelaku berdiri di depan kelas menyanyikan lagu kebangsaan agar ia merasa jera atas tindakan diskriminatifnya.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_074",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "KASUS: Selama pembelajaran jarak jauh, 50% siswa kelas Anda mengeluhkan kesulitan kuota internet dan sering tidak mengumpulkan tugas digital tepat waktu.\n\nKeputusan instruksional yang paling bijaksana dan berpihak pada siswa adalah...",
+      "explanation_text": "Solusi hibrida (daring+luring) adalah yang paling bijaksana dan berpihak pada siswa karena mengatasi kendala akses tanpa mengorbankan kualitas belajar.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Membagikan bantuan dana kuota internet dari kas pribadi Anda secara berkala agar seluruh siswa tetap wajib mengikuti Google Meet harian.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Mengurangi beban nilai kelulusan tugas digital bagi siswa kurang mampu tanpa memberikan alternatif bahan ajar luring.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Merancang pembelajaran hibrida dengan membagikan modul ajar cetak (luring) mandiri bagi yang terkendala, serta menyederhanakan ukuran tugas video menjadi teks.",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "Mewajibkan siswa mencari wifi gratis di kantor desa atau warung kopi terdekat agar tugas digital mereka tidak terlambat dikumpulkan.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_075",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "KASUS: Anda menjabat sebagai bendahara ujian sekolah. Kepala sekolah meminta Anda memanipulasi nota belanja konsumsi panitia agar ada sisa anggaran untuk dibagikan sebagai uang saku tambahan guru.\n\nTindakan berintegritas Anda menghadapi instruksi atasan ini adalah...",
+      "explanation_text": "Integritas bendahara diuji dengan menolak instruksi manipulatif atasan secara santun dan tetap melaporkan keuangan sesuai fakta.",
+      "options": [
+        {
+          "key": "D",
+          "text": "Membuat rekayasa nota belanja konsumsi panitia namun menyumbangkan seluruh sisa anggarannya langsung ke panti asuhan yatim.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Menuruti permintaan manipulasi nota konsumsi sekali ini saja demi kekeluargaan dan kesejahteraan rekan-rekan guru sejawat sekolah.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Menolak permintaan rekayasa nota secara santun, menjelaskan potensi temuan audit keuangan dinas, serta melaporkan pembukuan keuangan apa adanya.",
+          "is_correct": true
+        },
+        {
+          "key": "C",
+          "text": "Mengundurkan diri dari jabatan bendahara ujian hari itu juga untuk menghindari benturan kepentingan etis pribadi Anda.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_076",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "KASUS: Sekolah Anda didatangi demonstrasi warga sekitar yang merasa terganggu dengan kebisingan suara sound system kegiatan latihan ekstrakurikuler musik drumband siswa di sore hari.\n\nTindakan mediasi sosial paling produktif yang Anda ambil adalah...",
+      "explanation_text": "Dialog dan kompromi (pembatasan jam + relokasi) adalah mediasi sosial paling produktif.",
+      "options": [
+        {
+          "key": "B",
+          "text": "Meminta bantuan aparat kepolisian setempat untuk mengamankan jalannya latihan siswa dari aksi demonstrasi warga sekitar.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Mengabaikan protes warga karena kegiatan drumband memiliki surat izin resmi sekolah dan bertujuan meningkatkan prestasi siswa.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Mengundang perwakilan warga untuk berdialog, menyepakati pembatasan jam latihan drumband, serta merelokasi tempat latihan ke area tertutup sekolah.",
+          "is_correct": true
+        },
+        {
+          "key": "D",
+          "text": "Menghentikan seluruh aktivitas ekstrakurikuler drumband sekolah selamanya demi menjaga kedamaian dan kerukunan warga sekitar.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_077",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "KASUS: Sekolah ingin menyusun kurikulum operasional tingkat satuan pendidikan (KOSP). Terjadi konflik antara divisi guru kejuruan dan umum terkait porsi alokasi jam praktikum produktif.\n\nLangkah kolaboratif terbaik untuk menyelesaikannya adalah...",
+      "explanation_text": "Lokakarya bersama dengan referensi regulasi dan solusi proyek kolaboratif adalah langkah kolaboratif terbaik.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Memotong porsi jam pelajaran umum sebesar 30% karena sekolah kejuruan harus memprioritaskan kompetensi praktikum industri.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Mengadakan lokakarya pemetaan struktur kurikulum bersama, merujuk regulasi nasional, serta menyelaraskan jam pelajaran berbasis proyek kolaboratif lintas mata pelajaran.",
+          "is_correct": true
+        },
+        {
+          "key": "E",
+          "text": "Membiarkan kedua divisi berdebat di forum terbuka hingga salah satu pihak mengalah secara sukarela.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Menyerahkan penentuan porsi alokasi jam sepenuhnya kepada keputusan otoritatif sepihak kepala sekolah agar cepat selesai.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_078",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "KASUS: Beberapa siswa dari suku tertentu terbiasa berbicara menggunakan bahasa daerah kasar yang menyinggung perasaan siswa suku pendatang saat jam kerja kelompok berlangsung.\n\nLangkah perekat kebangsaan guru adalah...",
+      "explanation_text": "Kontrak belajar bersama yang disepakati seluruh siswa adalah cara paling demokratis dan mendidik untuk menjaga ketertiban tanpa melanggar hak budaya.",
+      "options": [
+        {
+          "key": "E",
+          "text": "Menghukum siswa pembicara bahasa daerah tersebut menulis esai permintaan maaf sebanyak lima halaman portofolio kertas.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Mengabaikan penggunaan bahasa daerah karena merupakan bagian dari kearifan lokal budaya bangsa yang harus dilestarikan.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Menganjurkan siswa pendatang untuk mempelajari bahasa daerah lokal tersebut agar tidak mudah tersinggung di kelas.",
+          "is_correct": false
+        },
+        {
+          "key": "C",
+          "text": "Merumuskan kontrak belajar kelas wajib menggunakan bahasa Indonesia yang baik dan santun selama kegiatan akademik di sekolah berjalan.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_079",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "KASUS: Guru di sekolah Anda enggan menulis karya tulis ilmiah karena kesibukan beban mengajar harian, padahal karya ilmiah menjadi syarat mutlak kenaikan jenjang pangkat.\n\nSebagai koordinator pengembangan mutu, keputusan Anda adalah...",
+      "explanation_text": "Membangun ekosistem menulis melalui klinik dan mentoring adalah solusi profesional dan berkelanjutan.",
+      "options": [
+        {
+          "key": "C",
+          "text": "Menyusun draf karya tulis ilmiah standar secara mandiri lalu membagikannya agar guru-guru tinggal mencantumkan nama mereka masing-masing.",
+          "is_correct": false
+        },
+        {
+          "key": "E",
+          "text": "Mengusulkan kepada pimpinan sekolah untuk menyewa jasa calo penulisan karya tulis ilmiah yang profesional bagi guru-guru.",
+          "is_correct": false
+        },
+        {
+          "key": "B",
+          "text": "Menyarankan guru-guru agar menunda kenaikan pangkat mereka sampai beban mengajar harian sekolah dikurangi oleh dinas.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Membentuk komunitas praktisi \"Klinik Menulis Guru\", menyelenggarakan mentoring penulisan kolaboratif berkala, serta mengundang pakar penulisan jurnal.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "external_id": "ukkj_l2_080",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "topic_slug": "latihan-2-ukkj-3d-ke-4a",
+      "question_text": "KASUS: Terjadi kasus pencurian uang kas kelas di ruang kelas Anda. Seluruh bukti mengarah pada seorang siswa miskin berprestasi yang kepepet membayar uang buku bulanan.\n\nKeputusan bijaksana yang paling mendidik dalam menghadapi kasus ini adalah...",
+      "explanation_text": "Keputusan bijaksana mengedepankan nilai edukatif dan kemanusiaan: membina siswa, membantu kesulitannya, dan mencegah terulangnya kejadian melalui solusi sistemik (beasiswa).",
+      "options": [
+        {
+          "key": "C",
+          "text": "Mengumumkan nama pelaku pencurian di depan kelas agar memberikan efek jera moral bagi seluruh siswa kelas lainnya.",
+          "is_correct": false
+        },
+        {
+          "key": "A",
+          "text": "Mengajak siswa berdiskusi personal, membantunya mengembalikan uang dari saku pribadi Anda, memandu permohonan maaf, serta mengusulkan beasiswa keringanan buku.",
+          "is_correct": true
+        },
+        {
+          "key": "E",
+          "text": "Mengeluarkan siswa berprestasi tersebut dari sekolah secara sepihak untuk menjaga nama baik kesucian lembaga sekolah.",
+          "is_correct": false
+        },
+        {
+          "key": "D",
+          "text": "Meminta orang tuanya mengganti uang kas kelas yang hilang dalam waktu 24 jam atau dilaporkan ke kepolisian.",
+          "is_correct": false
+        }
       ]
     }
   ]
