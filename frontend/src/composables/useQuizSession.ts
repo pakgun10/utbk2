@@ -5,12 +5,20 @@ import {
   fetchRandomQuestion,
   fetchTopic,
 } from '@/api/client';
-import type { CheckResult, Question } from '@/types';
+import type { CheckResult, CheckScoredResult, Question } from '@/types';
 
-export type QuizState = 'loading' | 'ready' | 'answering' | 'reviewing' | 'resume' | 'error';
+export type QuizState =
+  | 'loading'
+  | 'ready'
+  | 'answering'
+  | 'reviewing'
+  | 'resume'
+  | 'error';
 
 interface SessionResult {
-  correct: boolean;
+  correct?: boolean;
+  score?: number;
+  maxScore?: number;
   elapsed: number;
 }
 
@@ -23,7 +31,7 @@ interface UseQuizSessionOptions {
 export function useQuizSession(options: UseQuizSessionOptions) {
   const state = ref<QuizState>('loading');
   const question = ref<Question | null>(null);
-  const result = ref<CheckResult | null>(null);
+  const result = ref<CheckResult | CheckScoredResult | null>(null);
   const selectedKeys = ref<string[]>([]);
   const timerRunning = ref(false);
   const finalTime = ref(0);
@@ -41,10 +49,18 @@ export function useQuizSession(options: UseQuizSessionOptions) {
     return answeredIds.value.size + 1;
   });
 
-  const correctCount = computed(() => sessionResults.value.filter((entry) => entry.correct).length);
-  const incorrectCount = computed(() => sessionResults.value.filter((entry) => !entry.correct).length);
+  const correctCount = computed(
+    () => sessionResults.value.filter((entry) => entry.correct === true).length,
+  );
+  const incorrectCount = computed(
+    () =>
+      sessionResults.value.filter((entry) => entry.correct === false).length,
+  );
   const totalTime = computed(() => {
-    const total = sessionResults.value.reduce((sum, entry) => sum + entry.elapsed, 0);
+    const total = sessionResults.value.reduce(
+      (sum, entry) => sum + entry.elapsed,
+      0,
+    );
     const m = Math.floor(total / 60);
     const s = total % 60;
     return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
@@ -53,7 +69,30 @@ export function useQuizSession(options: UseQuizSessionOptions) {
     if (sessionResults.value.length === 0) return 0;
     return Math.round((correctCount.value / sessionResults.value.length) * 100);
   });
-  const isLastQuestion = computed(() => answeredIds.value.size >= questionCount.value);
+  const isLastQuestion = computed(
+    () => answeredIds.value.size >= questionCount.value,
+  );
+
+  const binaryResult = computed(() =>
+    result.value && 'correct' in result.value ? result.value : null,
+  );
+  const scoredResult = computed(() =>
+    result.value && 'score' in result.value ? result.value : null,
+  );
+
+  const totalScore = computed(() =>
+    sessionResults.value.reduce((sum, e) => sum + (e.score ?? 0), 0),
+  );
+  const maxPossibleScore = computed(() =>
+    sessionResults.value.reduce((sum, e) => sum + (e.maxScore ?? 0), 0),
+  );
+  const totalScoredQuestions = computed(
+    () => sessionResults.value.filter((e) => e.score !== undefined).length,
+  );
+  const scorePercentage = computed(() => {
+    if (maxPossibleScore.value === 0) return 0;
+    return Math.round((totalScore.value / maxPossibleScore.value) * 100);
+  });
 
   async function loadQuestion() {
     state.value = 'loading';
@@ -63,7 +102,10 @@ export function useQuizSession(options: UseQuizSessionOptions) {
 
     try {
       const excludeArr = Array.from(answeredIds.value);
-      const nextQuestion = await fetchRandomQuestion(options.getTopicId(), excludeArr);
+      const nextQuestion = await fetchRandomQuestion(
+        options.getTopicId(),
+        excludeArr,
+      );
 
       if (!nextQuestion) {
         state.value = 'resume';
@@ -79,7 +121,8 @@ export function useQuizSession(options: UseQuizSessionOptions) {
         state.value = 'ready';
       }
     } catch (error) {
-      errorMessage.value = error instanceof Error ? error.message : 'Gagal memuat soal.';
+      errorMessage.value =
+        error instanceof Error ? error.message : 'Gagal memuat soal.';
       state.value = 'error';
     }
   }
@@ -115,13 +158,30 @@ export function useQuizSession(options: UseQuizSessionOptions) {
     timerRunning.value = false;
 
     try {
-      const checkResult = await apiCheckAnswer(question.value.id, selectedKeys.value);
+      const checkResult = await apiCheckAnswer(
+        question.value.id,
+        selectedKeys.value,
+      );
       result.value = checkResult;
       answeredIds.value.add(question.value.id);
-      sessionResults.value.push({ correct: checkResult.correct, elapsed: finalTime.value });
+
+      if ('correct' in checkResult) {
+        sessionResults.value.push({
+          correct: checkResult.correct,
+          elapsed: finalTime.value,
+        });
+      } else {
+        sessionResults.value.push({
+          score: checkResult.score,
+          maxScore: checkResult.max_score,
+          elapsed: finalTime.value,
+        });
+      }
+
       state.value = 'reviewing';
     } catch (error) {
-      errorMessage.value = error instanceof Error ? error.message : 'Gagal memeriksa jawaban.';
+      errorMessage.value =
+        error instanceof Error ? error.message : 'Gagal memeriksa jawaban.';
       state.value = 'error';
     }
   }
@@ -190,7 +250,11 @@ export function useQuizSession(options: UseQuizSessionOptions) {
 
   function hasActiveSession() {
     if (state.value === 'resume' || state.value === 'ready') return false;
-    return state.value === 'answering' || state.value === 'reviewing' || answeredIds.value.size > 0;
+    return (
+      state.value === 'answering' ||
+      state.value === 'reviewing' ||
+      answeredIds.value.size > 0
+    );
   }
 
   async function initializeSession() {
@@ -201,6 +265,7 @@ export function useQuizSession(options: UseQuizSessionOptions) {
   return {
     accuracy,
     answeredIds,
+    binaryResult,
     cancelExit,
     confirmExitState,
     correctCount,
@@ -215,6 +280,7 @@ export function useQuizSession(options: UseQuizSessionOptions) {
     loadQuestion,
     loadQuestionCount,
     loadTopicInfo,
+    maxPossibleScore,
     nextQuestion,
     onSelectKeys,
     onTime,
@@ -223,6 +289,8 @@ export function useQuizSession(options: UseQuizSessionOptions) {
     resetSession,
     result,
     retryCurrentState,
+    scorePercentage,
+    scoredResult,
     selectedKeys,
     showExitModal,
     startQuiz,
@@ -231,6 +299,8 @@ export function useQuizSession(options: UseQuizSessionOptions) {
     submitAnswer,
     timerRunning,
     topicLabel,
+    totalScore,
+    totalScoredQuestions,
     totalTime,
   };
 }

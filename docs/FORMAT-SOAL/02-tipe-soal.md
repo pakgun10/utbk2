@@ -70,3 +70,35 @@ Pernyataan yang dinilai benar atau salah.
 ```
 
 **Aturan:** tepat 2 opsi: `key: "true"` dan `key: "false"`. Salah satu `is_correct: true`.
+
+---
+
+## Multiple Choice — Skor Bertingkat
+
+Satu jawaban dipilih dari beberapa opsi. Setiap opsi memiliki skor numerik berbeda.
+Cocok untuk soal dengan gradasi kebenaran (jawaban terbaik, setengah benar, salah).
+
+```json
+{
+  "topic_slug": "penalaran-umum",
+  "type": "multiple_choice",
+  "difficulty": "hard",
+  "question_text": "Manakah strategi yang PALING efektif untuk meningkatkan daya ingat jangka panjang?",
+  "explanation_text": "Spaced repetition melibatkan pengulangan materi dalam interval yang semakin panjang, yang terbukti paling efektif berdasarkan kurva lupa Ebbinghaus. Strategi lain memiliki efektivitas lebih rendah atau hanya melengkapi.",
+  "options": [
+    { "key": "A", "text": "Spaced repetition (pengulangan terjadwal)", "is_correct": false, "score": 4 },
+    { "key": "B", "text": "Menghafal satu kali dalam durasi panjang", "is_correct": false, "score": 1 },
+    { "key": "C", "text": "Membaca berulang tanpa jeda", "is_correct": false, "score": 0 },
+    { "key": "D", "text": "Menunda belajar hingga mendekati ujian", "is_correct": false, "score": -1 }
+  ]
+}
+```
+
+**Aturan:**
+- User memilih **satu** opsi
+- Skor user = skor opsi yang dipilih
+- `best_keys` = opsi dengan skor tertinggi (jawaban terbaik)
+- `max_score` = skor tertinggi di antara semua opsi
+- Semua `is_correct` diisi `false` (tidak relevan untuk tipe ini)
+- Setiap opsi **wajib** memiliki field `score` (integer, bisa negatif)
+- Minimal 2 opsi, minimal satu opsi dengan `score > 0`

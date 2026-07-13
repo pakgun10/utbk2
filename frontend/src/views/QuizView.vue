@@ -21,7 +21,7 @@
 
     <div v-else-if="state === 'resume'" class="quiz-resume">
       <h2 class="resume-title">Sesi Selesai</h2>
-      
+
       <!-- Participant details on results card -->
       <div v-if="participant" class="resume-participant-card">
         <p class="res-part-name">{{ participant.name }}</p>
@@ -46,9 +46,22 @@
           <span class="resume-label">Akurasi</span>
         </div>
       </div>
+      <div v-if="totalScoredQuestions > 0" class="resume-stats resume-stats-scored">
+        <div class="resume-stat">
+          <span class="resume-value scored-total">{{ totalScore }}</span>
+          <span class="resume-label">Total Skor</span>
+        </div>
+        <div class="resume-stat">
+          <span class="resume-value">{{ maxPossibleScore }}</span>
+          <span class="resume-label">Skor Maksimal</span>
+        </div>
+        <div class="resume-stat">
+          <span class="resume-value">{{ scorePercentage }}%</span>
+          <span class="resume-label">Persentase Skor</span>
+        </div>
+      </div>
       <router-link :to="`/topics/${subjectId}`" class="quiz-back-btn">Pilih Topik Lain</router-link>
     </div>
-
 
     <div v-else-if="question" class="quiz-content">
       <TimerBar v-if="state === 'answering'" :running="timerRunning" @time="onTime" />
@@ -65,7 +78,8 @@
           :type="question.type"
           :selected-keys="selectedKeys"
           :disabled="state !== 'answering'"
-          :correct-keys="result?.correct_keys"
+          :correct-keys="binaryResult?.correct_keys"
+          :best-keys="scoredResult?.best_keys"
           :show-result="state === 'reviewing'"
           @update:selected-keys="onSelectKeys"
         />
@@ -81,12 +95,15 @@
       </div>
 
       <ExplanationPanel
-        v-if="state === 'reviewing' && result"
-        :correct="result.correct"
-        :correct_keys="result.correct_keys"
-        :explanation="result.explanation"
+        v-if="state === 'reviewing' && (binaryResult || scoredResult)"
+        :correct="binaryResult?.correct ?? false"
+        :correct_keys="binaryResult?.correct_keys ?? []"
+        :explanation="(binaryResult ?? scoredResult)!.explanation"
         :elapsed_seconds="finalTime"
         :is_last="isLastQuestion"
+        :score="scoredResult?.score"
+        :max-score="scoredResult?.max_score"
+        :best-keys="scoredResult?.best_keys"
         @next="nextQuestion"
         @finish="finishSession"
       />
@@ -121,7 +138,6 @@ import { useQuizSession } from '@/composables/useQuizSession';
 import { fetchParticipant } from '@/api/client';
 import type { Participant } from '@/types';
 
-
 const route = useRoute();
 const router = useRouter();
 
@@ -131,6 +147,7 @@ function getTopicId(): number {
 
 const {
   accuracy,
+  binaryResult,
   cancelExit: dismissExitModal,
   confirmExitState,
   correctCount,
@@ -142,6 +159,7 @@ const {
   incorrectCount,
   initializeSession,
   isLastQuestion,
+  maxPossibleScore,
   nextQuestion,
   onSelectKeys,
   onTime,
@@ -150,6 +168,8 @@ const {
   resetSession,
   result,
   retryCurrentState,
+  scorePercentage,
+  scoredResult,
   selectedKeys,
   showExitModal,
   startQuiz,
@@ -158,6 +178,8 @@ const {
   submitAnswer,
   timerRunning,
   topicLabel,
+  totalScore,
+  totalScoredQuestions,
   totalTime,
 } = useQuizSession({
   getTopicId,
@@ -199,7 +221,6 @@ watch(
     initializeSession();
   },
 );
-
 const participant = ref<Participant | null>(null);
 
 onMounted(async () => {
@@ -211,7 +232,6 @@ onMounted(async () => {
   }
 });
 </script>
-
 
 <style scoped>
 .quiz-header {
@@ -310,6 +330,28 @@ onMounted(async () => {
   margin-bottom: 32px;
 }
 
+.resume-participant-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 400px;
+  margin: 0 auto 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  border-top: 3px solid #1e40af;
+}
+
+.res-part-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #1a2b3c;
+  margin-bottom: 2px;
+}
+
+.res-part-meta {
+  font-size: 0.9rem;
+  color: #556677;
+}
+
 .resume-stats {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -340,26 +382,8 @@ onMounted(async () => {
   color: #c53030;
 }
 
-.resume-participant-card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 16px;
-  max-width: 400px;
-  margin: 0 auto 24px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-  border-top: 3px solid #1e40af;
-}
-
-.res-part-name {
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: #1a2b3c;
-  margin-bottom: 2px;
-}
-
-.res-part-meta {
-  font-size: 0.9rem;
-  color: #556677;
+.resume-value.scored-total {
+  color: #1e40af;
 }
 
 .resume-label {
@@ -370,7 +394,6 @@ onMounted(async () => {
 }
 
 .quiz-back-btn {
-
   display: inline-block;
   padding: 10px 24px;
   background: #1e40af;

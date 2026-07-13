@@ -3,11 +3,14 @@ import { z } from 'zod';
 import { parseSeedData } from '@/lib/seed.js';
 
 const baseSeed = {
-  subjects: [
-    { slug: 'tps', label: 'TPS', display_order: 1 },
-  ],
+  subjects: [{ slug: 'tps', label: 'TPS', display_order: 1 }],
   topics: [
-    { slug: 'penalaran-umum', subject_slug: 'tps', label: 'Penalaran Umum', display_order: 1 },
+    {
+      slug: 'penalaran-umum',
+      subject_slug: 'tps',
+      label: 'Penalaran Umum',
+      display_order: 1,
+    },
   ],
   questions: [
     {
@@ -54,7 +57,9 @@ describe('parseSeedData', () => {
     };
 
     const error = expectParseError(invalid);
-    expect(error.issues.some((issue) => issue.message.includes('single_choice'))).toBe(true);
+    expect(
+      error.issues.some((issue) => issue.message.includes('single_choice')),
+    ).toBe(true);
   });
 
   it('rejects true_false without true/false keys', () => {
@@ -73,18 +78,144 @@ describe('parseSeedData', () => {
     };
 
     const error = expectParseError(invalid);
-    expect(error.issues.some((issue) => issue.message.includes('"true" dan "false"'))).toBe(true);
+    expect(
+      error.issues.some((issue) =>
+        issue.message.includes('"true" dan "false"'),
+      ),
+    ).toBe(true);
   });
 
   it('rejects topic references to unknown subjects', () => {
     const invalid = {
       ...baseSeed,
       topics: [
-        { slug: 'penalaran-umum', subject_slug: 'unknown', label: 'Penalaran Umum', display_order: 1 },
+        {
+          slug: 'penalaran-umum',
+          subject_slug: 'unknown',
+          label: 'Penalaran Umum',
+          display_order: 1,
+        },
       ],
     };
 
     const error = expectParseError(invalid);
-    expect(error.issues.some((issue) => issue.message.includes('subject_slug'))).toBe(true);
+    expect(
+      error.issues.some((issue) => issue.message.includes('subject_slug')),
+    ).toBe(true);
+  });
+
+  it('accepts valid multiple_choice with scores', () => {
+    const valid = {
+      ...baseSeed,
+      questions: [
+        {
+          topic_slug: 'penalaran-umum',
+          type: 'multiple_choice',
+          difficulty: 'hard',
+          question_text: 'Soal skor bertingkat',
+          explanation_text: 'Pembahasan',
+          options: [
+            { key: 'A', text: 'A', is_correct: false, score: 4 },
+            { key: 'B', text: 'B', is_correct: false, score: 2 },
+            { key: 'C', text: 'C', is_correct: false, score: -1 },
+          ],
+        },
+      ],
+    };
+
+    expect(parseSeedData(valid)).toBeDefined();
+  });
+
+  it('rejects multiple_choice without score on options', () => {
+    const invalid = {
+      ...baseSeed,
+      questions: [
+        {
+          topic_slug: 'penalaran-umum',
+          type: 'multiple_choice',
+          difficulty: 'hard',
+          question_text: 'Soal skor bertingkat',
+          explanation_text: 'Pembahasan',
+          options: [
+            { key: 'A', text: 'A', is_correct: false },
+            { key: 'B', text: 'B', is_correct: false, score: 2 },
+          ],
+        },
+      ],
+    };
+
+    const error = expectParseError(invalid);
+    expect(error.issues.some((issue) => issue.message.includes('score'))).toBe(
+      true,
+    );
+  });
+
+  it('rejects multiple_choice with all scores <= 0', () => {
+    const invalid = {
+      ...baseSeed,
+      questions: [
+        {
+          topic_slug: 'penalaran-umum',
+          type: 'multiple_choice',
+          difficulty: 'hard',
+          question_text: 'Soal skor bertingkat',
+          explanation_text: 'Pembahasan',
+          options: [
+            { key: 'A', text: 'A', is_correct: false, score: 0 },
+            { key: 'B', text: 'B', is_correct: false, score: -1 },
+          ],
+        },
+      ],
+    };
+
+    const error = expectParseError(invalid);
+    expect(
+      error.issues.some((issue) => issue.message.includes('score > 0')),
+    ).toBe(true);
+  });
+
+  it('rejects multiple_choice with is_correct true', () => {
+    const invalid = {
+      ...baseSeed,
+      questions: [
+        {
+          topic_slug: 'penalaran-umum',
+          type: 'multiple_choice',
+          difficulty: 'hard',
+          question_text: 'Soal skor bertingkat',
+          explanation_text: 'Pembahasan',
+          options: [
+            { key: 'A', text: 'A', is_correct: true, score: 4 },
+            { key: 'B', text: 'B', is_correct: false, score: 2 },
+          ],
+        },
+      ],
+    };
+
+    const error = expectParseError(invalid);
+    expect(
+      error.issues.some((issue) => issue.message.includes('is_correct')),
+    ).toBe(true);
+  });
+
+  it('rejects multiple_choice with only one option', () => {
+    const invalid = {
+      ...baseSeed,
+      questions: [
+        {
+          topic_slug: 'penalaran-umum',
+          type: 'multiple_choice',
+          difficulty: 'hard',
+          question_text: 'Soal skor bertingkat',
+          explanation_text: 'Pembahasan',
+          options: [{ key: 'A', text: 'A', is_correct: false, score: 4 }],
+        },
+      ],
+    };
+
+    const error = expectParseError(invalid);
+    expect(
+      error.issues.some((issue) => issue.message.includes('minimal dua opsi')),
+    ).toBe(true);
   });
 });

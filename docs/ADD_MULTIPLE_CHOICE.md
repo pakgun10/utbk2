@@ -1,6 +1,6 @@
 # Implementation Plan: Tipe Soal `multiple_choice` (Skor Bertingkat)
 
-> **Status:** Draft — belum diimplementasikan  
+> **Status:** Implemented ✅  
 > **Prinsip utama:** tidak mengubah logika 3 tipe soal existing (`single_choice`, `multiple_response`, `true_false`)
 
 ---
@@ -15,19 +15,27 @@ Pada frontend, **huruf opsi (A, B, C, D, E) tidak ditampilkan** untuk tipe ini �
 
 ## 1. Database
 
-### 1.1 Migration: `backend/drizzle/0003_add_multiple_choice.sql`
+### 1.1 Migration: generate dengan `drizzle-kit generate`
+
+Migration **tidak ditulis manual**. Folder `backend/drizzle/` sudah menggunakan workflow `drizzle-kit` dengan journal + snapshot (`meta/_journal.json`, `meta/0000_snapshot.json`, dst). File SQL manual tanpa update journal tidak akan dikenali oleh `drizzle-kit migrate`.
+
+**Langkah:**
+1. Update Drizzle schema di `questions.ts` dan `question-options.ts` (section 1.2 & 1.3).
+2. Jalankan `bunx drizzle-kit generate` — ini akan otomatis menghasilkan:
+   - File SQL migration baru (nomor berikutnya: `0002_<nama_otomatis>.sql`)
+   - Update `meta/_journal.json` dengan entry baru
+   - Snapshot baru `meta/0002_snapshot.json`
+3. Verifikasi isi file SQL yang ter-generate — seharusnya berisi:
 
 ```sql
 -- Tambah nilai enum baru
-ALTER TABLE questions
-  MODIFY type enum('single_choice','multiple_response','multiple_choice','true_false') NOT NULL;
+ALTER TABLE `questions` MODIFY `type` enum('single_choice','multiple_response','multiple_choice','true_false') NOT NULL;
 
 -- Tambah kolom skor per opsi (NULL untuk tipe soal lain)
-ALTER TABLE question_options
-  ADD score int NULL;
+ALTER TABLE `question_options` ADD `score` int;
 ```
 
-> **Catatan:** MySQL ENUM `MODIFY` hanya menambah nilai di akhir; urutan existing (`single_choice`, `multiple_response`, `true_false`) tetap di depan. Data existing tidak terpengaruh.
+> **Catatan:** Migration yang sudah ada adalah `0000_parallel_ares.sql` dan `0001_great_la_nuit.sql`. Migration berikutnya akan bernomor `0002`, **bukan** `0003`. Nomor dan nama file di-generate otomatis oleh drizzle-kit.
 
 ### 1.2 Drizzle Schema: `backend/src/db/schema/questions.ts`
 
@@ -67,6 +75,12 @@ export interface CheckResult {
   explanation: string;
 }
 
+// Interface BARU — opsi dengan skor
+export interface ScoredOption {
+  key: string;
+  score: number;
+}
+
 // Interface BARU untuk hasil skor
 export interface ScoredResult {
   score: number;
@@ -79,6 +93,11 @@ export function evaluateScoredAnswer(
   selectedKeys: string[],
   scoredOptions: ScoredOption[],
 ): ScoredResult {
+  // Guard: jika tidak ada opsi (data tidak valid)
+  if (scoredOptions.length === 0) {
+    return { score: 0, max_score: 0, best_keys: [] };
+  }
+
   const maxScore = Math.max(...scoredOptions.map((o) => o.score));
   const bestKeys = scoredOptions
     .filter((o) => o.score === maxScore)
@@ -91,23 +110,21 @@ export function evaluateScoredAnswer(
 
   return { score, max_score: maxScore, best_keys: bestKeys };
 }
-
-export interface ScoredOption {
-  key: string;
-  score: number;
-}
 ```
 
 ### 2.2 `backend/src/routes/questions.ts`
 
-Di handler `POST /:id/check`, branch berdasarkan tipe soal:
+Di handler `POST /:id/check`, branch berdasarkan tipe soal.
+
+**Penting:** `findQuestionAnswerKey()` (dipanggil di awal handler) hanya mengembalikan `{ key, is_correct }` — **tidak ada field `score`**. Untuk `multiple_choice`, harus memanggil `findQuestionScoredOptions()` secara terpisah untuk mendapatkan `{ key, score }`.
 
 ```ts
-// ... setelah validasi ...
+// ... setelah validasi selected_keys ...
 
 if (question.type === 'multiple_choice') {
-  // Ambil opsi + skor (bukan is_correct)
-  const scoredOptions = options.map((o) => ({
+  // Query terpisah — ambil { key, score }, BUKAN dari `options` (yang hanya { key, is_correct })
+  // Konversi null → 0 karena kolom score nullable
+  const scoredOptions = (await findQuestionScoredOptions(db, id)).map((o) => ({
     key: o.key,
     score: o.score ?? 0,
   }));
@@ -121,7 +138,7 @@ const result = checkAnswer(question.type as QuestionType, parsed.data.selected_k
 return c.json(mapCheckAnswerResponse(question, result));
 ```
 
-> **Butuh:** query baru `findQuestionScoredOptions()` di `question-service.ts` yang mengembalikan `{ key, score }` selain `{ key, is_correct }`. Atau modifikasi `findQuestionAnswerKey()` untuk return `score` juga — tapi kolom `score` bisa NULL.
+> **Catatan:** Validasi `selectedKeys` (sebelum branch) tetap menggunakan `options` dari `findQuestionAnswerKey()` karena hanya butuh `option.key` — tidak perlu `score`.
 
 ### 2.3 `backend/src/services/question-service.ts`
 
@@ -145,6 +162,35 @@ export async function findQuestionScoredOptions(
     .from(questionOptions)
     .where(eq(questionOptions.question_id, questionId));
 }
+```
+
+> **Catatan:** `score` dari DB bisa `null` (kolom nullable). Di route handler (section 2.2), `evaluateScoredAnswer` menerima `ScoredOption[]` dengan `score: number`. Konversi `null` → `0` dilakukan saat mapping di route, atau ubah signature `evaluateScoredAnswer` untuk menerima `number | null`. Rekomendasi: konversi di route handler:
+>
+> ```ts
+> const scoredOptions = (await findQuestionScoredOptions(db, id)).map((o) => ({
+>   key: o.key,
+>   score: o.score ?? 0,
+> }));
+> ```
+
+Route handler juga perlu import `findQuestionScoredOptions` dan `mapCheckScoredResponse`. Lihat diff import:
+
+```diff
+ import {
+   mapCheckAnswerResponse,
+   mapEmptyRandomQuestionResponse,
+   mapRandomQuestionResponse,
++  mapCheckScoredResponse,
+ } from '../mappers/question-response';
+ import {
+   countQuestionsForTopic,
+   createQuestionsDb,
+   findQuestionAnswerKey,
+   findQuestionById,
+   findQuestionOptions,
+   findRandomQuestion,
++  findQuestionScoredOptions,
+ } from '../services/question-service';
 ```
 
 ### 2.4 `backend/src/mappers/question-response.ts`
@@ -239,9 +285,15 @@ if (question.type === 'multiple_choice') {
     }
   }
 
-  // 4. is_correct tidak relevan untuk tipe ini, tapi tetap harus boolean.
-  //    Seed akan mengabaikannya (set false semua).
-  //    Tidak perlu validasi ketat, cukup warning.
+  // 4. is_correct harus false untuk semua opsi (tidak relevan untuk tipe ini)
+  const hasCorrectTrue = question.options.some((opt) => opt.is_correct);
+  if (hasCorrectTrue) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: 'Soal multiple_choice tidak boleh memiliki opsi dengan is_correct true. Gunakan field score.',
+      path: ['questions', index, 'options'],
+    });
+  }
 }
 ```
 
@@ -265,6 +317,7 @@ Tambah test case:
 - `multiple_choice` tanpa `score` → gagal
 - `multiple_choice` semua skor ≤ 0 → gagal
 - `multiple_choice` dengan 1 opsi → gagal
+- `multiple_choice` dengan `is_correct: true` → gagal
 - `multiple_choice` dengan duplikat key → gagal (existing test sudah cover via unique keys)
 
 ---
@@ -835,12 +888,12 @@ Update tabel `questions` — kolom `type`:
 | # | File | Jenis Perubahan |
 |---|---|---|
 | **DB** |||
-| 1 | `backend/drizzle/0003_add_multiple_choice.sql` | **NEW** — migration |
+| 1 | `backend/drizzle/0002_*.sql` + `meta/_journal.json` + `meta/0002_snapshot.json` | **GENERATE** via `drizzle-kit generate` (setelah update schema #2 & #3) |
 | 2 | `backend/src/db/schema/questions.ts` | tambah `'multiple_choice'` ke enum |
 | 3 | `backend/src/db/schema/question-options.ts` | tambah kolom `score` |
 | **Backend — Core** |||
 | 4 | `backend/src/lib/scoring.ts` | tambah `QuestionType`, `ScoredResult`, `ScoredOption`, `evaluateScoredAnswer()` |
-| 5 | `backend/src/routes/questions.ts` | branch `multiple_choice` di handler `/check` |
+| 5 | `backend/src/routes/questions.ts` | branch `multiple_choice` di handler `/check` + import `findQuestionScoredOptions` & `mapCheckScoredResponse` |
 | 6 | `backend/src/services/question-service.ts` | tambah `findQuestionScoredOptions()` |
 | 7 | `backend/src/mappers/question-response.ts` | tambah `mapCheckScoredResponse()` |
 | 8 | `backend/src/validators/question-validator.ts` | validasi `multiple_choice` (1 jawaban) |
@@ -869,19 +922,20 @@ Update tabel `questions` — kolom `type`:
 
 ## 11. Urutan Implementasi (Rekomendasi)
 
-1. **Database** — migration + Drizzle schema update
-2. **Scoring function** — `evaluateScoredAnswer()` + test
-3. **Service + Mapper + Route** — agar endpoint `/check` bisa menerima `multiple_choice`
-4. **Validator** — validasi input
-5. **Seed** — validasi + insert `score`
-6. **Route test** — memastikan response format benar
-7. **Frontend types** — fondasi type-safe
-8. **OptionList** — perubahan visual terbesar (sembunyikan key + badge skor)
-9. **ExplanationPanel** — polymorphic header
-10. **QuizView + useQuizSession** — wiring result ke UI + resume stats
-11. **QuestionCard** — label tipe baru
-12. **API client** — union return type
-13. **Dokumentasi** — update semua docs
+1. **Drizzle schema** — update `questions.ts` dan `question-options.ts` (section 1.2 & 1.3)
+2. **Migration** — jalankan `bunx drizzle-kit generate` untuk menghasilkan file SQL + journal + snapshot (section 1.1)
+3. **Scoring function** — `evaluateScoredAnswer()` + test
+4. **Service + Mapper + Route** — agar endpoint `/check` bisa menerima `multiple_choice` (section 2.2–2.4)
+5. **Validator** — validasi input (section 2.5)
+6. **Seed** — validasi + insert `score` (section 3.1)
+7. **Route test** — memastikan response format benar (section 4.2)
+8. **Frontend types** — fondasi type-safe (section 5.1)
+9. **OptionList** — perubahan visual terbesar (sembunyikan key + badge skor) (section 6.2)
+10. **ExplanationPanel** — polymorphic header (section 6.3)
+11. **QuizView + useQuizSession** — wiring result ke UI + resume stats (section 6.4 & 7.1)
+12. **QuestionCard** — label tipe baru (section 6.1)
+13. **API client** — union return type (section 8.1)
+14. **Dokumentasi** — update semua docs (section 9)
 
 ---
 

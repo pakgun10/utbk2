@@ -17,6 +17,11 @@ export interface QuestionOptionKeyCorrect {
   is_correct: boolean;
 }
 
+export interface QuestionOptionKeyScore {
+  key: string;
+  score: number | null;
+}
+
 export function createQuestionsDb(pool: Pool) {
   return drizzle(pool, { schema, mode: 'default' });
 }
@@ -96,6 +101,19 @@ export async function findQuestionAnswerKey(
     .select({
       key: questionOptions.option_key,
       is_correct: questionOptions.is_correct,
+    })
+    .from(questionOptions)
+    .where(eq(questionOptions.question_id, questionId));
+}
+
+export async function findQuestionScoredOptions(
+  db: QuestionsDb,
+  questionId: number,
+): Promise<QuestionOptionKeyScore[]> {
+  return db
+    .select({
+      key: questionOptions.option_key,
+      score: questionOptions.score,
     })
     .from(questionOptions)
     .where(eq(questionOptions.question_id, questionId));

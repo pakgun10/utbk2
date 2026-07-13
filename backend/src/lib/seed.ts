@@ -14,11 +14,17 @@ const optionSchema = z.object({
   key: z.string().min(1),
   text: z.string().min(1),
   is_correct: z.boolean(),
+  score: z.number().int().optional(),
 });
 
 const questionSchema = z.object({
   topic_slug: z.string().min(1),
-  type: z.enum(['single_choice', 'multiple_response', 'true_false']),
+  type: z.enum([
+    'single_choice',
+    'multiple_response',
+    'multiple_choice',
+    'true_false',
+  ]),
   difficulty: z.enum(['easy', 'medium', 'hard']),
   external_id: z.string().optional(),
   question_text: z.string().min(1),
@@ -39,90 +45,144 @@ const subjectSchema = z.object({
   display_order: z.number().int().positive(),
 });
 
-const seedSchema = z.object({
-  subjects: z.array(subjectSchema),
-  topics: z.array(topicSchema),
-  questions: z.array(questionSchema),
-}).superRefine((data, ctx) => {
-  const subjectSlugs = new Set(data.subjects.map((subject) => subject.slug));
-  const topicSlugs = new Set(data.topics.map((topic) => topic.slug));
+const seedSchema = z
+  .object({
+    subjects: z.array(subjectSchema),
+    topics: z.array(topicSchema),
+    questions: z.array(questionSchema),
+  })
+  .superRefine((data, ctx) => {
+    const subjectSlugs = new Set(data.subjects.map((subject) => subject.slug));
+    const topicSlugs = new Set(data.topics.map((topic) => topic.slug));
 
-  for (const [index, topic] of data.topics.entries()) {
-    if (!subjectSlugs.has(topic.subject_slug)) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: `Topic "${topic.slug}" merujuk ke subject_slug yang tidak ada.`,
-        path: ['topics', index, 'subject_slug'],
-      });
-    }
-  }
-
-  for (const [index, question] of data.questions.entries()) {
-    if (!topicSlugs.has(question.topic_slug)) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: `Question "${question.question_text}" merujuk ke topic_slug yang tidak ada.`,
-        path: ['questions', index, 'topic_slug'],
-      });
-    }
-
-    const correctOptions = question.options.filter((option) => option.is_correct);
-    const optionKeys = question.options.map((option) => option.key);
-    const uniqueKeys = new Set(optionKeys);
-
-    if (uniqueKeys.size !== optionKeys.length) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: 'Setiap opsi pada satu soal harus memiliki key unik.',
-        path: ['questions', index, 'options'],
-      });
-    }
-
-    if (question.type === 'single_choice' && correctOptions.length !== 1) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: 'Soal single_choice harus memiliki tepat satu jawaban benar.',
-        path: ['questions', index, 'options'],
-      });
-    }
-
-    if (question.type === 'multiple_response' && correctOptions.length < 2) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: 'Soal multiple_response harus memiliki minimal dua jawaban benar.',
-        path: ['questions', index, 'options'],
-      });
-    }
-
-    if (question.type === 'true_false') {
-      if (question.options.length !== 2) {
+    for (const [index, topic] of data.topics.entries()) {
+      if (!subjectSlugs.has(topic.subject_slug)) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: 'Soal true_false harus memiliki tepat dua opsi.',
+          message: `Topic "${topic.slug}" merujuk ke subject_slug yang tidak ada.`,
+          path: ['topics', index, 'subject_slug'],
+        });
+      }
+    }
+
+    for (const [index, question] of data.questions.entries()) {
+      if (!topicSlugs.has(question.topic_slug)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `Question "${question.question_text}" merujuk ke topic_slug yang tidak ada.`,
+          path: ['questions', index, 'topic_slug'],
+        });
+      }
+
+      const correctOptions = question.options.filter(
+        (option) => option.is_correct,
+      );
+      const optionKeys = question.options.map((option) => option.key);
+      const uniqueKeys = new Set(optionKeys);
+
+      if (uniqueKeys.size !== optionKeys.length) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Setiap opsi pada satu soal harus memiliki key unik.',
           path: ['questions', index, 'options'],
         });
       }
 
-      const allowedKeys = new Set(['true', 'false']);
-      const hasExactKeys = optionKeys.every((key) => allowedKeys.has(key)) && uniqueKeys.size === 2;
-      if (!hasExactKeys) {
+      if (question.type === 'single_choice' && correctOptions.length !== 1) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: 'Soal true_false harus memakai key "true" dan "false".',
+          message:
+            'Soal single_choice harus memiliki tepat satu jawaban benar.',
           path: ['questions', index, 'options'],
         });
       }
 
-      if (correctOptions.length !== 1) {
+      if (question.type === 'multiple_response' && correctOptions.length < 2) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: 'Soal true_false harus memiliki tepat satu jawaban benar.',
+          message:
+            'Soal multiple_response harus memiliki minimal dua jawaban benar.',
           path: ['questions', index, 'options'],
         });
       }
+
+      if (question.type === 'multiple_choice') {
+        if (question.options.length < 2) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Soal multiple_choice harus memiliki minimal dua opsi.',
+            path: ['questions', index, 'options'],
+          });
+        }
+
+        const missingScore = question.options.some(
+          (opt) => opt.score === undefined,
+        );
+        if (missingScore) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message:
+              'Setiap opsi pada soal multiple_choice wajib memiliki field score.',
+            path: ['questions', index, 'options'],
+          });
+        }
+
+        if (!missingScore) {
+          const hasPositive = question.options.some(
+            (opt) => (opt.score ?? 0) > 0,
+          );
+          if (!hasPositive) {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message:
+                'Soal multiple_choice harus memiliki minimal satu opsi dengan score > 0.',
+              path: ['questions', index, 'options'],
+            });
+          }
+        }
+
+        const hasCorrectTrue = question.options.some((opt) => opt.is_correct);
+        if (hasCorrectTrue) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message:
+              'Soal multiple_choice tidak boleh memiliki opsi dengan is_correct true. Gunakan field score.',
+            path: ['questions', index, 'options'],
+          });
+        }
+      }
+
+      if (question.type === 'true_false') {
+        if (question.options.length !== 2) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Soal true_false harus memiliki tepat dua opsi.',
+            path: ['questions', index, 'options'],
+          });
+        }
+
+        const allowedKeys = new Set(['true', 'false']);
+        const hasExactKeys =
+          optionKeys.every((key) => allowedKeys.has(key)) &&
+          uniqueKeys.size === 2;
+        if (!hasExactKeys) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Soal true_false harus memakai key "true" dan "false".',
+            path: ['questions', index, 'options'],
+          });
+        }
+
+        if (correctOptions.length !== 1) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Soal true_false harus memiliki tepat satu jawaban benar.',
+            path: ['questions', index, 'options'],
+          });
+        }
+      }
     }
-  }
-});
+  });
 
 export function parseSeedData(raw: unknown) {
   return seedSchema.parse(raw);
@@ -141,7 +201,11 @@ export async function seed() {
   let questionCount = 0;
 
   for (const subj of data.subjects) {
-    const [existing] = await db.select().from(subjects).where(eq(subjects.slug, subj.slug)).limit(1);
+    const [existing] = await db
+      .select()
+      .from(subjects)
+      .where(eq(subjects.slug, subj.slug))
+      .limit(1);
     if (!existing) {
       await db.insert(subjects).values(subj);
       subjectCount++;
@@ -149,13 +213,23 @@ export async function seed() {
   }
 
   for (const t of data.topics) {
-    const [subject] = await db.select({ id: subjects.id }).from(subjects).where(eq(subjects.slug, t.subject_slug)).limit(1);
+    const [subject] = await db
+      .select({ id: subjects.id })
+      .from(subjects)
+      .where(eq(subjects.slug, t.subject_slug))
+      .limit(1);
     if (!subject) {
-      console.error(`[seed] Subject "${t.subject_slug}" not found for topic "${t.slug}"`);
+      console.error(
+        `[seed] Subject "${t.subject_slug}" not found for topic "${t.slug}"`,
+      );
       continue;
     }
 
-    const [existing] = await db.select().from(topics).where(eq(topics.slug, t.slug)).limit(1);
+    const [existing] = await db
+      .select()
+      .from(topics)
+      .where(eq(topics.slug, t.slug))
+      .limit(1);
     if (!existing) {
       await db.insert(topics).values({
         subject_id: subject.id,
@@ -168,25 +242,38 @@ export async function seed() {
   }
 
   for (const q of data.questions) {
-    const [topic] = await db.select({ id: topics.id }).from(topics).where(eq(topics.slug, q.topic_slug)).limit(1);
+    const [topic] = await db
+      .select({ id: topics.id })
+      .from(topics)
+      .where(eq(topics.slug, q.topic_slug))
+      .limit(1);
     if (!topic) {
-      console.error(`[seed] Topic "${q.topic_slug}" not found for question, skipping.`);
+      console.error(
+        `[seed] Topic "${q.topic_slug}" not found for question, skipping.`,
+      );
       continue;
     }
 
     let existing;
 
     if (q.external_id) {
-      [existing] = await db.select({ id: questions.id })
+      [existing] = await db
+        .select({ id: questions.id })
         .from(questions)
         .where(eq(questions.external_id, q.external_id))
         .limit(1);
     }
 
     if (!existing) {
-      [existing] = await db.select({ id: questions.id })
+      [existing] = await db
+        .select({ id: questions.id })
         .from(questions)
-        .where(and(eq(questions.topic_id, topic.id), eq(questions.question_text, q.question_text)))
+        .where(
+          and(
+            eq(questions.topic_id, topic.id),
+            eq(questions.question_text, q.question_text),
+          ),
+        )
         .limit(1);
     }
 
@@ -210,6 +297,7 @@ export async function seed() {
         option_key: opt.key,
         option_text: opt.text,
         is_correct: opt.is_correct,
+        score: opt.score ?? null,
         display_order: i + 1,
       });
     }
@@ -217,7 +305,9 @@ export async function seed() {
     questionCount++;
   }
 
-  console.log(`[seed] Done. Subjects: ${subjectCount}, Topics: ${topicCount}, Questions: ${questionCount}`);
+  console.log(
+    `[seed] Done. Subjects: ${subjectCount}, Topics: ${topicCount}, Questions: ${questionCount}`,
+  );
 
   await pool.end();
 }

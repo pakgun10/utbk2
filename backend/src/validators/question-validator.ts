@@ -10,7 +10,9 @@ const checkBodySchema = z.object({
   selected_keys: z.array(z.string().min(1)).min(1),
 });
 
-export function parseRandomQuestionQuery(query: Record<string, string | undefined>) {
+export function parseRandomQuestionQuery(
+  query: Record<string, string | undefined>,
+) {
   return randomQuerySchema.safeParse(query);
 }
 
@@ -51,7 +53,14 @@ export function validateSelectedKeys(
     return 'selected_keys mengandung opsi yang tidak valid.';
   }
 
-  if ((questionType === 'single_choice' || questionType === 'true_false') && selectedKeys.length !== 1) {
+  if (
+    (questionType === 'single_choice' || questionType === 'true_false') &&
+    selectedKeys.length !== 1
+  ) {
+    return 'Tipe soal ini hanya menerima satu jawaban.';
+  }
+
+  if (questionType === 'multiple_choice' && selectedKeys.length !== 1) {
     return 'Tipe soal ini hanya menerima satu jawaban.';
   }
 

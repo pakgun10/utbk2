@@ -90,7 +90,7 @@ Contoh:
 | Field | Tipe | Wajib | Keterangan |
 |---|---|---|---|
 | `topic_slug` | string | Ya | Merujuk ke `slug` topic. |
-| `type` | string | Ya | `single_choice` / `multiple_response` / `true_false` |
+| `type` | string | Ya | `single_choice` / `multiple_response` / `multiple_choice` / `true_false` |
 | `difficulty` | string | Ya | `easy` / `medium` / `hard` |
 | `question_text` | string | Ya | Isi soal. Bisa multi-baris. |
 | `explanation_text` | string | Ya | Pembahasan. Wajib diisi walau singkat. |
@@ -114,3 +114,4 @@ Gunakan `external_id` untuk identitas soal yang stabil antar import. Tanpa `exte
 | `key` | string | Ya | `A`, `B`, `C`, `D`. Untuk `true_false`: `true` / `false` |
 | `text` | string | Ya | Teks opsi. |
 | `is_correct` | boolean | Ya | `true` jika ini kunci jawaban. |
+| `score` | number | Khusus `multiple_choice` | Skor jika opsi ini dipilih. Bisa negatif. |

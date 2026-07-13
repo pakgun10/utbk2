@@ -33,7 +33,11 @@ describe('questionsRoutes', () => {
   it('returns random question payload without answer key', async () => {
     drizzleMock.mockReturnValue({
       select: (shape?: unknown) => {
-        if (shape && typeof shape === 'object' && 'total' in (shape as Record<string, unknown>)) {
+        if (
+          shape &&
+          typeof shape === 'object' &&
+          'total' in (shape as Record<string, unknown>)
+        ) {
           return {
             from: () => ({
               where: () => ({
@@ -43,7 +47,11 @@ describe('questionsRoutes', () => {
           };
         }
 
-        if (shape && typeof shape === 'object' && 'text' in (shape as Record<string, unknown>)) {
+        if (
+          shape &&
+          typeof shape === 'object' &&
+          'text' in (shape as Record<string, unknown>)
+        ) {
           return {
             from: () => ({
               where: () => ({
@@ -101,7 +109,11 @@ describe('questionsRoutes', () => {
   it('rejects duplicate selected_keys on check', async () => {
     drizzleMock.mockReturnValue({
       select: (shape?: unknown) => {
-        if (shape && typeof shape === 'object' && 'is_correct' in (shape as Record<string, unknown>)) {
+        if (
+          shape &&
+          typeof shape === 'object' &&
+          'is_correct' in (shape as Record<string, unknown>)
+        ) {
           return {
             from: () => ({
               where: async () => [
@@ -140,6 +152,72 @@ describe('questionsRoutes', () => {
     await expect(res.json()).resolves.toEqual({
       error: 'invalid_body',
       message: 'selected_keys tidak boleh duplikat.',
+    });
+  });
+
+  it('returns scored response for multiple_choice check', async () => {
+    drizzleMock.mockReturnValue({
+      select: (shape?: unknown) => {
+        if (
+          shape &&
+          typeof shape === 'object' &&
+          'is_correct' in (shape as Record<string, unknown>)
+        ) {
+          return {
+            from: () => ({
+              where: async () => [
+                { key: 'A', is_correct: false },
+                { key: 'B', is_correct: false },
+              ],
+            }),
+          };
+        }
+
+        if (
+          shape &&
+          typeof shape === 'object' &&
+          'score' in (shape as Record<string, unknown>)
+        ) {
+          return {
+            from: () => ({
+              where: async () => [
+                { key: 'A', score: 2 },
+                { key: 'B', score: 4 },
+              ],
+            }),
+          };
+        }
+
+        return {
+          from: () => ({
+            where: () => ({
+              limit: async () => [
+                {
+                  id: 20,
+                  type: 'multiple_choice',
+                  explanation_text: 'Pembahasan skor',
+                },
+              ],
+            }),
+          }),
+        };
+      },
+    });
+
+    const { questionsRoutes } = await import('@/routes/questions.js');
+    const app = questionsRoutes({} as never);
+    const res = await app.request('http://localhost/20/check', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ selected_keys: ['A'] }),
+    });
+
+    expect(res.status).toBe(200);
+    await expect(res.json()).resolves.toEqual({
+      score: 2,
+      max_score: 4,
+      best_keys: ['B'],
+      explanation: 'Pembahasan skor',
     });
   });
 });

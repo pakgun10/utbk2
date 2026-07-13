@@ -6,8 +6,10 @@
       class="option-item"
       :class="{
         'option-selected': isSelected(option.key),
-        'option-correct': showResult && isCorrectKey(option.key),
-        'option-wrong': showResult && isSelected(option.key) && !isCorrectKey(option.key),
+        'option-correct': showResult && type !== 'multiple_choice' && isCorrectKey(option.key),
+        'option-wrong': showResult && type !== 'multiple_choice' && isSelected(option.key) && !isCorrectKey(option.key),
+        'option-best': showResult && type === 'multiple_choice' && isBestKey(option.key),
+        'option-scored-wrong': showResult && type === 'multiple_choice' && isSelected(option.key) && (option.score ?? 0) < 0,
         'option-disabled': disabled,
       }"
       @click="toggle(option.key)"
@@ -20,7 +22,19 @@
           <span v-if="isSelected(option.key)" class="radio-dot"></span>
         </span>
       </span>
+      <span v-if="type !== 'multiple_choice'" class="option-key">{{ option.key }}</span>
       <span class="option-text">{{ option.text }}</span>
+      <span
+        v-if="type === 'multiple_choice' && showResult && option.score !== undefined"
+        class="option-score-badge"
+        :class="{
+          'score-positive': (option.score ?? 0) > 0,
+          'score-negative': (option.score ?? 0) < 0,
+          'score-zero': (option.score ?? 0) === 0,
+        }"
+      >
+        {{ (option.score ?? 0) > 0 ? '+' : '' }}{{ option.score }}
+      </span>
     </div>
   </div>
 </template>
@@ -35,6 +49,7 @@ const props = defineProps<{
   selectedKeys: string[];
   disabled: boolean;
   correctKeys?: string[];
+  bestKeys?: string[];
   showResult?: boolean;
 }>();
 
@@ -50,6 +65,10 @@ function isSelected(key: string): boolean {
 
 function isCorrectKey(key: string): boolean {
   return props.correctKeys?.includes(key) ?? false;
+}
+
+function isBestKey(key: string): boolean {
+  return props.bestKeys?.includes(key) ?? false;
 }
 
 function toggle(key: string) {
@@ -99,7 +118,8 @@ function toggle(key: string) {
   background: #e6ffe6;
 }
 
-.option-wrong {
+.option-wrong,
+.option-scored-wrong {
   border-color: #c53030;
   background: #ffe6e6;
 }
@@ -157,5 +177,33 @@ function toggle(key: string) {
 
 .option-text {
   font-size: 1rem;
+}
+
+.option-score-badge {
+  margin-left: auto;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.score-positive {
+  color: #2f855a;
+  background: #e6ffe6;
+}
+
+.score-negative {
+  color: #c53030;
+  background: #ffe6e6;
+}
+
+.score-zero {
+  color: #778899;
+  background: #f0f0f0;
+}
+
+.option-best {
+  border-color: #2f855a;
+  background: #e6ffe6;
 }
 </style>

@@ -21,6 +21,7 @@ const typeLabel = computed(() => {
   switch (props.type) {
     case 'single_choice': return 'Pilihan Ganda';
     case 'multiple_response': return 'Pilihan Ganda Kompleks';
+    case 'multiple_choice': return 'Skor Bertingkat';
     case 'true_false': return 'Benar - Salah';
     default: return props.type;
   }

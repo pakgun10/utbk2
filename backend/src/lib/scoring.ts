@@ -1,4 +1,8 @@
-export type QuestionType = 'single_choice' | 'multiple_response' | 'true_false';
+export type QuestionType =
+  | 'single_choice'
+  | 'multiple_response'
+  | 'multiple_choice'
+  | 'true_false';
 
 export interface CheckResult {
   correct: boolean;
@@ -9,6 +13,37 @@ export interface CheckResult {
 export interface QuestionOption {
   key: string;
   is_correct: boolean;
+}
+
+export interface ScoredOption {
+  key: string;
+  score: number;
+}
+
+export interface ScoredResult {
+  score: number;
+  max_score: number;
+  best_keys: string[];
+}
+
+export function evaluateScoredAnswer(
+  selectedKeys: string[],
+  scoredOptions: ScoredOption[],
+): ScoredResult {
+  if (scoredOptions.length === 0) {
+    return { score: 0, max_score: 0, best_keys: [] };
+  }
+
+  const maxScore = Math.max(...scoredOptions.map((o) => o.score));
+  const bestKeys = scoredOptions
+    .filter((o) => o.score === maxScore)
+    .map((o) => o.key);
+
+  const selected = selectedKeys[0] ?? '';
+  const matched = scoredOptions.find((o) => o.key === selected);
+  const score = matched ? matched.score : 0;
+
+  return { score, max_score: maxScore, best_keys: bestKeys };
 }
 
 /**

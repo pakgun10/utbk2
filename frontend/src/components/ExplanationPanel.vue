@@ -1,14 +1,24 @@
 <template>
-  <div class="explanation-panel" :class="{ correct: isCorrect, incorrect: !isCorrect }">
+  <div
+    class="explanation-panel"
+    :class="{
+      correct: isCorrect && score === undefined,
+      incorrect: !isCorrect && score === undefined,
+      scored: score !== undefined,
+    }"
+  >
     <div class="explanation-header">
-      <span v-if="isCorrect" class="explanation-status correct-status">&#10003; Benar</span>
-      <span v-else class="explanation-status incorrect-status">&#10007; Salah</span>
+      <span v-if="score === undefined && isCorrect" class="explanation-status correct-status">&#10003; Benar</span>
+      <span v-else-if="score === undefined && !isCorrect" class="explanation-status incorrect-status">&#10007; Salah</span>
+      <span v-else class="explanation-status scored-status">
+        Skor: {{ score }} / {{ maxScore }}
+      </span>
       <span class="explanation-time">{{ formattedTime }}</span>
     </div>
 
     <div class="explanation-answer">
-      <strong>Jawaban benar:</strong>
-      <span class="correct-keys">{{ correctKeysDisplay }}</span>
+      <strong>{{ score === undefined ? 'Jawaban benar:' : 'Jawaban terbaik:' }}</strong>
+      <span class="correct-keys">{{ score === undefined ? correctKeysDisplay : bestKeysDisplay }}</span>
     </div>
 
     <div class="explanation-body">
@@ -34,6 +44,9 @@ const props = defineProps<{
   explanation: string;
   elapsed_seconds: number;
   is_last?: boolean;
+  score?: number;
+  maxScore?: number;
+  bestKeys?: string[];
 }>();
 
 defineEmits<{
@@ -50,6 +63,7 @@ const formattedTime = computed(() => {
 });
 
 const correctKeysDisplay = computed(() => props.correct_keys.join(', '));
+const bestKeysDisplay = computed(() => (props.bestKeys ?? []).join(', '));
 </script>
 
 <style scoped>
@@ -67,6 +81,14 @@ const correctKeysDisplay = computed(() => props.correct_keys.join(', '));
 
 .explanation-panel.incorrect {
   border-left-color: #c53030;
+}
+
+.explanation-panel.scored {
+  border-left-color: #1e40af;
+}
+
+.scored-status {
+  color: #1e40af;
 }
 
 .explanation-header {

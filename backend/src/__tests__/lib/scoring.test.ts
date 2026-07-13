@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { checkAnswer } from '@/lib/scoring.js';
+import { checkAnswer, evaluateScoredAnswer } from '@/lib/scoring.js';
 
 const sampleOptions = [
   { key: 'A', is_correct: false },
@@ -64,7 +64,11 @@ describe('checkAnswer - multiple_response', () => {
   });
 
   it('returns incorrect when extra selected', () => {
-    const result = checkAnswer('multiple_response', ['A', 'B', 'C'], multiOptions);
+    const result = checkAnswer(
+      'multiple_response',
+      ['A', 'B', 'C'],
+      multiOptions,
+    );
     expect(result.correct).toBe(false);
   });
 
@@ -95,5 +99,55 @@ describe('checkAnswer - true_false', () => {
   it('returns incorrect when select false', () => {
     const result = checkAnswer('true_false', ['false'], tfOptions);
     expect(result.correct).toBe(false);
+  });
+});
+
+describe('evaluateScoredAnswer', () => {
+  const scoredOptions = [
+    { key: 'A', score: 2 },
+    { key: 'B', score: 4 },
+    { key: 'C', score: 1 },
+    { key: 'D', score: -1 },
+  ];
+
+  it('returns full score and best key when selecting best option', () => {
+    const result = evaluateScoredAnswer(['B'], scoredOptions);
+    expect(result.score).toBe(4);
+    expect(result.max_score).toBe(4);
+    expect(result.best_keys).toEqual(['B']);
+  });
+
+  it('returns partial score for non-best option', () => {
+    const result = evaluateScoredAnswer(['A'], scoredOptions);
+    expect(result.score).toBe(2);
+    expect(result.max_score).toBe(4);
+    expect(result.best_keys).toEqual(['B']);
+  });
+
+  it('returns negative score for negative option', () => {
+    const result = evaluateScoredAnswer(['D'], scoredOptions);
+    expect(result.score).toBe(-1);
+  });
+
+  it('returns 0 for unmatched key', () => {
+    const result = evaluateScoredAnswer(['X'], scoredOptions);
+    expect(result.score).toBe(0);
+  });
+
+  it('returns all best keys when multiple have same max score', () => {
+    const options = [
+      { key: 'A', score: 4 },
+      { key: 'B', score: 4 },
+      { key: 'C', score: 2 },
+    ];
+    const result = evaluateScoredAnswer(['A'], options);
+    expect(result.best_keys).toEqual(['A', 'B']);
+  });
+
+  it('returns zero values for empty options', () => {
+    const result = evaluateScoredAnswer(['A'], []);
+    expect(result.score).toBe(0);
+    expect(result.max_score).toBe(0);
+    expect(result.best_keys).toEqual([]);
   });
 });

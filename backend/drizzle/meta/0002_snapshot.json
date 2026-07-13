@@ -1,76 +1,9 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "b0fa906b-dbcb-4dc5-beb6-16a7e3e75126",
+  "id": "1eb3ee69-5ef8-4bd4-9cf9-d6c82b5c2275",
   "prevId": "724ab545-3376-4fe9-8890-c811982b8d83",
   "tables": {
-    "participants": {
-      "name": "participants",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "int",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": true
-        },
-        "session_token": {
-          "name": "session_token",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "institution": {
-          "name": "institution",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "ukkj": {
-          "name": "ukkj",
-          "type": "varchar(50)",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false,
-          "default": "(now())"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {
-        "participants_id": {
-          "name": "participants_id",
-          "columns": [
-            "id"
-          ]
-        }
-      },
-      "uniqueConstraints": {
-        "participants_session_token_unique": {
-          "name": "participants_session_token_unique",
-          "columns": [
-            "session_token"
-          ]
-        }
-      },
-      "checkConstraint": {}
-    },
     "question_options": {
       "name": "question_options",
       "columns": {
@@ -107,6 +40,13 @@
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
+          "autoincrement": false
+        },
+        "score": {
+          "name": "score",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         },
         "display_order": {
@@ -163,7 +103,7 @@
         },
         "type": {
           "name": "type",
-          "type": "enum('single_choice','multiple_response','true_false')",
+          "type": "enum('single_choice','multiple_response','multiple_choice','true_false')",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false

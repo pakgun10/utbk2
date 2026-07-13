@@ -86,7 +86,7 @@ subjects  ──<  topics  ──<  questions  ──<  question_options
 |---|---|---|
 | id | int auto_increment | PK |
 | topic_id | int FK | → topics.id |
-| type | enum | `single_choice`, `multiple_response`, `true_false` |
+| type | enum | `single_choice`, `multiple_response`, `multiple_choice`, `true_false` |
 | difficulty | enum | `easy`, `medium`, `hard` |
 | question_text | text | Isi soal |
 | explanation_text | text | Pembahasan |
@@ -102,6 +102,7 @@ subjects  ──<  topics  ──<  questions  ──<  question_options
 | option_key | varchar(5) | `A`, `B`, `C`, `D`, `true`, `false` |
 | option_text | text | Teks opsi |
 | is_correct | boolean | Kunci jawaban |
+| score | int nullable | Skor per opsi (khusus `multiple_choice`) |
 | display_order | int | |
 
 ---

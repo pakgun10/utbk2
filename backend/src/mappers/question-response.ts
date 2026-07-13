@@ -43,10 +43,25 @@ export function mapEmptyRandomQuestionResponse() {
   };
 }
 
-export function mapCheckAnswerResponse(question: CheckQuestionRow, result: CheckAnswerResult) {
+export function mapCheckAnswerResponse(
+  question: CheckQuestionRow,
+  result: CheckAnswerResult,
+) {
   return {
     correct: result.correct,
     correct_keys: result.correct_keys,
+    explanation: question.explanation_text,
+  };
+}
+
+export function mapCheckScoredResponse(
+  question: CheckQuestionRow,
+  result: { score: number; max_score: number; best_keys: string[] },
+) {
+  return {
+    score: result.score,
+    max_score: result.max_score,
+    best_keys: result.best_keys,
     explanation: question.explanation_text,
   };
 }

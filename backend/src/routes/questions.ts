@@ -1,9 +1,10 @@
 import { Hono } from 'hono';
-import { checkAnswer } from '../lib/scoring';
+import { checkAnswer, evaluateScoredAnswer } from '../lib/scoring';
 import type { Pool } from '../db/connection';
 import type { QuestionType } from '../lib/scoring';
 import {
   mapCheckAnswerResponse,
+  mapCheckScoredResponse,
   mapEmptyRandomQuestionResponse,
   mapRandomQuestionResponse,
 } from '../mappers/question-response';
@@ -13,6 +14,7 @@ import {
   findQuestionAnswerKey,
   findQuestionById,
   findQuestionOptions,
+  findQuestionScoredOptions,
   findRandomQuestion,
 } from '../services/question-service';
 import {
@@ -31,7 +33,13 @@ export function questionsRoutes(pool: Pool) {
     const parsed = parseRandomQuestionQuery(c.req.query());
 
     if (!parsed.success) {
-      return c.json({ error: 'invalid_query', message: 'topic_id harus berupa angka positif.' }, 400);
+      return c.json(
+        {
+          error: 'invalid_query',
+          message: 'topic_id harus berupa angka positif.',
+        },
+        400,
+      );
     }
 
     const total = await countQuestionsForTopic(db, parsed.data.topic_id);
@@ -42,11 +50,21 @@ export function questionsRoutes(pool: Pool) {
     const parsed = parseRandomQuestionQuery(c.req.query());
 
     if (!parsed.success) {
-      return c.json({ error: 'invalid_query', message: 'topic_id harus berupa angka positif.' }, 400);
+      return c.json(
+        {
+          error: 'invalid_query',
+          message: 'topic_id harus berupa angka positif.',
+        },
+        400,
+      );
     }
 
     const excludeIds = parseExcludeIds(parsed.data.exclude);
-    const question = await findRandomQuestion(db, parsed.data.topic_id, excludeIds);
+    const question = await findRandomQuestion(
+      db,
+      parsed.data.topic_id,
+      excludeIds,
+    );
 
     if (!question) {
       return c.json(mapEmptyRandomQuestionResponse());
@@ -60,20 +78,32 @@ export function questionsRoutes(pool: Pool) {
     const id = parseQuestionIdParam(c.req.param('id'));
 
     if (id === null) {
-      return c.json({ error: 'invalid_param', message: 'ID soal tidak valid.' }, 400);
+      return c.json(
+        { error: 'invalid_param', message: 'ID soal tidak valid.' },
+        400,
+      );
     }
 
     const body = await c.req.json();
     const parsed = parseCheckAnswerBody(body);
 
     if (!parsed.success) {
-      return c.json({ error: 'invalid_body', message: 'Body tidak valid. selected_keys wajib diisi.' }, 400);
+      return c.json(
+        {
+          error: 'invalid_body',
+          message: 'Body tidak valid. selected_keys wajib diisi.',
+        },
+        400,
+      );
     }
 
     const question = await findQuestionById(db, id);
 
     if (!question) {
-      return c.json({ error: 'not_found', message: 'Soal tidak ditemukan.' }, 404);
+      return c.json(
+        { error: 'not_found', message: 'Soal tidak ditemukan.' },
+        404,
+      );
     }
 
     const options = await findQuestionAnswerKey(db, id);
@@ -88,7 +118,26 @@ export function questionsRoutes(pool: Pool) {
       return c.json({ error: 'invalid_body', message: validationError }, 400);
     }
 
-    const result = checkAnswer(question.type as QuestionType, parsed.data.selected_keys, options);
+    if (question.type === 'multiple_choice') {
+      const scoredOptions = (await findQuestionScoredOptions(db, id)).map(
+        (o) => ({
+          key: o.key,
+          score: o.score ?? 0,
+        }),
+      );
+
+      const scoredResult = evaluateScoredAnswer(
+        parsed.data.selected_keys,
+        scoredOptions,
+      );
+      return c.json(mapCheckScoredResponse(question, scoredResult));
+    }
+
+    const result = checkAnswer(
+      question.type as QuestionType,
+      parsed.data.selected_keys,
+      options,
+    );
 
     return c.json(mapCheckAnswerResponse(question, result));
   });

@@ -17,11 +17,16 @@ export interface Topic {
 export interface QuestionOption {
   key: string;
   text: string;
+  score?: number;
 }
 
 export interface Question {
   id: number;
-  type: 'single_choice' | 'multiple_response' | 'true_false';
+  type:
+    | 'single_choice'
+    | 'multiple_response'
+    | 'multiple_choice'
+    | 'true_false';
   difficulty: 'easy' | 'medium' | 'hard';
   question_text: string;
   options: QuestionOption[];
@@ -33,6 +38,13 @@ export interface CheckResult {
   explanation: string;
 }
 
+export interface CheckScoredResult {
+  score: number;
+  max_score: number;
+  best_keys: string[];
+  explanation: string;
+}
+
 export interface Participant {
   id?: number;
   session_token?: string;
@@ -40,4 +52,3 @@ export interface Participant {
   institution: string;
   ukkj: '3c' | '4a' | '4d';
 }
-
