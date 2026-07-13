@@ -11,7 +11,8 @@
     { "slug": "pemahaman-dan-pengetahuan-bacaan", "subject_slug": "literasi-bahasa-indonesia", "label": "Pemahaman dan Pengetahuan Bacaan", "display_order": 1 },
     { "slug": "literasi-bahasa-inggris", "subject_slug": "literasi-bahasa-inggris", "label": "Literasi Bahasa Inggris", "display_order": 1 },
     { "slug": "aljabar", "subject_slug": "penalaran-matematika", "label": "Aljabar", "display_order": 1 },
-    { "slug": "geometri", "subject_slug": "penalaran-matematika", "label": "Geometri", "display_order": 2 }
+    { "slug": "geometri", "subject_slug": "penalaran-matematika", "label": "Geometri", "display_order": 2 },
+    { "slug": "rasio", "subject_slug": "penalaran-matematika", "label": "Rasio", "display_order": 3 }
   ],
   "questions": [
     {
@@ -176,6 +177,76 @@
       "options": [
         { "key": "true", "text": "Benar", "is_correct": true },
         { "key": "false", "text": "Salah", "is_correct": false }
+      ]
+    },
+    {
+      "topic_slug": "rasio",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "external_id": "q_ras_001",
+      "question_text": "Perbandingan umur Ali dan Budi adalah 2 : 3. Jika jumlah umur mereka 30 tahun, maka umur Ali adalah...",
+      "explanation_text": "Ali : Budi = 2 : 3. Jumlah rasio = 2 + 3 = 5. Umur Ali = (2/5) x 30 = 12 tahun.",
+      "options": [
+        { "key": "A", "text": "10 tahun", "is_correct": false },
+        { "key": "B", "text": "12 tahun", "is_correct": true },
+        { "key": "C", "text": "15 tahun", "is_correct": false },
+        { "key": "D", "text": "18 tahun", "is_correct": false }
+      ]
+    },
+    {
+      "topic_slug": "rasio",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ras_002",
+      "question_text": "Pada peta berskala 1 : 250.000, jarak kota X dan Y adalah 8 cm. Jarak sebenarnya kedua kota tersebut adalah...",
+      "explanation_text": "Skala 1 : 250.000 artinya 1 cm pada peta = 250.000 cm sebenarnya. Jarak sebenarnya = 8 x 250.000 = 2.000.000 cm = 20 km.",
+      "options": [
+        { "key": "A", "text": "2 km", "is_correct": false },
+        { "key": "B", "text": "10 km", "is_correct": false },
+        { "key": "C", "text": "20 km", "is_correct": true },
+        { "key": "D", "text": "200 km", "is_correct": false }
+      ]
+    },
+    {
+      "topic_slug": "rasio",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "external_id": "q_ras_003",
+      "question_text": "Sebuah resep kue memerlukan tepung dan gula dengan perbandingan 5 : 2. Jika digunakan 200 gram gula, maka tepung yang dibutuhkan adalah...",
+      "explanation_text": "Tepung : Gula = 5 : 2. Tepung = (5/2) x 200 = 500 gram.",
+      "options": [
+        { "key": "A", "text": "300 gram", "is_correct": false },
+        { "key": "B", "text": "400 gram", "is_correct": false },
+        { "key": "C", "text": "500 gram", "is_correct": true },
+        { "key": "D", "text": "700 gram", "is_correct": false }
+      ]
+    },
+    {
+      "topic_slug": "rasio",
+      "type": "single_choice",
+      "difficulty": "hard",
+      "external_id": "q_ras_004",
+      "question_text": "Suatu pekerjaan dapat diselesaikan oleh 12 orang dalam 15 hari. Jika pekerjaan ingin selesai dalam 10 hari, banyak tambahan pekerja yang diperlukan adalah...",
+      "explanation_text": "Ini perbandingan berbalik nilai. 12 orang x 15 hari = 180 orang-hari. Untuk 10 hari: 180/10 = 18 orang. Tambahan = 18 - 12 = 6 orang.",
+      "options": [
+        { "key": "A", "text": "3 orang", "is_correct": false },
+        { "key": "B", "text": "6 orang", "is_correct": true },
+        { "key": "C", "text": "8 orang", "is_correct": false },
+        { "key": "D", "text": "18 orang", "is_correct": false }
+      ]
+    },
+    {
+      "topic_slug": "rasio",
+      "type": "single_choice",
+      "difficulty": "hard",
+      "external_id": "q_ras_005",
+      "question_text": "Perbandingan uang A, B, dan C adalah 3 : 4 : 5. Jika selisih uang A dan C adalah Rp24.000, jumlah uang mereka bertiga adalah...",
+      "explanation_text": "Selisih rasio A dan C = 5 - 3 = 2 bagian = Rp24.000. Nilai 1 bagian = Rp12.000. Jumlah rasio = 3 + 4 + 5 = 12 bagian. Total = 12 x Rp12.000 = Rp144.000.",
+      "options": [
+        { "key": "A", "text": "Rp120.000", "is_correct": false },
+        { "key": "B", "text": "Rp132.000", "is_correct": false },
+        { "key": "C", "text": "Rp144.000", "is_correct": true },
+        { "key": "D", "text": "Rp156.000", "is_correct": false }
       ]
     }
   ]

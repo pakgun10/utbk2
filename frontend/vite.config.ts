@@ -5,7 +5,13 @@ import vue from '@vitejs/plugin-vue';
 import { resolve } from 'node:path';
 
 function readEnv(key: string): string {
+  if (process.env[key]) {
+    return process.env[key] as string;
+  }
   const envPath = path.resolve(process.cwd(), '..', '.env');
+  if (!fs.existsSync(envPath)) {
+    return '';
+  }
   const raw = fs.readFileSync(envPath, 'utf8');
   for (const line of raw.split(/\r?\n/)) {
     const trimmed = line.trim();
